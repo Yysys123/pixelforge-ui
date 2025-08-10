@@ -1,17 +1,36 @@
 {
   "name": "@pixelforge/react",
   "version": "0.1.0",
-  "description": "PixelForge UI React components",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "description": "Modern React component library with design tokens, accessibility-first approach, and comprehensive theming support",
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "accessibility",
+    "typescript",
+    "theme",
+    "css-variables"
+  ],
+  "homepage": "https://github.com/pixelforge/pixelforge-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixelforge/pixelforge-ui.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/pixelforge/pixelforge-ui/issues"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "license": "MIT",
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --external react,react-dom --minify",
-    "dev": "tsup src/index.tsx --format cjs,esm --dts --external react,react-dom --watch --inject-style",
+    "dev": "tsup src/index.tsx --format cjs,esm --external react,react-dom --watch",
     "test": "jest",
     "test:a11y": "jest --testPathPattern=a11y",
     "bundle-size": "bundlesize",

@@ -49,20 +49,28 @@ jobs:
       - name: Run tests
         run: pnpm test
 
+      - name: Check if packages exist and are ready
+        run: |
+          echo "Checking package builds..."
+          ls -la packages/core/dist/
+          ls -la packages/react/dist/
+          echo "Core package info:"
+          cat packages/core/package.json | jq '.name, .version'
+          echo "React package info:"
+          cat packages/react/package.json | jq '.name, .version'
+
       - name: Publish core package
         working-directory: packages/core
-        run: npm publish --access public
+        run: |
+          echo "Publishing @pixelforge/core..."
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish react package
         working-directory: packages/react
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish icons package
-        working-directory: packages/icons
-        run: npm publish --access public
+        run: |
+          echo "Publishing @pixelforge/react..."
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

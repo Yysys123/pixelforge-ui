@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "pnpm -w storybook",
+    "dev": "echo 'Use: pnpm --filter @pixelforge/react dev for component development'",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "test:a11y": "pnpm -r test:a11y",

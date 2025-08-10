@@ -13,4 +13,6 @@ export default defineConfig({
       '.css': 'empty',
     };
   },
+  // Only include source files, exclude tests and utilities
+  onSuccess: 'echo "Build completed successfully"',
 });

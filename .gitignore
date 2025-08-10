@@ -123,3 +123,4 @@ Thumbs.db
 
 # Chromatic
 build-storybook.log
+*storybook.log
