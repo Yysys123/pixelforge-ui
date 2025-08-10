@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+coverage
+.next
+.nuxt
+.vite
+storybook-static
+*.log
+*.md
+pnpm-lock.yaml

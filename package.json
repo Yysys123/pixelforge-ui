@@ -9,18 +9,31 @@
   ],
   "scripts": {
     "dev": "pnpm -w storybook",
-    "build": "pnpm -w build",
-    "test": "pnpm -w test",
-    "lint": "pnpm -w lint",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:a11y": "pnpm -r test:a11y",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "tsc --build",
+    "bundle-size": "pnpm -r bundle-size",
+    "clean": "pnpm -r clean",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
-    "prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.0",
+    "eslint-plugin-testing-library": "^6.0.0",
     "husky": "^8.0.0",
-    "lint-staged": "^15.0.0"
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18",
