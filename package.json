@@ -1,0 +1,30 @@
+{
+  "name": "pixelforge-ui",
+  "version": "0.1.0",
+  "description": "PixelForge UI - Modern React component library with design tokens",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -w storybook",
+    "build": "pnpm -w build",
+    "test": "pnpm -w test",
+    "lint": "pnpm -w lint",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@8.15.0"
+}

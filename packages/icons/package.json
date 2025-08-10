@@ -1,0 +1,31 @@
+{
+  "name": "@pixelforge/icons",
+  "version": "0.1.0",
+  "description": "PixelForge UI icon set",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --external react,react-dom",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --external react,react-dom --watch",
+    "test": "jest",
+    "lint": "eslint 'src/**/*.{ts,tsx}'"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

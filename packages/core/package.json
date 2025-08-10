@@ -1,0 +1,23 @@
+{
+  "name": "@pixelforge/core",
+  "version": "0.1.0",
+  "description": "PixelForge UI core design tokens and utilities",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "jest",
+    "lint": "eslint 'src/**/*.{ts,tsx}'"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
