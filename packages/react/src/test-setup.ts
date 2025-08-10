@@ -1,10 +1,14 @@
 import '@testing-library/jest-dom';
 import { configure } from '@testing-library/react';
+import { toHaveNoViolations } from 'jest-axe';
 
 // Configure Testing Library
 configure({
   testIdAttribute: 'data-testid',
 });
+
+// Extend jest matchers
+expect.extend(toHaveNoViolations);
 
 // Mock CSS modules
 Object.defineProperty(window, 'matchMedia', {

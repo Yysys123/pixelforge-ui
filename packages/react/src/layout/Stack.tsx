@@ -46,7 +46,7 @@ export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * HTML element to render as
    */
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'div' | 'section' | 'main' | 'article' | 'aside' | 'nav' | 'ul' | 'ol';
 
   /**
    * Additional CSS class names
@@ -71,7 +71,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       align = 'stretch',
       justify = 'start',
       wrap = 'nowrap',
-      as: Element = 'div',
+      as = 'div',
       className,
       children,
       ...props
@@ -88,10 +88,12 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       className
     );
 
+    const Component = as as React.ElementType;
+
     return (
-      <Element ref={ref} className={classes} {...props}>
+      <Component ref={ref} className={classes} {...props}>
         {children}
-      </Element>
+      </Component>
     );
   }
 );

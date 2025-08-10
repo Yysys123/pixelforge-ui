@@ -89,7 +89,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@pixelforge/core':
+      '@pixelforge-ui/core':
         specifier: workspace:*
         version: link:../core
       clsx:
@@ -111,6 +111,9 @@ importers:
       '@types/jest':
         specifier: ^29.0.0
         version: 29.5.14
+      '@types/jest-axe':
+        specifier: ^3.5.9
+        version: 3.5.9
       '@types/react':
         specifier: ^18.0.0
         version: 18.3.23
@@ -787,6 +790,9 @@ packages:
   '@types/istanbul-reports@3.0.4':
     resolution: {integrity: sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==}
 
+  '@types/jest-axe@3.5.9':
+    resolution: {integrity: sha512-z98CzR0yVDalCEuhGXXO4/zN4HHuSebAukXDjTLJyjEAgoUf1H1i+sr7SUB/mz8CRS/03/XChsx0dcLjHkndoQ==}
+
   '@types/jest@29.5.14':
     resolution: {integrity: sha512-ZN+4sdnLUbo8EVvVc2ao0GFW6oVrQRPn4K2lglySj7APvSrgzxHiNNK99us4WDMi57xxA2yggblIAMNhXOotLQ==}
 
@@ -1046,6 +1052,10 @@ packages:
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
+
+  axe-core@3.5.6:
+    resolution: {integrity: sha512-LEUDjgmdJoA3LqklSTwKYqkjcZ4HKc4ddIYGSAiSkr46NTjzg2L9RNB+lekO9P7Dlpa87+hBtzc2Fzn/+GUWMQ==}
+    engines: {node: '>=4'}
 
   axe-core@4.7.2:
     resolution: {integrity: sha512-zIURGIS1E1Q4pcrMjp+nnEh+16G56eG/MUllJH8yEvw7asDo7Ac9uhC9KIH5jzpITueEZolfYglnCGIuSBz39g==}
@@ -4103,6 +4113,11 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
 
+  '@types/jest-axe@3.5.9':
+    dependencies:
+      '@types/jest': 29.5.14
+      axe-core: 3.5.6
+
   '@types/jest@29.5.14':
     dependencies:
       expect: 29.7.0
@@ -4420,6 +4435,8 @@ snapshots:
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.1.0
+
+  axe-core@3.5.6: {}
 
   axe-core@4.7.2: {}
 

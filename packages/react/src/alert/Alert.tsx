@@ -168,6 +168,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
         return () => clearTimeout(timer);
       }
+      return undefined;
     }, [autoHideDuration]);
 
     const handleDismiss = () => {

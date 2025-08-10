@@ -65,7 +65,7 @@ const useFocusTrap = (
         (el): el is HTMLElement => {
           return (
             el instanceof HTMLElement &&
-            !el.disabled &&
+            !(el as any).disabled &&
             el.tabIndex !== -1 &&
             el.offsetParent !== null
           );

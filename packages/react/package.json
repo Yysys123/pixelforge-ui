@@ -28,6 +28,20 @@
     "README.md"
   ],
   "license": "MIT",
+  "bundlesize": [
+    {
+      "path": "./dist/index.js",
+      "maxSize": "20 kB"
+    },
+    {
+      "path": "./dist/index.mjs",
+      "maxSize": "18 kB"
+    },
+    {
+      "path": "./dist/index.css",
+      "maxSize": "50 kB"
+    }
+  ],
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --external react,react-dom --minify",
     "dev": "tsup src/index.tsx --format cjs,esm --external react,react-dom --watch",
@@ -51,6 +65,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",
     "@types/jest": "^29.0.0",
+    "@types/jest-axe": "^3.5.9",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "bundlesize": "^0.18.0",

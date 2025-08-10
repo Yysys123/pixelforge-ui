@@ -11,7 +11,7 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * HTML element to render as
    */
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'div' | 'main' | 'section' | 'article' | 'aside' | 'header' | 'footer';
 
   /**
    * Additional CSS class names
@@ -30,15 +30,16 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
   (
-    { size = 'xl', as: Element = 'div', className, children, ...props },
+    { size = 'xl', as = 'div', className, children, ...props },
     ref
   ) => {
     const classes = clsx(styles.container, styles[`size-${size}`], className);
+    const Component = as as React.ElementType;
 
     return (
-      <Element ref={ref} className={classes} {...props}>
+      <Component ref={ref} className={classes} {...props}>
         {children}
-      </Element>
+      </Component>
     );
   }
 );

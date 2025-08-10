@@ -1,10 +1,8 @@
 import React from 'react';
-import { render, screen, act } from '../test-utils';
+import { render, screen } from '../test-utils';
 import userEvent from '@testing-library/user-event';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
 import { Modal } from './Modal';
-
-expect.extend(toHaveNoViolations);
 
 // Mock createPortal to render in current document
 jest.mock('react-dom', () => ({

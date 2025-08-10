@@ -60,15 +60,26 @@ jobs:
           echo "Checking package builds..."
           ls -la packages/core/dist/
           ls -la packages/react/dist/
+          ls -la packages/icons/dist/
           echo "Core package info:"
           cat packages/core/package.json | jq '.name, .version'
           echo "React package info:"
           cat packages/react/package.json | jq '.name, .version'
+          echo "Icons package info:"
+          cat packages/icons/package.json | jq '.name, .version'
 
       - name: Publish core package
         working-directory: packages/core
         run: |
-          echo "Publishing @pixelforge/core..."
+          echo "Publishing @pixelforge-ui/core..."
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish icons package
+        working-directory: packages/icons
+        run: |
+          echo "Publishing @pixelforge-ui/icons..."
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -76,7 +87,7 @@ jobs:
       - name: Publish react package
         working-directory: packages/react
         run: |
-          echo "Publishing @pixelforge/react..."
+          echo "Publishing @pixelforge-ui/react..."
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

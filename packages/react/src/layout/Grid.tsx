@@ -50,7 +50,7 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * HTML element to render as
    */
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'div' | 'section' | 'main' | 'article' | 'aside';
 
   /**
    * Additional CSS class names
@@ -78,7 +78,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
       smCols,
       mdCols,
       lgCols,
-      as: Element = 'div',
+      as = 'div',
       className,
       children,
       ...props
@@ -100,10 +100,12 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
       className
     );
 
+    const Component = as as React.ElementType;
+
     return (
-      <Element ref={ref} className={classes} {...props}>
+      <Component ref={ref} className={classes} {...props}>
         {children}
-      </Element>
+      </Component>
     );
   }
 );

@@ -1,10 +1,8 @@
 import React from 'react';
 import { render, screen } from '../test-utils';
 import userEvent from '@testing-library/user-event';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
 import { Button } from './Button';
-
-expect.extend(toHaveNoViolations);
 
 describe('Button', () => {
   describe('Rendering', () => {

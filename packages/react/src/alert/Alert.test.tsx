@@ -1,10 +1,7 @@
 import React from 'react';
 import { render, screen, act } from '../test-utils';
 import userEvent from '@testing-library/user-event';
-import { axe, toHaveNoViolations } from 'jest-axe';
 import { Alert } from './Alert';
-
-expect.extend(toHaveNoViolations);
 
 // Mock timers for auto-hide functionality
 jest.useFakeTimers();

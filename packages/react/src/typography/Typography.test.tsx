@@ -1,9 +1,7 @@
 import React from 'react';
 import { render, screen } from '../test-utils';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
 import { Typography } from './Typography';
-
-expect.extend(toHaveNoViolations);
 
 describe('Typography', () => {
   describe('Rendering', () => {

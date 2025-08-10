@@ -191,7 +191,7 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       overline: 'span',
     };
 
-    const Element = as || (variant ? defaultElementMap[variant] : 'p');
+    const Element = as || (variant ? (defaultElementMap as any)[variant] : 'p');
 
     const classes = clsx(
       styles.typography,
