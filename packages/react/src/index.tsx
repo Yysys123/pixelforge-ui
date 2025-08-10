@@ -19,3 +19,6 @@ export * from './input';
 export * from './typography';
 export * from './layout';
 export * from './card';
+export * from './modal';
+export * from './badge';
+export * from './alert';
