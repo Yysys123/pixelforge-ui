@@ -1,5 +1,5 @@
 {
-  "name": "@pixelforge/react",
+  "name": "@pixelforge-ui/react",
   "version": "0.1.0",
   "description": "Modern React component library with design tokens, accessibility-first approach, and comprehensive theming support",
   "keywords": [
@@ -42,7 +42,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@pixelforge/core": "workspace:*",
+    "@pixelforge-ui/core": "workspace:*",
     "clsx": "^2.0.0"
   },
   "devDependencies": {

@@ -39,7 +39,10 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 // Focus trap utility
-const useFocusTrap = (isActive: boolean, containerRef: React.RefObject<HTMLElement>) => {
+const useFocusTrap = (
+  isActive: boolean,
+  containerRef: React.RefObject<HTMLElement>
+) => {
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {

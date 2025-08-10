@@ -6,7 +6,14 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Badge content */
   children?: React.ReactNode;
   /** Badge variant */
-  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info';
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'danger'
+    | 'info';
   /** Badge size */
   size?: 'sm' | 'md' | 'lg';
   /** Badge shape */
@@ -105,7 +112,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       >
         {/* Decorative pattern overlay */}
         <div className={styles['pattern-overlay']} />
-        
+
         {/* Accent shapes */}
         <div className={styles['accent-shapes']}>
           <div className={styles['accent-dot']} />

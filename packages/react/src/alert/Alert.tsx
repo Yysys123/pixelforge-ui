@@ -30,35 +30,105 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Whether alert appears as a toast (floating) */
   toast?: boolean;
   /** Toast position when toast prop is true */
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center';
+  position?:
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-center'
+    | 'bottom-center';
 }
 
 // Default icons for each variant
 const DefaultIcons = {
   default: (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" strokeWidth="2"/>
-      <path d="M10 6V10L12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <path
+        d="M10 6V10L12 12"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   ),
   success: (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16.25 6.25L8.125 14.375L3.75 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16.25 6.25L8.125 14.375L3.75 10"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   ),
   warning: (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 7V11M10 15H10.01M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 7V11M10 15H10.01M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   ),
   danger: (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 8L8 12M8 8L12 12M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 8L8 12M8 8L12 12M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   ),
   info: (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 14V10M10 6H10.01M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 14V10M10 6H10.01M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   ),
 };
@@ -153,31 +223,17 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         <div className={styles['content-wrapper']}>
           {/* Icon */}
           {displayIcon && (
-            <div className={styles['icon-container']}>
-              {displayIcon}
-            </div>
+            <div className={styles['icon-container']}>{displayIcon}</div>
           )}
 
           {/* Text content */}
           <div className={styles['text-content']}>
-            {title && (
-              <div className={styles.title}>
-                {title}
-              </div>
-            )}
-            {children && (
-              <div className={styles.message}>
-                {children}
-              </div>
-            )}
+            {title && <div className={styles.title}>{title}</div>}
+            {children && <div className={styles.message}>{children}</div>}
           </div>
 
           {/* Actions */}
-          {actions && (
-            <div className={styles.actions}>
-              {actions}
-            </div>
-          )}
+          {actions && <div className={styles.actions}>{actions}</div>}
 
           {/* Dismiss button */}
           {dismissible && (
@@ -207,9 +263,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         </div>
 
         {/* Brutalist corner cut */}
-        {showDecorations && (
-          <div className={styles['corner-cut']} />
-        )}
+        {showDecorations && <div className={styles['corner-cut']} />}
       </div>
     );
   }

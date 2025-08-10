@@ -48,7 +48,6 @@ export function useThemeCSS(): Record<string, string> {
   return tokensToCSS(tokens);
 }
 
-
 /**
  * Theme provider component that manages theme state and injects CSS variables
  */
@@ -146,7 +145,9 @@ export function ThemeProvider({
   };
 
   const setTokens = (newTokens: Partial<DesignTokens>) => {
-    setCustomThemeTokens((prev: Partial<DesignTokens>) => mergeTokens(prev as DesignTokens, newTokens));
+    setCustomThemeTokens((prev: Partial<DesignTokens>) =>
+      mergeTokens(prev as DesignTokens, newTokens)
+    );
   };
 
   const contextValue: ThemeContextValue = {

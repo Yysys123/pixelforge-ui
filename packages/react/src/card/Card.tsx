@@ -131,7 +131,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 
         {/* Body content */}
         <div className={styles.body}>
-          {description && <div className={styles.description}>{description}</div>}
+          {description && (
+            <div className={styles.description}>{description}</div>
+          )}
 
           {/* Features grid */}
           {features.length > 0 && (
@@ -158,7 +160,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
                   </span>
                   {price.amount}
                   {price.period && (
-                    <span className={styles['price-period']}>{price.period}</span>
+                    <span className={styles['price-period']}>
+                      {price.period}
+                    </span>
                   )}
                 </div>
               )}

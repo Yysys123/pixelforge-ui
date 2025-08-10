@@ -23,7 +23,9 @@ describe('Card', () => {
 
     it('renders description', () => {
       render(<Card description="Award-winning design studio" />);
-      expect(screen.getByText('Award-winning design studio')).toBeInTheDocument();
+      expect(
+        screen.getByText('Award-winning design studio')
+      ).toBeInTheDocument();
     });
 
     it('renders custom children', () => {
@@ -75,7 +77,7 @@ describe('Card', () => {
 
     it('renders feature items', () => {
       render(<Card features={mockFeatures} />);
-      
+
       expect(screen.getByText('UI/UX Design')).toBeInTheDocument();
       expect(screen.getByText('Development')).toBeInTheDocument();
       expect(screen.getByTestId('icon-1')).toBeInTheDocument();
@@ -120,10 +122,10 @@ describe('Card', () => {
       const handleAction = jest.fn();
 
       render(<Card actionText="Click me" onAction={handleAction} />);
-      
+
       const button = screen.getByRole('button', { name: 'Click me' });
       await user.click(button);
-      
+
       expect(handleAction).toHaveBeenCalledTimes(1);
     });
 
@@ -175,12 +177,16 @@ describe('Card', () => {
 
       expect(screen.getByText('Premium Package')).toBeInTheDocument();
       expect(screen.getByText('Popular')).toBeInTheDocument();
-      expect(screen.getByText('Complete design and development package')).toBeInTheDocument();
+      expect(
+        screen.getByText('Complete design and development package')
+      ).toBeInTheDocument();
       expect(screen.getByText('Design')).toBeInTheDocument();
       expect(screen.getByText('Code')).toBeInTheDocument();
       expect(screen.getByText('999')).toBeInTheDocument();
       expect(screen.getByText('per project')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Get Started' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Get Started' })
+      ).toBeInTheDocument();
       expect(screen.getByText('Featured')).toBeInTheDocument();
     });
   });

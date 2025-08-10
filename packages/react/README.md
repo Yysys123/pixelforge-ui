@@ -1,11 +1,11 @@
-# @pixelforge/react
+# @pixelforge-ui/react
 
 Modern React component library with design tokens, accessibility-first approach, and comprehensive theming support.
 
 ## Installation
 
 ```bash
-npm install @pixelforge/react
+npm install @pixelforge-ui/react
 ```
 
 ## Features
@@ -22,7 +22,7 @@ npm install @pixelforge/react
 ## Quick Start
 
 ```tsx
-import { Button, Input, Typography, ThemeProvider } from '@pixelforge/react';
+import { Button, Input, Typography, ThemeProvider } from '@pixelforge-ui/react';
 
 function App() {
   return (
@@ -50,7 +50,7 @@ function App() {
 Flexible button component with multiple variants and states.
 
 ```tsx
-import { Button } from '@pixelforge/react';
+import { Button } from '@pixelforge-ui/react';
 
 // Variants
 <Button variant="primary">Primary</Button>
@@ -77,7 +77,7 @@ import { Button } from '@pixelforge/react';
 Accessible input component with validation states and helper text.
 
 ```tsx
-import { Input } from '@pixelforge/react';
+import { Input } from '@pixelforge-ui/react';
 
 // Basic usage
 <Input label="Username" placeholder="Enter username" />
@@ -110,7 +110,7 @@ import { Input } from '@pixelforge/react';
 Flexible typography component with semantic variants.
 
 ```tsx
-import { Typography } from '@pixelforge/react';
+import { Typography } from '@pixelforge-ui/react';
 
 // Semantic variants
 <Typography variant="h1">Heading 1</Typography>
@@ -138,7 +138,7 @@ import { Typography } from '@pixelforge/react';
 ### Layout Components
 
 ```tsx
-import { Container, Stack, Grid } from '@pixelforge/react';
+import { Container, Stack, Grid } from '@pixelforge-ui/react';
 
 // Container with max width
 <Container size="md">
@@ -168,7 +168,7 @@ import { Container, Stack, Grid } from '@pixelforge/react';
 Wrap your app with ThemeProvider for theme context.
 
 ```tsx
-import { ThemeProvider } from '@pixelforge/react';
+import { ThemeProvider } from '@pixelforge-ui/react';
 
 <ThemeProvider defaultMode="light">
   <App />
@@ -184,7 +184,7 @@ import { ThemeProvider } from '@pixelforge/react';
 Override default design tokens.
 
 ```tsx
-import { ThemeProvider, defaultTokens } from '@pixelforge/react';
+import { ThemeProvider, defaultTokens } from '@pixelforge-ui/react';
 
 const customTheme = {
   ...defaultTokens,
@@ -229,7 +229,7 @@ All components follow WCAG 2.1 AA guidelines:
 Full TypeScript support with comprehensive type definitions:
 
 ```tsx
-import type { ButtonProps, InputProps } from '@pixelforge/react';
+import type { ButtonProps, InputProps } from '@pixelforge-ui/react';
 
 const MyButton: React.FC<ButtonProps> = (props) => {
   return <Button {...props} />;
@@ -244,8 +244,8 @@ const MyButton: React.FC<ButtonProps> = (props) => {
 
 ```tsx
 // Import specific components to minimize bundle
-import { Button } from '@pixelforge/react/button';
-import { Input } from '@pixelforge/react/input';
+import { Button } from '@pixelforge-ui/react/button';
+import { Input } from '@pixelforge-ui/react/input';
 ```
 
 ## Browser Support
@@ -257,13 +257,13 @@ import { Input } from '@pixelforge/react/input';
 
 ## Package Info
 
-- **Dependencies**: React 18+, @pixelforge/core, clsx
+- **Dependencies**: React 18+, @pixelforge-ui/core, clsx
 - **License**: MIT
 - **Bundle**: ESM + CJS + TypeScript declarations
 
 ## Related Packages
 
-- [`@pixelforge/core`](https://www.npmjs.com/package/@pixelforge/core) - Design tokens and theming utilities
+- [`@pixelforge-ui/core`](https://www.npmjs.com/package/@pixelforge-ui/core) - Design tokens and theming utilities
 
 ---
 

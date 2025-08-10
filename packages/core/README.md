@@ -1,11 +1,11 @@
-# @pixelforge/core
+# @pixelforge-ui/core
 
 Design tokens and theming utilities for PixelForge UI component library.
 
 ## Installation
 
 ```bash
-npm install @pixelforge/core
+npm install @pixelforge-ui/core
 ```
 
 ## Features
@@ -21,7 +21,7 @@ npm install @pixelforge/core
 ### Basic Usage
 
 ```tsx
-import { defaultTokens, ThemeProvider, useTheme } from '@pixelforge/core';
+import { defaultTokens, ThemeProvider, useTheme } from '@pixelforge-ui/core';
 
 // Use design tokens directly
 console.log(defaultTokens.colors.primary[500]); // '#3b82f6'
@@ -53,7 +53,7 @@ function MyComponent() {
 ### CSS Variables
 
 ```tsx
-import { tokensToCSS } from '@pixelforge/core';
+import { tokensToCSS } from '@pixelforge-ui/core';
 
 // Generate CSS variables
 const cssVars = tokensToCSS(defaultTokens);
@@ -97,7 +97,7 @@ const styles = `
 All tokens are fully typed for excellent developer experience:
 
 ```tsx
-import type { DesignTokens, Colors } from '@pixelforge/core';
+import type { DesignTokens, Colors } from '@pixelforge-ui/core';
 
 // Autocomplete and type safety
 const colors: Colors = defaultTokens.colors;
@@ -107,7 +107,7 @@ const primaryBlue: string = colors.primary[500]; // ✅ Type-safe
 ## Theme Customization
 
 ```tsx
-import { defaultTokens, type DesignTokens } from '@pixelforge/core';
+import { defaultTokens, type DesignTokens } from '@pixelforge-ui/core';
 
 // Override specific tokens
 const customTokens: DesignTokens = {
@@ -136,7 +136,7 @@ const customTokens: DesignTokens = {
 
 ## Related Packages
 
-- [`@pixelforge/react`](https://www.npmjs.com/package/@pixelforge/react) - React components built with these tokens
+- [`@pixelforge-ui/react`](https://www.npmjs.com/package/@pixelforge-ui/react) - React components built with these tokens
 
 ---
 

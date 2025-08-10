@@ -11,7 +11,7 @@ export {
   ThemeProvider,
   useTheme,
   type ReactNode,
-} from '@pixelforge/core';
+} from '@pixelforge-ui/core';
 
 // Components
 export * from './button';

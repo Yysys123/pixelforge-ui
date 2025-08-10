@@ -14,13 +14,17 @@ describe('Badge', () => {
     });
 
     it('renders with custom className', () => {
-      const { container } = render(<Badge className="custom-badge">Test</Badge>);
+      const { container } = render(
+        <Badge className="custom-badge">Test</Badge>
+      );
       const badge = container.firstChild as HTMLElement;
       expect(badge).toHaveClass('custom-badge');
     });
 
     it('renders with custom style', () => {
-      const { container } = render(<Badge style={{ color: 'red' }}>Test</Badge>);
+      const { container } = render(
+        <Badge style={{ color: 'red' }}>Test</Badge>
+      );
       const badge = container.firstChild as HTMLElement;
       expect(badge).toHaveStyle({ color: 'red' });
     });
@@ -39,31 +43,33 @@ describe('Badge', () => {
   });
 
   describe('Variants', () => {
-    it.each(['default', 'primary', 'secondary', 'success', 'warning', 'danger', 'info'] as const)(
-      'applies %s variant class',
-      (variant) => {
-        const { container } = render(<Badge variant={variant}>Test</Badge>);
-        const badge = container.firstChild as HTMLElement;
-        expect(badge).toHaveClass(`variant-${variant}`);
-      }
-    );
+    it.each([
+      'default',
+      'primary',
+      'secondary',
+      'success',
+      'warning',
+      'danger',
+      'info',
+    ] as const)('applies %s variant class', variant => {
+      const { container } = render(<Badge variant={variant}>Test</Badge>);
+      const badge = container.firstChild as HTMLElement;
+      expect(badge).toHaveClass(`variant-${variant}`);
+    });
   });
 
   describe('Sizes', () => {
-    it.each(['sm', 'md', 'lg'] as const)(
-      'applies %s size class',
-      (size) => {
-        const { container } = render(<Badge size={size}>Test</Badge>);
-        const badge = container.firstChild as HTMLElement;
-        expect(badge).toHaveClass(`size-${size}`);
-      }
-    );
+    it.each(['sm', 'md', 'lg'] as const)('applies %s size class', size => {
+      const { container } = render(<Badge size={size}>Test</Badge>);
+      const badge = container.firstChild as HTMLElement;
+      expect(badge).toHaveClass(`size-${size}`);
+    });
   });
 
   describe('Shapes', () => {
     it.each(['rounded', 'pill', 'square'] as const)(
       'applies %s shape class',
-      (shape) => {
+      shape => {
         const { container } = render(<Badge shape={shape}>Test</Badge>);
         const badge = container.firstChild as HTMLElement;
         expect(badge).toHaveClass(`shape-${shape}`);
@@ -133,8 +139,12 @@ describe('Badge', () => {
 
     it.each(['top-right', 'top-left', 'bottom-right', 'bottom-left'] as const)(
       'applies %s position class when overlay',
-      (position) => {
-        const { container } = render(<Badge overlay position={position}>Test</Badge>);
+      position => {
+        const { container } = render(
+          <Badge overlay position={position}>
+            Test
+          </Badge>
+        );
         const badge = container.firstChild as HTMLElement;
         expect(badge).toHaveClass(`position-${position}`);
       }
@@ -170,11 +180,15 @@ describe('Badge', () => {
       const user = userEvent.setup();
       const handleClick = jest.fn();
 
-      render(<Badge interactive onClick={handleClick}>Test</Badge>);
-      
+      render(
+        <Badge interactive onClick={handleClick}>
+          Test
+        </Badge>
+      );
+
       const badge = screen.getByRole('button');
       await user.click(badge);
-      
+
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
@@ -182,12 +196,16 @@ describe('Badge', () => {
       const user = userEvent.setup();
       const handleKeyDown = jest.fn();
 
-      render(<Badge interactive onKeyDown={handleKeyDown}>Test</Badge>);
-      
+      render(
+        <Badge interactive onKeyDown={handleKeyDown}>
+          Test
+        </Badge>
+      );
+
       const badge = screen.getByRole('button');
       badge.focus();
       await user.keyboard('{Enter}');
-      
+
       expect(handleKeyDown).toHaveBeenCalledTimes(1);
     });
   });
@@ -196,7 +214,7 @@ describe('Badge', () => {
     it('renders with icon', () => {
       const icon = <span data-testid="test-icon">★</span>;
       render(<Badge icon={icon}>Test</Badge>);
-      
+
       expect(screen.getByTestId('test-icon')).toBeInTheDocument();
       expect(screen.getByText('Test')).toBeInTheDocument();
     });
@@ -204,7 +222,7 @@ describe('Badge', () => {
     it('renders icon only badge with content', () => {
       const icon = <span data-testid="test-icon">★</span>;
       render(<Badge icon={icon}>Badge</Badge>);
-      
+
       expect(screen.getByTestId('test-icon')).toBeInTheDocument();
       expect(screen.getByText('Badge')).toBeInTheDocument();
     });
@@ -218,7 +236,11 @@ describe('Badge', () => {
     });
 
     it('combines rotation with other transforms', () => {
-      const { container } = render(<Badge rotation={-10} style={{ transform: 'scale(1.2)' }}>Test</Badge>);
+      const { container } = render(
+        <Badge rotation={-10} style={{ transform: 'scale(1.2)' }}>
+          Test
+        </Badge>
+      );
       const badge = container.firstChild as HTMLElement;
       // Rotation should override the style transform
       expect(badge).toHaveStyle({ transform: 'rotate(-10deg)' });
@@ -256,7 +278,7 @@ describe('Badge', () => {
       );
 
       const badge = container.firstChild as HTMLElement;
-      
+
       expect(badge).toHaveClass('variant-primary');
       expect(badge).toHaveClass('size-lg');
       expect(badge).toHaveClass('shape-pill');
@@ -266,7 +288,7 @@ describe('Badge', () => {
       expect(badge).toHaveClass('custom-class');
       expect(badge).toHaveStyle({ transform: 'rotate(5deg)' });
       expect(badge).toHaveAttribute('role', 'button');
-      
+
       expect(screen.getByTestId('star-icon')).toBeInTheDocument();
       expect(screen.getByText('Premium')).toBeInTheDocument();
     });
@@ -291,12 +313,7 @@ describe('Badge', () => {
 
     it('renders status dot', () => {
       const { container } = render(
-        <Badge
-          dot
-          variant="success"
-          overlay
-          position="bottom-right"
-        />
+        <Badge dot variant="success" overlay position="bottom-right" />
       );
 
       const badge = container.firstChild as HTMLElement;
@@ -309,7 +326,11 @@ describe('Badge', () => {
 
   describe('HTML Attributes', () => {
     it('forwards additional props', () => {
-      render(<Badge data-testid="custom-badge" aria-label="Notification badge">5</Badge>);
+      render(
+        <Badge data-testid="custom-badge" aria-label="Notification badge">
+          5
+        </Badge>
+      );
       const badge = screen.getByTestId('custom-badge');
       expect(badge).toHaveAttribute('aria-label', 'Notification badge');
     });

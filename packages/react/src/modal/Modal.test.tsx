@@ -43,30 +43,55 @@ describe('Modal', () => {
     });
 
     it('does not render when closed', () => {
-      render(<Modal {...defaultProps} open={false}>Modal content</Modal>);
+      render(
+        <Modal {...defaultProps} open={false}>
+          Modal content
+        </Modal>
+      );
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
 
     it('renders with title', () => {
-      render(<Modal {...defaultProps} title="Test Modal">Modal content</Modal>);
-      expect(screen.getByRole('heading', { name: 'Test Modal' })).toBeInTheDocument();
-      expect(screen.getByRole('dialog')).toHaveAttribute('aria-labelledby', 'modal-title');
+      render(
+        <Modal {...defaultProps} title="Test Modal">
+          Modal content
+        </Modal>
+      );
+      expect(
+        screen.getByRole('heading', { name: 'Test Modal' })
+      ).toBeInTheDocument();
+      expect(screen.getByRole('dialog')).toHaveAttribute(
+        'aria-labelledby',
+        'modal-title'
+      );
     });
 
     it('renders custom header content', () => {
       const header = <div data-testid="custom-header">Custom Header</div>;
-      render(<Modal {...defaultProps} header={header}>Modal content</Modal>);
+      render(
+        <Modal {...defaultProps} header={header}>
+          Modal content
+        </Modal>
+      );
       expect(screen.getByTestId('custom-header')).toBeInTheDocument();
     });
 
     it('renders custom footer content', () => {
       const footer = <div data-testid="custom-footer">Custom Footer</div>;
-      render(<Modal {...defaultProps} footer={footer}>Modal content</Modal>);
+      render(
+        <Modal {...defaultProps} footer={footer}>
+          Modal content
+        </Modal>
+      );
       expect(screen.getByTestId('custom-footer')).toBeInTheDocument();
     });
 
     it('applies custom className', () => {
-      render(<Modal {...defaultProps} className="custom-modal">Modal content</Modal>);
+      render(
+        <Modal {...defaultProps} className="custom-modal">
+          Modal content
+        </Modal>
+      );
       expect(screen.getByRole('dialog')).toHaveClass('custom-modal');
     });
   });
@@ -74,8 +99,12 @@ describe('Modal', () => {
   describe('Size variants', () => {
     it.each(['sm', 'md', 'lg', 'xl', 'fullscreen'] as const)(
       'applies %s size class',
-      (size) => {
-        render(<Modal {...defaultProps} size={size}>Modal content</Modal>);
+      size => {
+        render(
+          <Modal {...defaultProps} size={size}>
+            Modal content
+          </Modal>
+        );
         expect(screen.getByRole('dialog')).toHaveClass(`size-${size}`);
       }
     );
@@ -84,23 +113,35 @@ describe('Modal', () => {
   describe('Close button', () => {
     it('renders close button by default', () => {
       render(<Modal {...defaultProps}>Modal content</Modal>);
-      expect(screen.getByRole('button', { name: 'Close modal' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Close modal' })
+      ).toBeInTheDocument();
     });
 
     it('does not render close button when showCloseButton is false', () => {
-      render(<Modal {...defaultProps} showCloseButton={false}>Modal content</Modal>);
-      expect(screen.queryByRole('button', { name: 'Close modal' })).not.toBeInTheDocument();
+      render(
+        <Modal {...defaultProps} showCloseButton={false}>
+          Modal content
+        </Modal>
+      );
+      expect(
+        screen.queryByRole('button', { name: 'Close modal' })
+      ).not.toBeInTheDocument();
     });
 
     it('calls onClose when close button is clicked', async () => {
       const user = userEvent.setup();
       const handleClose = jest.fn();
 
-      render(<Modal {...defaultProps} onClose={handleClose}>Modal content</Modal>);
-      
+      render(
+        <Modal {...defaultProps} onClose={handleClose}>
+          Modal content
+        </Modal>
+      );
+
       const closeButton = screen.getByRole('button', { name: 'Close modal' });
       await user.click(closeButton);
-      
+
       expect(handleClose).toHaveBeenCalledTimes(1);
     });
   });
@@ -110,12 +151,16 @@ describe('Modal', () => {
       const user = userEvent.setup();
       const handleClose = jest.fn();
 
-      render(<Modal {...defaultProps} onClose={handleClose}>Modal content</Modal>);
-      
+      render(
+        <Modal {...defaultProps} onClose={handleClose}>
+          Modal content
+        </Modal>
+      );
+
       // Click on backdrop (presentation role element)
       const backdrop = screen.getByRole('presentation');
       await user.click(backdrop);
-      
+
       expect(handleClose).toHaveBeenCalledTimes(1);
     });
 
@@ -124,14 +169,18 @@ describe('Modal', () => {
       const handleClose = jest.fn();
 
       render(
-        <Modal {...defaultProps} onClose={handleClose} closeOnBackdropClick={false}>
+        <Modal
+          {...defaultProps}
+          onClose={handleClose}
+          closeOnBackdropClick={false}
+        >
           Modal content
         </Modal>
       );
-      
+
       const backdrop = screen.getByRole('presentation');
       await user.click(backdrop);
-      
+
       expect(handleClose).not.toHaveBeenCalled();
     });
 
@@ -139,11 +188,15 @@ describe('Modal', () => {
       const user = userEvent.setup();
       const handleClose = jest.fn();
 
-      render(<Modal {...defaultProps} onClose={handleClose}>Modal content</Modal>);
-      
+      render(
+        <Modal {...defaultProps} onClose={handleClose}>
+          Modal content
+        </Modal>
+      );
+
       const modal = screen.getByRole('dialog');
       await user.click(modal);
-      
+
       expect(handleClose).not.toHaveBeenCalled();
     });
   });
@@ -153,10 +206,14 @@ describe('Modal', () => {
       const user = userEvent.setup();
       const handleClose = jest.fn();
 
-      render(<Modal {...defaultProps} onClose={handleClose}>Modal content</Modal>);
-      
+      render(
+        <Modal {...defaultProps} onClose={handleClose}>
+          Modal content
+        </Modal>
+      );
+
       await user.keyboard('{Escape}');
-      
+
       expect(handleClose).toHaveBeenCalledTimes(1);
     });
 
@@ -169,9 +226,9 @@ describe('Modal', () => {
           Modal content
         </Modal>
       );
-      
+
       await user.keyboard('{Escape}');
-      
+
       expect(handleClose).not.toHaveBeenCalled();
     });
   });
@@ -193,14 +250,14 @@ describe('Modal', () => {
       expect(firstButton).toBeInTheDocument();
       expect(secondButton).toBeInTheDocument();
       expect(closeButton).toBeInTheDocument();
-      
+
       // Test manual focus
       firstButton.focus();
       expect(firstButton).toHaveFocus();
-      
+
       secondButton.focus();
       expect(secondButton).toHaveFocus();
-      
+
       closeButton.focus();
       expect(closeButton).toHaveFocus();
     });
@@ -225,10 +282,16 @@ describe('Modal', () => {
     });
 
     it('restores body scroll when modal is closed', () => {
-      const { rerender } = render(<Modal {...defaultProps}>Modal content</Modal>);
+      const { rerender } = render(
+        <Modal {...defaultProps}>Modal content</Modal>
+      );
       expect(document.body.style.overflow).toBe('hidden');
 
-      rerender(<Modal {...defaultProps} open={false}>Modal content</Modal>);
+      rerender(
+        <Modal {...defaultProps} open={false}>
+          Modal content
+        </Modal>
+      );
       expect(document.body.style.overflow).toBe('visible');
     });
   });
@@ -260,23 +323,34 @@ describe('Modal', () => {
         </Modal>
       );
 
-      expect(screen.getByRole('heading', { name: 'Complete Modal' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: 'Complete Modal' })
+      ).toBeInTheDocument();
       expect(screen.getByText('Custom header')).toBeInTheDocument();
-      expect(screen.getByText('This is a complete modal example with all features.')).toBeInTheDocument();
+      expect(
+        screen.getByText('This is a complete modal example with all features.')
+      ).toBeInTheDocument();
       expect(screen.getByText('Cancel')).toBeInTheDocument();
       expect(screen.getByText('Save')).toBeInTheDocument();
-      expect(screen.getByRole('dialog')).toHaveClass('size-lg', 'custom-content');
+      expect(screen.getByRole('dialog')).toHaveClass(
+        'size-lg',
+        'custom-content'
+      );
     });
   });
 
   describe('HTML Attributes', () => {
     it('forwards additional props to modal element', () => {
       render(
-        <Modal {...defaultProps} data-testid="custom-modal" aria-describedby="modal-description">
+        <Modal
+          {...defaultProps}
+          data-testid="custom-modal"
+          aria-describedby="modal-description"
+        >
           Modal content
         </Modal>
       );
-      
+
       const modal = screen.getByTestId('custom-modal');
       expect(modal).toHaveAttribute('aria-describedby', 'modal-description');
     });
@@ -289,7 +363,7 @@ describe('Modal', () => {
           <p>This modal follows accessibility best practices.</p>
         </Modal>
       );
-      
+
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
@@ -308,14 +382,18 @@ describe('Modal', () => {
           <input id="email" type="email" />
         </Modal>
       );
-      
+
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
 
     it('has proper dialog role and aria attributes', () => {
-      render(<Modal {...defaultProps} title="Test Modal">Modal content</Modal>);
-      
+      render(
+        <Modal {...defaultProps} title="Test Modal">
+          Modal content
+        </Modal>
+      );
+
       const modal = screen.getByRole('dialog');
       expect(modal).toHaveAttribute('aria-modal', 'true');
       expect(modal).toHaveAttribute('aria-labelledby', 'modal-title');
@@ -323,7 +401,7 @@ describe('Modal', () => {
 
     it('close button has proper accessibility attributes', () => {
       render(<Modal {...defaultProps}>Modal content</Modal>);
-      
+
       const closeButton = screen.getByRole('button', { name: 'Close modal' });
       expect(closeButton).toHaveAttribute('type', 'button');
       expect(closeButton).toHaveAttribute('aria-label', 'Close modal');
@@ -333,7 +411,11 @@ describe('Modal', () => {
   describe('Ref forwarding', () => {
     it('forwards ref to modal backdrop element', () => {
       const ref = React.createRef<HTMLDivElement>();
-      render(<Modal {...defaultProps} ref={ref}>Modal content</Modal>);
+      render(
+        <Modal {...defaultProps} ref={ref}>
+          Modal content
+        </Modal>
+      );
 
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
       expect(ref.current).toHaveAttribute('role', 'presentation');
@@ -345,13 +427,13 @@ describe('Modal', () => {
       const user = userEvent.setup();
 
       render(<Modal open={true}>Modal content</Modal>);
-      
+
       // Should not throw when pressing escape or clicking backdrop without onClose
       await user.keyboard('{Escape}');
-      
+
       const backdrop = screen.getByRole('presentation');
       await user.click(backdrop);
-      
+
       // Should still render without issues
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
@@ -363,7 +445,7 @@ describe('Modal', () => {
 
     it('handles modal without header content', () => {
       render(<Modal {...defaultProps} showCloseButton={false} />);
-      
+
       // Should not render header section when no title, header, or close button
       expect(screen.queryByRole('heading')).not.toBeInTheDocument();
     });

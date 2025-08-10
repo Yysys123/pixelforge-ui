@@ -1,5 +1,5 @@
 {
-  "name": "@pixelforge/core",
+  "name": "@pixelforge-ui/core",
   "version": "0.1.0",
   "description": "Design tokens and theming utilities for PixelForge UI component library",
   "keywords": [
