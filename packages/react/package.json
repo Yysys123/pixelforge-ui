@@ -32,7 +32,7 @@
     "build": "tsup src/index.tsx --format cjs,esm --external react,react-dom --minify",
     "dev": "tsup src/index.tsx --format cjs,esm --external react,react-dom --watch",
     "test": "jest",
-    "test:a11y": "jest --testPathPattern=a11y",
+    "test:a11y": "jest",
     "bundle-size": "bundlesize",
     "clean": "rimraf dist",
     "lint": "eslint 'src/**/*.{ts,tsx}'"

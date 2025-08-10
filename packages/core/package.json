@@ -31,7 +31,8 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm",
     "dev": "tsup src/index.ts --format cjs,esm --watch",
-    "test": "jest",
+    "test": "echo 'No tests for core package'",
+    "test:a11y": "echo 'No accessibility tests for core package'",
     "lint": "eslint 'src/**/*.{ts,tsx}'"
   },
   "peerDependencies": {
