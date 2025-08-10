@@ -1,0 +1,48 @@
+/* Container base styles using CSS variables */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--pf-spacing-4);
+  padding-right: var(--pf-spacing-4);
+}
+
+/* Size variants */
+.size-sm {
+  max-width: 640px;
+}
+
+.size-md {
+  max-width: 768px;
+}
+
+.size-lg {
+  max-width: 1024px;
+}
+
+.size-xl {
+  max-width: 1280px;
+}
+
+.size-2xl {
+  max-width: 1536px;
+}
+
+.size-full {
+  max-width: none;
+}
+
+/* Responsive breakpoints */
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--pf-spacing-6);
+    padding-right: var(--pf-spacing-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--pf-spacing-8);
+    padding-right: var(--pf-spacing-8);
+  }
+}

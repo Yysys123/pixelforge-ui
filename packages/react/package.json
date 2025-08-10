@@ -8,9 +8,12 @@
   "files": ["dist"],
   "license": "MIT",
   "scripts": {
-    "build": "tsup src/index.tsx --format cjs,esm --dts --external react,react-dom",
-    "dev": "tsup src/index.tsx --format cjs,esm --dts --external react,react-dom --watch",
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react,react-dom --minify --inject-style",
+    "dev": "tsup src/index.tsx --format cjs,esm --dts --external react,react-dom --watch --inject-style",
     "test": "jest",
+    "test:a11y": "jest --testPathPattern=a11y",
+    "bundle-size": "bundlesize",
+    "clean": "rimraf dist",
     "lint": "eslint 'src/**/*.{ts,tsx}'"
   },
   "peerDependencies": {
@@ -18,13 +21,26 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@pixelforge/core": "workspace:*"
+    "@pixelforge/core": "workspace:*",
+    "clsx": "^2.0.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "^9.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.0.0",
+    "@types/jest": "^29.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "bundlesize": "^0.18.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.0.0",
+    "jest-axe": "^8.0.0",
+    "jest-environment-jsdom": "^29.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
   },

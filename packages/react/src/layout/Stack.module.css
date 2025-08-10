@@ -1,0 +1,200 @@
+/* Stack base styles using CSS variables */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Direction variants */
+.direction-column {
+  flex-direction: column;
+}
+
+.direction-row {
+  flex-direction: row;
+}
+
+.direction-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.direction-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Spacing variants */
+.spacing-0 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-0);
+}
+
+.spacing-1 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-1);
+}
+
+.spacing-2 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-2);
+}
+
+.spacing-3 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-3);
+}
+
+.spacing-4 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-4);
+}
+
+.spacing-5 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-5);
+}
+
+.spacing-6 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-6);
+}
+
+.spacing-8 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-8);
+}
+
+.spacing-10 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-10);
+}
+
+.spacing-12 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-12);
+}
+
+.spacing-16 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-16);
+}
+
+.spacing-20 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-20);
+}
+
+.spacing-24 > *:not(:last-child) {
+  margin-bottom: var(--pf-spacing-24);
+}
+
+/* Row spacing (when direction is row) */
+.direction-row.spacing-0 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-0);
+}
+
+.direction-row.spacing-1 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-1);
+}
+
+.direction-row.spacing-2 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-2);
+}
+
+.direction-row.spacing-3 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-3);
+}
+
+.direction-row.spacing-4 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-4);
+}
+
+.direction-row.spacing-5 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-5);
+}
+
+.direction-row.spacing-6 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-6);
+}
+
+.direction-row.spacing-8 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-8);
+}
+
+.direction-row.spacing-10 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-10);
+}
+
+.direction-row.spacing-12 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-12);
+}
+
+.direction-row.spacing-16 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-16);
+}
+
+.direction-row.spacing-20 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-20);
+}
+
+.direction-row.spacing-24 > *:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: var(--pf-spacing-24);
+}
+
+/* Alignment variants */
+.align-start {
+  align-items: flex-start;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.align-baseline {
+  align-items: baseline;
+}
+
+/* Justify variants */
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* Wrap variants */
+.wrap-nowrap {
+  flex-wrap: nowrap;
+}
+
+.wrap-wrap {
+  flex-wrap: wrap;
+}
+
+.wrap-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}

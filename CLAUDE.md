@@ -880,6 +880,7 @@ Phase 5 — Release
 ⸻
 
 15 — Quick checklist (ready to execute)
+   	•	Crete comprehensive HOW to implement docs and a README.md file also document each component
 	•	Create GitHub org/repo pixelforge-ui
 	•	Setup pnpm workspace + TypeScript baseline
 	•	Implement tokens & ThemeProvider in core
