@@ -3,42 +3,43 @@ import { clsx } from 'clsx';
 import styles from './Button.module.css';
 import '../styles/utilities.css';
 
-export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
+export interface ButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
   /**
    * Visual style variant of the button
    */
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  
+
   /**
    * Size of the button
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Whether the button should take up the full width of its container
    */
   fullWidth?: boolean;
-  
+
   /**
    * Loading state - shows spinner and disables interaction
    */
   loading?: boolean;
-  
+
   /**
    * Icon to display at the start of the button
    */
   startIcon?: React.ReactNode;
-  
+
   /**
    * Icon to display at the end of the button
    */
   endIcon?: React.ReactNode;
-  
+
   /**
    * Additional CSS class names
    */
   className?: string;
-  
+
   /**
    * Button content
    */
@@ -120,9 +121,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           startIcon
         )}
-        
+
         {children && <span>{children}</span>}
-        
+
         {!loading && endIcon}
       </button>
     );

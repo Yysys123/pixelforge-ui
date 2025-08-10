@@ -1,5 +1,17 @@
-// Re-export everything from core for convenience
-export * from '@pixelforge/core';
+// Re-export design tokens and theme utilities from core (excluding conflicting names)
+export {
+  type ColorScale,
+  type Colors,
+  type Spacing,
+  type Typography as TypographyTokens,
+  type Shadows,
+  type DesignTokens,
+  defaultTokens,
+  tokensToCSS,
+  ThemeProvider,
+  useTheme,
+  type ReactNode,
+} from '@pixelforge/core';
 
 // Components
 export * from './button';

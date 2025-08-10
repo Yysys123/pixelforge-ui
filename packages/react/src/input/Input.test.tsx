@@ -43,7 +43,7 @@ describe('Input', () => {
       render(<Input label="Username" />);
       const input = screen.getByRole('textbox');
       const label = screen.getByText('Username');
-      
+
       expect(label).toHaveAttribute('for', input.getAttribute('id'));
     });
 
@@ -61,7 +61,7 @@ describe('Input', () => {
   });
 
   describe('Sizes', () => {
-    it.each(['sm', 'md', 'lg'] as const)('applies %s size class', (size) => {
+    it.each(['sm', 'md', 'lg'] as const)('applies %s size class', size => {
       render(<Input size={size} />);
       const inputContainer = screen.getByRole('textbox').closest('div');
       expect(inputContainer).toHaveClass(`size-${size}`);
@@ -85,7 +85,7 @@ describe('Input', () => {
       render(<Input disabled />);
       const input = screen.getByRole('textbox');
       const inputContainer = input.closest('div');
-      
+
       expect(input).toBeDisabled();
       expect(inputContainer).toHaveClass('disabled');
     });
@@ -114,15 +114,21 @@ describe('Input', () => {
     it('displays error message', () => {
       render(<Input error="Something went wrong" />);
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-      expect(screen.getByText('Something went wrong')).toHaveAttribute('role', 'alert');
+      expect(screen.getByText('Something went wrong')).toHaveAttribute(
+        'role',
+        'alert'
+      );
     });
 
     it('associates error message with input', () => {
       render(<Input error="Something went wrong" />);
       const input = screen.getByRole('textbox');
       const errorMessage = screen.getByText('Something went wrong');
-      
-      expect(input).toHaveAttribute('aria-describedby', errorMessage.getAttribute('id'));
+
+      expect(input).toHaveAttribute(
+        'aria-describedby',
+        errorMessage.getAttribute('id')
+      );
     });
   });
 
@@ -136,8 +142,11 @@ describe('Input', () => {
       render(<Input helperText="Enter your username" />);
       const input = screen.getByRole('textbox');
       const helperText = screen.getByText('Enter your username');
-      
-      expect(input).toHaveAttribute('aria-describedby', helperText.getAttribute('id'));
+
+      expect(input).toHaveAttribute(
+        'aria-describedby',
+        helperText.getAttribute('id')
+      );
     });
 
     it('applies success style to helper text when state is success', () => {
@@ -151,10 +160,11 @@ describe('Input', () => {
     it('renders start icon', () => {
       const icon = <span data-testid="start-icon">🔍</span>;
       render(<Input startIcon={icon} />);
-      
+
       expect(screen.getByTestId('start-icon')).toBeInTheDocument();
-      
-      const startIconWrapper = screen.getByTestId('start-icon').closest('span');
+
+      // Check the parent span wrapper which has the icon styling
+      const startIconWrapper = screen.getByTestId('start-icon').parentElement;
       expect(startIconWrapper).toHaveClass('start-icon');
       expect(startIconWrapper).toHaveAttribute('aria-hidden', 'true');
     });
@@ -162,10 +172,11 @@ describe('Input', () => {
     it('renders end icon', () => {
       const icon = <span data-testid="end-icon">✅</span>;
       render(<Input endIcon={icon} />);
-      
+
       expect(screen.getByTestId('end-icon')).toBeInTheDocument();
-      
-      const endIconWrapper = screen.getByTestId('end-icon').closest('span');
+
+      // Check the parent span wrapper which has the icon styling
+      const endIconWrapper = screen.getByTestId('end-icon').parentElement;
       expect(endIconWrapper).toHaveClass('end-icon');
       expect(endIconWrapper).toHaveAttribute('aria-hidden', 'true');
     });
@@ -183,10 +194,10 @@ describe('Input', () => {
     it('handles user input', async () => {
       const user = userEvent.setup();
       render(<Input />);
-      
+
       const input = screen.getByRole('textbox');
       await user.type(input, 'Hello World');
-      
+
       expect(input).toHaveValue('Hello World');
     });
 
@@ -194,10 +205,10 @@ describe('Input', () => {
       const user = userEvent.setup();
       const handleChange = jest.fn();
       render(<Input onChange={handleChange} />);
-      
+
       const input = screen.getByRole('textbox');
       await user.type(input, 'a');
-      
+
       expect(handleChange).toHaveBeenCalled();
     });
 
@@ -205,10 +216,10 @@ describe('Input', () => {
       const user = userEvent.setup();
       const handleFocus = jest.fn();
       render(<Input onFocus={handleFocus} />);
-      
+
       const input = screen.getByRole('textbox');
       await user.click(input);
-      
+
       expect(handleFocus).toHaveBeenCalled();
     });
 
@@ -216,11 +227,11 @@ describe('Input', () => {
       const user = userEvent.setup();
       const handleBlur = jest.fn();
       render(<Input onBlur={handleBlur} />);
-      
+
       const input = screen.getByRole('textbox');
       await user.click(input);
       await user.tab();
-      
+
       expect(handleBlur).toHaveBeenCalled();
     });
   });
@@ -228,7 +239,7 @@ describe('Input', () => {
   describe('HTML Attributes', () => {
     it('forwards additional props to input', () => {
       render(<Input placeholder="Enter text..." data-testid="custom-input" />);
-      
+
       const input = screen.getByTestId('custom-input');
       expect(input).toHaveAttribute('placeholder', 'Enter text...');
     });
@@ -274,10 +285,10 @@ describe('Input', () => {
           <Input label="Password" />
         </>
       );
-      
+
       const usernameInput = screen.getByLabelText('Username');
       const passwordInput = screen.getByLabelText('Password');
-      
+
       expect(usernameInput.getAttribute('id')).not.toBe(
         passwordInput.getAttribute('id')
       );
@@ -288,7 +299,7 @@ describe('Input', () => {
     it('forwards ref to input element', () => {
       const ref = React.createRef<HTMLInputElement>();
       render(<Input ref={ref} />);
-      
+
       expect(ref.current).toBeInstanceOf(HTMLInputElement);
       expect(ref.current).toBe(screen.getByRole('textbox'));
     });

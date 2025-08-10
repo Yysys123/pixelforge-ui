@@ -2,33 +2,78 @@ import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import styles from './Typography.module.css';
 
-export type TypographyElement = 
-  | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  | 'p' | 'span' | 'div' | 'label' | 'legend'
-  | 'strong' | 'em' | 'small' | 'code' | 'pre';
+export type TypographyElement =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'p'
+  | 'span'
+  | 'div'
+  | 'label'
+  | 'legend'
+  | 'strong'
+  | 'em'
+  | 'small'
+  | 'code'
+  | 'pre';
 
 export type TypographyVariant =
-  | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  | 'subtitle1' | 'subtitle2'
-  | 'body1' | 'body2'
-  | 'caption' | 'overline';
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'body1'
+  | 'body2'
+  | 'caption'
+  | 'overline';
 
-export type TypographySize = 
-  | 'xs' | 'sm' | 'base' | 'lg' | 'xl' 
-  | '2xl' | '3xl' | '4xl' | '5xl' | '6xl';
+export type TypographySize =
+  | 'xs'
+  | 'sm'
+  | 'base'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
 
-export type TypographyWeight = 
-  | 'thin' | 'light' | 'normal' | 'medium' 
-  | 'semibold' | 'bold' | 'extrabold' | 'black';
+export type TypographyWeight =
+  | 'thin'
+  | 'light'
+  | 'normal'
+  | 'medium'
+  | 'semibold'
+  | 'bold'
+  | 'extrabold'
+  | 'black';
 
-export type TypographyColor = 
-  | 'primary' | 'secondary' | 'muted' | 'inverse'
-  | 'brand-primary' | 'brand-secondary'
-  | 'success' | 'warning' | 'danger';
+export type TypographyColor =
+  | 'primary'
+  | 'secondary'
+  | 'muted'
+  | 'inverse'
+  | 'brand-primary'
+  | 'brand-secondary'
+  | 'success'
+  | 'warning'
+  | 'danger';
 
 export type TypographyAlign = 'left' | 'center' | 'right' | 'justify';
 
-export type TypographyTransform = 'none' | 'uppercase' | 'lowercase' | 'capitalize';
+export type TypographyTransform =
+  | 'none'
+  | 'uppercase'
+  | 'lowercase'
+  | 'capitalize';
 
 export type TypographyDecoration = 'none' | 'underline' | 'line-through';
 
@@ -39,67 +84,67 @@ export interface TypographyProps {
    * The HTML element to render
    */
   as?: TypographyElement;
-  
+
   /**
    * Semantic variant that applies predefined styles
    */
   variant?: TypographyVariant;
-  
+
   /**
    * Font size
    */
   size?: TypographySize;
-  
+
   /**
    * Font weight
    */
   weight?: TypographyWeight;
-  
+
   /**
    * Text color
    */
   color?: TypographyColor;
-  
+
   /**
    * Text alignment
    */
   align?: TypographyAlign;
-  
+
   /**
    * Text transformation
    */
   transform?: TypographyTransform;
-  
+
   /**
    * Text decoration
    */
   decoration?: TypographyDecoration;
-  
+
   /**
    * Font family
    */
   family?: TypographyFamily;
-  
+
   /**
    * Truncate text with ellipsis
    */
   truncate?: boolean;
-  
+
   /**
    * Clamp text to specified number of lines
    */
   lineClamp?: 1 | 2 | 3;
-  
+
   /**
    * Additional CSS class names
    */
   className?: string;
-  
+
   /**
    * Children content
    */
   children?: React.ReactNode;
-  
+
   /**
    * Additional HTML attributes
    */
@@ -155,14 +200,14 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       {
         // Variant styles take precedence
         [styles[`variant-${variant}`]]: variant,
-        
+
         // Individual style overrides
         [styles[`size-${size}`]]: size && !variant,
         [styles[`weight-${weight}`]]: weight && !variant,
         [styles[`align-${align}`]]: align,
         [styles[`transform-${transform}`]]: transform,
         [styles[`decoration-${decoration}`]]: decoration,
-        
+
         // Truncation
         [styles.truncate]: truncate,
         [styles[`line-clamp-${lineClamp}`]]: lineClamp,

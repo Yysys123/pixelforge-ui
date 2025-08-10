@@ -7,17 +7,17 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Maximum width of the container
    */
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-  
+
   /**
    * HTML element to render as
    */
   as?: keyof JSX.IntrinsicElements;
-  
+
   /**
    * Additional CSS class names
    */
   className?: string;
-  
+
   /**
    * Children content
    */
@@ -30,20 +30,10 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
   (
-    {
-      size = 'xl',
-      as: Element = 'div',
-      className,
-      children,
-      ...props
-    },
+    { size = 'xl', as: Element = 'div', className, children, ...props },
     ref
   ) => {
-    const classes = clsx(
-      styles.container,
-      styles[`size-${size}`],
-      className
-    );
+    const classes = clsx(styles.container, styles[`size-${size}`], className);
 
     return (
       <Element ref={ref} className={classes} {...props}>

@@ -3,52 +3,53 @@ import { clsx } from 'clsx';
 import styles from './Input.module.css';
 import '../styles/utilities.css';
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /**
    * Size of the input
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Validation state of the input
    */
   state?: 'default' | 'error' | 'success';
-  
+
   /**
    * Whether the input should take up the full width of its container
    */
   fullWidth?: boolean;
-  
+
   /**
    * Label for the input
    */
   label?: string;
-  
+
   /**
    * Helper text displayed below the input
    */
   helperText?: string;
-  
+
   /**
    * Error message (sets state to error automatically)
    */
   error?: string;
-  
+
   /**
    * Icon to display at the start of the input
    */
   startIcon?: React.ReactNode;
-  
+
   /**
    * Icon to display at the end of the input
    */
   endIcon?: React.ReactNode;
-  
+
   /**
    * Additional CSS class names for the wrapper
    */
   wrapperClassName?: string;
-  
+
   /**
    * Additional CSS class names for the input
    */
@@ -82,7 +83,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const generatedId = useId();
     const id = providedId || generatedId;
     const helperTextId = `${id}-helper`;
-    
+
     // If error is provided, override state
     const finalState = error ? 'error' : state;
     const finalHelperText = error || helperText;
@@ -106,21 +107,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className
     );
 
-    const labelClasses = clsx(
-      styles.label,
-      {
-        [styles.required]: required,
-        [styles.disabled]: disabled,
-      }
-    );
+    const labelClasses = clsx(styles.label, {
+      [styles.required]: required,
+      [styles.disabled]: disabled,
+    });
 
-    const helperTextClasses = clsx(
-      styles['helper-text'],
-      {
-        [styles.error]: finalState === 'error',
-        [styles.success]: finalState === 'success',
-      }
-    );
+    const helperTextClasses = clsx(styles['helper-text'], {
+      [styles.error]: finalState === 'error',
+      [styles.success]: finalState === 'success',
+    });
 
     return (
       <div className={wrapperClasses}>
@@ -129,14 +124,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
-        
+
         <div className={inputClasses}>
           {startIcon && (
             <span className={styles['start-icon']} aria-hidden="true">
               {startIcon}
             </span>
           )}
-          
+
           <input
             ref={ref}
             id={id}
@@ -144,22 +139,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             required={required}
             aria-invalid={finalState === 'error'}
-            aria-describedby={
-              finalHelperText ? helperTextId : undefined
-            }
+            aria-describedby={finalHelperText ? helperTextId : undefined}
             {...props}
           />
-          
+
           {endIcon && (
             <span className={styles['end-icon']} aria-hidden="true">
               {endIcon}
             </span>
           )}
         </div>
-        
+
         {finalHelperText && (
-          <div 
-            id={helperTextId} 
+          <div
+            id={helperTextId}
             className={helperTextClasses}
             role={finalState === 'error' ? 'alert' : undefined}
           >

@@ -16,12 +16,12 @@ export function tokensToCSS(tokens: DesignTokens): CSSVariables {
       if ('primary' in colorValue) {
         // Handle text/border objects
         Object.entries(colorValue).forEach(([subKey, subValue]) => {
-          cssVars[`--pf-color-${colorKey}-${subKey}`] = subValue;
+          cssVars[`--pf-color-${colorKey}-${subKey}`] = subValue as string;
         });
       } else {
         // Handle color scales
         Object.entries(colorValue).forEach(([shade, value]) => {
-          cssVars[`--pf-color-${colorKey}-${shade}`] = value;
+          cssVars[`--pf-color-${colorKey}-${shade}`] = value as string;
         });
       }
     }
@@ -83,7 +83,10 @@ export function tokensToCSS(tokens: DesignTokens): CSSVariables {
 /**
  * Generates CSS string from CSS variables
  */
-export function generateCSSString(cssVars: CSSVariables, selector = ':root'): string {
+export function generateCSSString(
+  cssVars: CSSVariables,
+  selector = ':root'
+): string {
   const declarations = Object.entries(cssVars)
     .map(([property, value]) => `  ${property}: ${value};`)
     .join('\n');
@@ -94,16 +97,34 @@ export function generateCSSString(cssVars: CSSVariables, selector = ':root'): st
 /**
  * Merges two sets of design tokens, with the second taking precedence
  */
-export function mergeTokens(base: DesignTokens, override: Partial<DesignTokens>): DesignTokens {
+export function mergeTokens(
+  base: DesignTokens,
+  override: Partial<DesignTokens>
+): DesignTokens {
   return {
     colors: { ...base.colors, ...override.colors },
     spacing: { ...base.spacing, ...override.spacing },
     typography: {
-      fontFamily: { ...base.typography.fontFamily, ...override.typography?.fontFamily },
-      fontSize: { ...base.typography.fontSize, ...override.typography?.fontSize },
-      fontWeight: { ...base.typography.fontWeight, ...override.typography?.fontWeight },
-      lineHeight: { ...base.typography.lineHeight, ...override.typography?.lineHeight },
-      letterSpacing: { ...base.typography.letterSpacing, ...override.typography?.letterSpacing },
+      fontFamily: {
+        ...base.typography.fontFamily,
+        ...override.typography?.fontFamily,
+      },
+      fontSize: {
+        ...base.typography.fontSize,
+        ...override.typography?.fontSize,
+      },
+      fontWeight: {
+        ...base.typography.fontWeight,
+        ...override.typography?.fontWeight,
+      },
+      lineHeight: {
+        ...base.typography.lineHeight,
+        ...override.typography?.lineHeight,
+      },
+      letterSpacing: {
+        ...base.typography.letterSpacing,
+        ...override.typography?.letterSpacing,
+      },
     },
     borderRadius: { ...base.borderRadius, ...override.borderRadius },
     shadows: { ...base.shadows, ...override.shadows },

@@ -11,52 +11,52 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
    * Number of columns
    */
   cols?: GridCols;
-  
+
   /**
    * Number of rows
    */
   rows?: GridRows;
-  
+
   /**
    * Gap between grid items
    */
   gap?: GridGap;
-  
+
   /**
    * Column gap between grid items
    */
   gapX?: GridGap;
-  
+
   /**
    * Row gap between grid items
    */
   gapY?: GridGap;
-  
+
   /**
    * Responsive columns for small screens
    */
   smCols?: GridCols;
-  
+
   /**
    * Responsive columns for medium screens
    */
   mdCols?: GridCols;
-  
+
   /**
    * Responsive columns for large screens
    */
   lgCols?: GridCols;
-  
+
   /**
    * HTML element to render as
    */
   as?: keyof JSX.IntrinsicElements;
-  
+
   /**
    * Additional CSS class names
    */
   className?: string;
-  
+
   /**
    * Children content
    */

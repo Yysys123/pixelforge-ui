@@ -2,44 +2,57 @@ import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import styles from './Stack.module.css';
 
-export type StackSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20 | 24;
+export type StackSpacing =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 8
+  | 10
+  | 12
+  | 16
+  | 20
+  | 24;
 
 export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Direction of the stack
    */
   direction?: 'column' | 'row' | 'column-reverse' | 'row-reverse';
-  
+
   /**
    * Spacing between children
    */
   spacing?: StackSpacing;
-  
+
   /**
    * How to align children along the cross axis
    */
   align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
-  
+
   /**
    * How to distribute children along the main axis
    */
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-  
+
   /**
    * Whether children should wrap
    */
   wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
-  
+
   /**
    * HTML element to render as
    */
   as?: keyof JSX.IntrinsicElements;
-  
+
   /**
    * Additional CSS class names
    */
   className?: string;
-  
+
   /**
    * Children content
    */

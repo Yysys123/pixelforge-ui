@@ -1,5 +1,5 @@
 export { Typography } from './Typography';
-export type { 
+export type {
   TypographyProps,
   TypographyElement,
   TypographyVariant,
@@ -9,5 +9,5 @@ export type {
   TypographyAlign,
   TypographyTransform,
   TypographyDecoration,
-  TypographyFamily
+  TypographyFamily,
 } from './Typography';

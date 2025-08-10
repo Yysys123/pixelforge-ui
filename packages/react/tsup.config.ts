@@ -1,0 +1,16 @@
+import { defineConfig } from 'tsup';
+
+export default defineConfig({
+  entry: ['src/index.tsx'],
+  format: ['cjs', 'esm'],
+  dts: false, // Disable DTS for now due to project references issue
+  minify: true,
+  external: ['react', 'react-dom'],
+  esbuildOptions(options) {
+    // Ignore CSS imports during build
+    options.loader = {
+      ...options.loader,
+      '.css': 'empty',
+    };
+  },
+});
