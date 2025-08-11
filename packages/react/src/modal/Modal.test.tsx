@@ -377,7 +377,14 @@ describe('Modal', () => {
 
       const { container } = render(
         <Modal {...defaultProps} title="Interactive Modal" footer={footer}>
-          <Typography as="label" htmlFor="email" variant="caption" weight="bold">Email:</Typography>
+          <Typography
+            as="label"
+            htmlFor="email"
+            variant="caption"
+            weight="bold"
+          >
+            Email:
+          </Typography>
           <input id="email" type="email" />
         </Modal>
       );
@@ -408,7 +415,7 @@ describe('Modal', () => {
 
     it('should not have accessibility violations for different sizes', async () => {
       const sizes = ['sm', 'md', 'lg', 'xl', 'fullscreen'] as const;
-      
+
       for (const size of sizes) {
         const { container, unmount } = render(
           <Modal {...defaultProps} size={size} title="Size Test Modal">
@@ -457,7 +464,7 @@ describe('Modal', () => {
 
     it('traps focus within modal', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <Modal {...defaultProps} title="Focus Trap Test">
           <input data-testid="first-input" placeholder="First input" />
@@ -496,13 +503,17 @@ describe('Modal', () => {
 
     it('restores focus when modal closes', async () => {
       const user = userEvent.setup();
-      
+
       const TestComponent = () => {
         const [open, setOpen] = React.useState(false);
         return (
           <div>
             <button onClick={() => setOpen(true)}>Open Modal</button>
-            <Modal open={open} onClose={() => setOpen(false)} title="Focus Restore Test">
+            <Modal
+              open={open}
+              onClose={() => setOpen(false)}
+              title="Focus Restore Test"
+            >
               <p>Modal content</p>
             </Modal>
           </div>
@@ -512,7 +523,7 @@ describe('Modal', () => {
       render(<TestComponent />);
 
       const openButton = screen.getByText('Open Modal');
-      
+
       // Click to open modal
       await user.click(openButton);
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -612,7 +623,7 @@ describe('Modal', () => {
           High contrast modal content
         </Modal>
       );
-      
+
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
 
@@ -636,7 +647,7 @@ describe('Modal', () => {
           Reduced motion modal content
         </Modal>
       );
-      
+
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
 
@@ -668,7 +679,7 @@ describe('Modal', () => {
 
     it('supports internationalization with proper text direction', () => {
       document.dir = 'rtl';
-      
+
       render(
         <Modal {...defaultProps} title="مودال عربي">
           محتوى المودال باللغة العربية
@@ -678,7 +689,7 @@ describe('Modal', () => {
       const modal = screen.getByRole('dialog');
       expect(modal).toBeInTheDocument();
       expect(screen.getByText('مودال عربي')).toBeInTheDocument();
-      
+
       document.dir = 'ltr'; // Reset
     });
   });

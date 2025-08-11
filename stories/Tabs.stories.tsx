@@ -12,10 +12,24 @@ const DashboardContent = () => (
     <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
       Dashboard Overview
     </Typography>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-      <Card title="Total Users" description="1,234 active users" variant="primary" />
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '16px',
+      }}
+    >
+      <Card
+        title="Total Users"
+        description="1,234 active users"
+        variant="primary"
+      />
       <Card title="Revenue" description="$45,678 this month" variant="accent" />
-      <Card title="Orders" description="567 orders pending" variant="secondary" />
+      <Card
+        title="Orders"
+        description="567 orders pending"
+        variant="secondary"
+      />
     </div>
   </div>
 );
@@ -26,19 +40,41 @@ const AnalyticsContent = () => (
       Analytics Report
     </Typography>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ padding: '20px', background: 'var(--pf-surface)', border: '2px solid var(--pf-text)', borderRadius: '8px' }}>
+      <div
+        style={{
+          padding: '20px',
+          background: 'var(--pf-surface)',
+          border: '2px solid var(--pf-text)',
+          borderRadius: '8px',
+        }}
+      >
         <Typography variant="body1">
           📊 <strong>Page Views:</strong> 12,345 (+15% from last month)
         </Typography>
       </div>
-      <div style={{ padding: '20px', background: 'var(--pf-surface)', border: '2px solid var(--pf-text)', borderRadius: '8px' }}>
+      <div
+        style={{
+          padding: '20px',
+          background: 'var(--pf-surface)',
+          border: '2px solid var(--pf-text)',
+          borderRadius: '8px',
+        }}
+      >
         <Typography variant="body1">
           👥 <strong>Unique Visitors:</strong> 8,901 (+8% from last month)
         </Typography>
       </div>
-      <div style={{ padding: '20px', background: 'var(--pf-surface)', border: '2px solid var(--pf-text)', borderRadius: '8px' }}>
+      <div
+        style={{
+          padding: '20px',
+          background: 'var(--pf-surface)',
+          border: '2px solid var(--pf-text)',
+          borderRadius: '8px',
+        }}
+      >
         <Typography variant="body1">
-          ⏱️ <strong>Avg. Session Duration:</strong> 4m 32s (+12% from last month)
+          ⏱️ <strong>Avg. Session Duration:</strong> 4m 32s (+12% from last
+          month)
         </Typography>
       </div>
     </div>
@@ -50,9 +86,20 @@ const SettingsContent = () => (
     <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
       Account Settings
     </Typography>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        maxWidth: '400px',
+      }}
+    >
       <div>
-        <Typography variant="body2" weight="bold" style={{ marginBottom: '8px' }}>
+        <Typography
+          variant="body2"
+          weight="bold"
+          style={{ marginBottom: '8px' }}
+        >
           Notification Preferences
         </Typography>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -71,8 +118,12 @@ const SettingsContent = () => (
         </div>
       </div>
       <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
-        <Button variant="primary" size="sm">Save Changes</Button>
-        <Button variant="outline" size="sm">Reset</Button>
+        <Button variant="primary" size="sm">
+          Save Changes
+        </Button>
+        <Button variant="outline" size="sm">
+          Reset
+        </Button>
       </div>
     </div>
   </div>
@@ -113,7 +164,11 @@ const tabsWithBadges: TabItem[] = [
       </div>
     ),
     icon: '💬',
-    badge: <Badge variant="danger" size="sm">3</Badge>,
+    badge: (
+      <Badge variant="danger" size="sm">
+        3
+      </Badge>
+    ),
   },
   {
     key: 'notifications',
@@ -127,7 +182,11 @@ const tabsWithBadges: TabItem[] = [
       </div>
     ),
     icon: '🔔',
-    badge: <Badge variant="warning" size="sm">12</Badge>,
+    badge: (
+      <Badge variant="warning" size="sm">
+        12
+      </Badge>
+    ),
   },
   {
     key: 'updates',
@@ -141,7 +200,11 @@ const tabsWithBadges: TabItem[] = [
       </div>
     ),
     icon: '🔄',
-    badge: <Badge variant="success" size="sm">✓</Badge>,
+    badge: (
+      <Badge variant="success" size="sm">
+        ✓
+      </Badge>
+    ),
   },
   {
     key: 'archive',
@@ -254,11 +317,21 @@ export const WithChildren: Story = {
           Welcome to PixelForge UI
         </Typography>
         <Typography variant="body1">
-          This is an example of using TabPane children instead of the items prop.
-          This approach gives you more flexibility in defining tab content.
+          This is an example of using TabPane children instead of the items
+          prop. This approach gives you more flexibility in defining tab
+          content.
         </Typography>
       </TabPane>
-      <TabPane key="features" tab="Features" icon="⭐" badge={<Badge variant="accent" size="sm">New</Badge>}>
+      <TabPane
+        key="features"
+        tab="Features"
+        icon="⭐"
+        badge={
+          <Badge variant="accent" size="sm">
+            New
+          </Badge>
+        }
+      >
         <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
           Key Features
         </Typography>
@@ -400,8 +473,12 @@ export const WithExtraContent: Story = {
     items: basicTabItems,
     tabBarExtraContent: (
       <div style={{ display: 'flex', gap: '8px' }}>
-        <Button size="sm" variant="outline">Export</Button>
-        <Button size="sm" variant="primary">Add New</Button>
+        <Button size="sm" variant="outline">
+          Export
+        </Button>
+        <Button size="sm" variant="primary">
+          Add New
+        </Button>
       </div>
     ),
   },
@@ -411,24 +488,33 @@ export const WithExtraContent: Story = {
 export const ControlledTabs: Story = {
   render: () => {
     const [activeKey, setActiveKey] = useState('dashboard');
-    
+
     const controlledItems: TabItem[] = [
       {
         key: 'dashboard',
         label: 'Dashboard',
         content: (
           <div>
-            <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
+            <Typography
+              variant="h3"
+              weight="bold"
+              style={{ marginBottom: '16px' }}
+            >
               Controlled Dashboard
             </Typography>
             <Typography variant="body1" style={{ marginBottom: '16px' }}>
-              This tab is controlled by external state. Current active key: <strong>{activeKey}</strong>
+              This tab is controlled by external state. Current active key:{' '}
+              <strong>{activeKey}</strong>
             </Typography>
             <div style={{ display: 'flex', gap: '8px' }}>
               <Button size="sm" onClick={() => setActiveKey('reports')}>
                 Go to Reports
               </Button>
-              <Button size="sm" variant="outline" onClick={() => setActiveKey('profile')}>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setActiveKey('profile')}
+              >
                 Go to Profile
               </Button>
             </div>
@@ -441,7 +527,11 @@ export const ControlledTabs: Story = {
         label: 'Reports',
         content: (
           <div>
-            <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
+            <Typography
+              variant="h3"
+              weight="bold"
+              style={{ marginBottom: '16px' }}
+            >
               Reports Section
             </Typography>
             <Typography variant="body1">
@@ -456,7 +546,11 @@ export const ControlledTabs: Story = {
         label: 'Profile',
         content: (
           <div>
-            <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
+            <Typography
+              variant="h3"
+              weight="bold"
+              style={{ marginBottom: '16px' }}
+            >
               User Profile
             </Typography>
             <Typography variant="body1">
@@ -467,15 +561,27 @@ export const ControlledTabs: Story = {
         icon: '👤',
       },
     ];
-    
+
     return (
       <div>
-        <div style={{ marginBottom: '16px', padding: '16px', background: 'var(--pf-surface)', border: '2px solid var(--pf-text)', borderRadius: '8px' }}>
-          <Typography variant="body2" weight="bold" style={{ marginBottom: '8px' }}>
+        <div
+          style={{
+            marginBottom: '16px',
+            padding: '16px',
+            background: 'var(--pf-surface)',
+            border: '2px solid var(--pf-text)',
+            borderRadius: '8px',
+          }}
+        >
+          <Typography
+            variant="body2"
+            weight="bold"
+            style={{ marginBottom: '8px' }}
+          >
             External Controls
           </Typography>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            {controlledItems.map((item) => (
+            {controlledItems.map(item => (
               <Button
                 key={item.key}
                 size="sm"
@@ -487,7 +593,7 @@ export const ControlledTabs: Story = {
             ))}
           </div>
         </div>
-        
+
         <Tabs
           items={controlledItems}
           activeKey={activeKey}
@@ -507,7 +613,7 @@ export const DynamicTabs: Story = {
     ]);
     const [activeKey, setActiveKey] = useState('tab1');
     const [counter, setCounter] = useState(3);
-    
+
     const addTab = () => {
       const newTab = {
         key: `tab${counter}`,
@@ -518,24 +624,29 @@ export const DynamicTabs: Story = {
       setActiveKey(newTab.key);
       setCounter(counter + 1);
     };
-    
+
     const removeTab = (targetKey: string) => {
       const targetIndex = tabs.findIndex(tab => tab.key === targetKey);
       const newTabs = tabs.filter(tab => tab.key !== targetKey);
-      
+
       if (newTabs.length && targetKey === activeKey) {
-        const nextIndex = targetIndex === newTabs.length ? targetIndex - 1 : targetIndex;
+        const nextIndex =
+          targetIndex === newTabs.length ? targetIndex - 1 : targetIndex;
         setActiveKey(newTabs[nextIndex].key);
       }
-      
+
       setTabs(newTabs);
     };
-    
+
     const tabItems: TabItem[] = tabs.map(tab => ({
       ...tab,
       content: (
         <div>
-          <Typography variant="h3" weight="bold" style={{ marginBottom: '16px' }}>
+          <Typography
+            variant="h3"
+            weight="bold"
+            style={{ marginBottom: '16px' }}
+          >
             {tab.label}
           </Typography>
           <Typography variant="body1" style={{ marginBottom: '16px' }}>
@@ -553,7 +664,7 @@ export const DynamicTabs: Story = {
         </div>
       ),
     }));
-    
+
     return (
       <div>
         <div style={{ marginBottom: '16px' }}>
@@ -561,7 +672,7 @@ export const DynamicTabs: Story = {
             Add New Tab
           </Button>
         </div>
-        
+
         <Tabs
           items={tabItems}
           activeKey={activeKey}
@@ -585,7 +696,13 @@ export const ComplexContent: Story = {
         key: 'overview',
         label: 'Overview',
         content: (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '20px',
+            }}
+          >
             <Card
               title="Performance"
               description="System performance metrics and monitoring data"
@@ -616,50 +733,117 @@ export const ComplexContent: Story = {
         label: 'Data',
         content: (
           <div>
-            <Typography variant="h3" weight="bold" style={{ marginBottom: '20px' }}>
+            <Typography
+              variant="h3"
+              weight="bold"
+              style={{ marginBottom: '20px' }}
+            >
               Data Management
             </Typography>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '16px', background: 'var(--pf-surface)', borderRadius: '8px', border: '2px solid var(--pf-text)' }}>
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '12px',
+                  alignItems: 'center',
+                  padding: '16px',
+                  background: 'var(--pf-surface)',
+                  borderRadius: '8px',
+                  border: '2px solid var(--pf-text)',
+                }}
+              >
                 <span style={{ fontSize: '24px' }}>📁</span>
                 <div>
-                  <Typography variant="body1" weight="bold">Documents</Typography>
-                  <Typography variant="caption" color="muted">1,234 files • 45.6 GB</Typography>
+                  <Typography variant="body1" weight="bold">
+                    Documents
+                  </Typography>
+                  <Typography variant="caption" color="muted">
+                    1,234 files • 45.6 GB
+                  </Typography>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '16px', background: 'var(--pf-surface)', borderRadius: '8px', border: '2px solid var(--pf-text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '12px',
+                  alignItems: 'center',
+                  padding: '16px',
+                  background: 'var(--pf-surface)',
+                  borderRadius: '8px',
+                  border: '2px solid var(--pf-text)',
+                }}
+              >
                 <span style={{ fontSize: '24px' }}>🖼️</span>
                 <div>
-                  <Typography variant="body1" weight="bold">Images</Typography>
-                  <Typography variant="caption" color="muted">567 files • 12.3 GB</Typography>
+                  <Typography variant="body1" weight="bold">
+                    Images
+                  </Typography>
+                  <Typography variant="caption" color="muted">
+                    567 files • 12.3 GB
+                  </Typography>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '16px', background: 'var(--pf-surface)', borderRadius: '8px', border: '2px solid var(--pf-text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '12px',
+                  alignItems: 'center',
+                  padding: '16px',
+                  background: 'var(--pf-surface)',
+                  borderRadius: '8px',
+                  border: '2px solid var(--pf-text)',
+                }}
+              >
                 <span style={{ fontSize: '24px' }}>🎵</span>
                 <div>
-                  <Typography variant="body1" weight="bold">Media</Typography>
-                  <Typography variant="caption" color="muted">89 files • 3.2 GB</Typography>
+                  <Typography variant="body1" weight="bold">
+                    Media
+                  </Typography>
+                  <Typography variant="caption" color="muted">
+                    89 files • 3.2 GB
+                  </Typography>
                 </div>
               </div>
             </div>
           </div>
         ),
         icon: '💾',
-        badge: <Badge variant="warning" size="sm">Sync</Badge>,
+        badge: (
+          <Badge variant="warning" size="sm">
+            Sync
+          </Badge>
+        ),
       },
       {
         key: 'logs',
         label: 'Activity Logs',
         content: (
           <div>
-            <Typography variant="h3" weight="bold" style={{ marginBottom: '20px' }}>
+            <Typography
+              variant="h3"
+              weight="bold"
+              style={{ marginBottom: '20px' }}
+            >
               Recent Activity
             </Typography>
-            <div style={{ fontFamily: 'monospace', background: '#000', color: '#00ff00', padding: '16px', borderRadius: '8px', border: '2px solid var(--pf-text)' }}>
+            <div
+              style={{
+                fontFamily: 'monospace',
+                background: '#000',
+                color: '#00ff00',
+                padding: '16px',
+                borderRadius: '8px',
+                border: '2px solid var(--pf-text)',
+              }}
+            >
               <div>[2024-01-10 14:23:45] User login successful</div>
               <div>[2024-01-10 14:22:10] System backup completed</div>
               <div>[2024-01-10 14:20:33] Database optimization started</div>
-              <div>[2024-01-10 14:18:22] File upload completed: document.pdf</div>
+              <div>
+                [2024-01-10 14:18:22] File upload completed: document.pdf
+              </div>
               <div>[2024-01-10 14:15:11] Security scan initiated</div>
               <div>[2024-01-10 14:12:44] Cache cleared successfully</div>
             </div>
@@ -668,7 +852,7 @@ export const ComplexContent: Story = {
         icon: '📜',
       },
     ];
-    
+
     return (
       <Tabs
         items={complexItems}
@@ -679,8 +863,12 @@ export const ComplexContent: Story = {
         showIndicator={true}
         tabBarExtraContent={
           <div style={{ display: 'flex', gap: '8px' }}>
-            <Button size="sm" variant="outline">Refresh</Button>
-            <Button size="sm" variant="primary">Export</Button>
+            <Button size="sm" variant="outline">
+              Refresh
+            </Button>
+            <Button size="sm" variant="primary">
+              Export
+            </Button>
           </div>
         }
       />

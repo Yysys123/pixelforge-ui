@@ -4,42 +4,43 @@ import { Typography } from '../typography/Typography';
 import styles from './Radio.module.css';
 import '../styles/utilities.css';
 
-export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+export interface RadioProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   /**
    * Label text for the radio button
    */
   label?: string;
-  
+
   /**
    * Size variant
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent';
-  
+
   /**
    * Error message to display
    */
   error?: string;
-  
+
   /**
    * Helper text to display below the radio button
    */
   helperText?: string;
-  
+
   /**
    * Whether the radio button is required
    */
   required?: boolean;
-  
+
   /**
    * Custom className for the wrapper
    */
   wrapperClassName?: string;
-  
+
   /**
    * Custom icon to show when selected
    */
@@ -71,8 +72,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     const radioId = id || `radio-${Math.random().toString(36).substr(2, 9)}`;
     const errorId = error ? `${radioId}-error` : undefined;
     const helperId = helperText ? `${radioId}-helper` : undefined;
-    
-    const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+
+    const describedBy =
+      [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
     const wrapperClasses = clsx(
       styles.wrapper,
@@ -88,13 +90,10 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
 
     const radioClasses = clsx(styles.radio, className);
 
-    const labelClasses = clsx(
-      styles.label,
-      {
-        [styles.disabled]: disabled,
-        [styles.required]: required,
-      }
-    );
+    const labelClasses = clsx(styles.label, {
+      [styles.disabled]: disabled,
+      [styles.required]: required,
+    });
 
     return (
       <div className={wrapperClasses}>
@@ -110,23 +109,29 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             aria-describedby={describedBy}
             {...props}
           />
-          
+
           <span className={styles['radio-mark']}>
             {props.checked && selectedIcon && selectedIcon}
           </span>
-          
+
           {label && (
             <Typography
-              variant={size === 'lg' ? 'body1' : size === 'sm' ? 'caption' : 'body2'}
+              variant={
+                size === 'lg' ? 'body1' : size === 'sm' ? 'caption' : 'body2'
+              }
               weight="medium"
               className={labelClasses}
             >
               {label}
-              {required && <span className={styles['required-mark']} aria-label="required">*</span>}
+              {required && (
+                <span className={styles['required-mark']} aria-label="required">
+                  *
+                </span>
+              )}
             </Typography>
           )}
         </label>
-        
+
         {error && (
           <Typography
             variant="caption"
@@ -138,7 +143,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             {error}
           </Typography>
         )}
-        
+
         {helperText && !error && (
           <Typography
             variant="caption"
@@ -161,22 +166,22 @@ export interface RadioGroupProps {
    * Radio group name
    */
   name: string;
-  
+
   /**
    * Currently selected value
    */
   value?: string;
-  
+
   /**
    * Default selected value
    */
   defaultValue?: string;
-  
+
   /**
    * Callback when selection changes
    */
   onChange?: (value: string) => void;
-  
+
   /**
    * Radio options
    */
@@ -186,42 +191,42 @@ export interface RadioGroupProps {
     disabled?: boolean;
     helperText?: string;
   }>;
-  
+
   /**
    * Group label
    */
   label?: string;
-  
+
   /**
    * Size variant for all radios
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant for all radios
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent';
-  
+
   /**
    * Layout direction
    */
   direction?: 'vertical' | 'horizontal';
-  
+
   /**
    * Whether the group is required
    */
   required?: boolean;
-  
+
   /**
    * Error message for the group
    */
   error?: string;
-  
+
   /**
    * Helper text for the group
    */
   helperText?: string;
-  
+
   /**
    * Custom className for the group wrapper
    */
@@ -249,12 +254,13 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 }) => {
   const [internalValue, setInternalValue] = React.useState(defaultValue || '');
   const value = controlledValue !== undefined ? controlledValue : internalValue;
-  
+
   const groupId = `radio-group-${Math.random().toString(36).substr(2, 9)}`;
   const errorId = error ? `${groupId}-error` : undefined;
   const helperId = helperText ? `${groupId}-helper` : undefined;
-  
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+
+  const describedBy =
+    [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   const handleChange = (optionValue: string) => {
     if (controlledValue === undefined) {
@@ -278,13 +284,17 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
         <legend className={styles['group-legend']}>
           <Typography variant="body2" weight="bold">
             {label}
-            {required && <span className={styles['required-mark']} aria-label="required">*</span>}
+            {required && (
+              <span className={styles['required-mark']} aria-label="required">
+                *
+              </span>
+            )}
           </Typography>
         </legend>
       )}
-      
+
       <div className={styles['radio-list']}>
-        {options.map((option) => (
+        {options.map(option => (
           <Radio
             key={option.value}
             name={name}
@@ -300,7 +310,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
           />
         ))}
       </div>
-      
+
       {error && (
         <Typography
           variant="caption"
@@ -312,7 +322,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
           {error}
         </Typography>
       )}
-      
+
       {helperText && !error && (
         <Typography
           variant="caption"

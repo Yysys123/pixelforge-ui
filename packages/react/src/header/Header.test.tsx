@@ -11,7 +11,9 @@ describe('Header', () => {
 
   it('renders brand content', () => {
     render(<Header brand="PixelForge UI" />);
-    expect(screen.getByRole('heading', { name: 'PixelForge UI' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'PixelForge UI' })
+    ).toBeInTheDocument();
   });
 
   it('renders custom brand element', () => {
@@ -28,8 +30,10 @@ describe('Header', () => {
       </NavList>
     );
     render(<Header navigation={navigation} />);
-    
-    expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('navigation', { name: 'Main navigation' })
+    ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
   });
@@ -42,7 +46,7 @@ describe('Header', () => {
       </>
     );
     render(<Header actions={actions} />);
-    
+
     expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument();
   });
@@ -58,7 +62,9 @@ describe('Header', () => {
   });
 
   it('applies visual variants correctly', () => {
-    const { rerender } = render(<Header variant="primary" data-testid="header" />);
+    const { rerender } = render(
+      <Header variant="primary" data-testid="header" />
+    );
     let header = screen.getByTestId('header');
     expect(header).toHaveClass('variant-primary');
 
@@ -115,9 +121,7 @@ describe('Header', () => {
             <NavItem href="/about">About</NavItem>
           </NavList>
         }
-        actions={
-          <Button>Login</Button>
-        }
+        actions={<Button>Login</Button>}
       />
     );
 
@@ -134,7 +138,11 @@ describe('NavItem', () => {
   });
 
   it('applies active state correctly', () => {
-    render(<NavItem href="/current" active={true} data-testid="nav-item">Current Page</NavItem>);
+    render(
+      <NavItem href="/current" active={true} data-testid="nav-item">
+        Current Page
+      </NavItem>
+    );
     const navItem = screen.getByTestId('nav-item');
     expect(navItem).toHaveClass('active');
     expect(navItem).toHaveAttribute('aria-current', 'page');
@@ -143,33 +151,50 @@ describe('NavItem', () => {
   it('applies disabled state correctly', () => {
     const handleClick = jest.fn();
     render(
-      <NavItem href="/disabled" disabled={true} onClick={handleClick} data-testid="nav-item">
+      <NavItem
+        href="/disabled"
+        disabled={true}
+        onClick={handleClick}
+        data-testid="nav-item"
+      >
         Disabled Link
       </NavItem>
     );
-    
+
     const navItem = screen.getByTestId('nav-item');
     expect(navItem).toHaveClass('disabled');
     expect(navItem).toHaveAttribute('aria-disabled', 'true');
-    
+
     fireEvent.click(navItem);
     expect(handleClick).not.toHaveBeenCalled();
   });
 
   it('applies variant styles correctly', () => {
-    const { rerender } = render(<NavItem variant="bold" data-testid="nav-item">Bold Link</NavItem>);
+    const { rerender } = render(
+      <NavItem variant="bold" data-testid="nav-item">
+        Bold Link
+      </NavItem>
+    );
     let navItem = screen.getByTestId('nav-item');
     expect(navItem).toHaveClass('nav-variant-bold');
 
-    rerender(<NavItem variant="underline" data-testid="nav-item">Underline Link</NavItem>);
+    rerender(
+      <NavItem variant="underline" data-testid="nav-item">
+        Underline Link
+      </NavItem>
+    );
     navItem = screen.getByTestId('nav-item');
     expect(navItem).toHaveClass('nav-variant-underline');
   });
 
   it('handles click events when not disabled', () => {
     const handleClick = jest.fn();
-    render(<NavItem href="/test" onClick={handleClick}>Clickable Link</NavItem>);
-    
+    render(
+      <NavItem href="/test" onClick={handleClick}>
+        Clickable Link
+      </NavItem>
+    );
+
     fireEvent.click(screen.getByRole('link', { name: 'Clickable Link' }));
     expect(handleClick).toHaveBeenCalled();
   });
@@ -251,7 +276,9 @@ describe('NavList', () => {
     render(
       <NavList>
         <NavItem href="/">Home</NavItem>
-        <NavItem href="/products" active={true}>Products</NavItem>
+        <NavItem href="/products" active={true}>
+          Products
+        </NavItem>
         <NavItem href="/contact">Contact</NavItem>
       </NavList>
     );
@@ -259,16 +286,21 @@ describe('NavList', () => {
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Products' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument();
-    
+
     // Check that the active item has the correct aria-current
-    expect(screen.getByRole('link', { name: 'Products' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'Products' })).toHaveAttribute(
+      'aria-current',
+      'page'
+    );
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(
       <NavList>
         <NavItem href="/">Home</NavItem>
-        <NavItem href="/about" active={true}>About</NavItem>
+        <NavItem href="/about" active={true}>
+          About
+        </NavItem>
         <NavItem href="/contact">Contact</NavItem>
       </NavList>
     );

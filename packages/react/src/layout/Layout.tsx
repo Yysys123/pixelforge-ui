@@ -8,17 +8,17 @@ export interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
    * Size variant for the page layout
    */
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-  
+
   /**
    * Visual variant for the page
    */
   variant?: 'default' | 'contained' | 'padded' | 'bordered';
-  
+
   /**
    * Whether to show decorative patterns
    */
   showPatterns?: boolean;
-  
+
   /**
    * Custom className for the page wrapper
    */
@@ -42,10 +42,7 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
     },
     ref
   ) => {
-    const wrapperClasses = clsx(
-      styles['page-wrapper'],
-      wrapperClassName
-    );
+    const wrapperClasses = clsx(styles['page-wrapper'], wrapperClassName);
 
     const pageClasses = clsx(
       styles.page,
@@ -62,7 +59,7 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
             <div className={styles['pattern-dots']} />
           </div>
         )}
-        
+
         <div ref={ref} className={pageClasses} {...props}>
           {children}
         </div>
@@ -78,12 +75,12 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Container size variant
    */
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-  
+
   /**
    * Whether to center the container content
    */
   centered?: boolean;
-  
+
   /**
    * Padding variant
    */
@@ -130,22 +127,22 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
    * Semantic element type
    */
   as?: 'section' | 'article' | 'aside' | 'main' | 'div';
-  
+
   /**
    * Visual variant for the section
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent' | 'muted';
-  
+
   /**
    * Spacing variant
    */
   spacing?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  
+
   /**
    * Whether to show border
    */
   bordered?: boolean;
-  
+
   /**
    * Whether to show decorative patterns
    */
@@ -200,12 +197,12 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
    * Number of columns (1-12)
    */
   cols?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  
+
   /**
    * Gap between grid items
    */
   gap?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  
+
   /**
    * Responsive breakpoint behavior
    */
@@ -222,22 +219,10 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Grid = forwardRef<HTMLDivElement, GridProps>(
   (
-    {
-      cols = 1,
-      gap = 'md',
-      responsive,
-      className,
-      children,
-      style,
-      ...props
-    },
+    { cols = 1, gap = 'md', responsive, className, children, style, ...props },
     ref
   ) => {
-    const gridClasses = clsx(
-      styles.grid,
-      styles[`gap-${gap}`],
-      className
-    );
+    const gridClasses = clsx(styles.grid, styles[`gap-${gap}`], className);
 
     const gridStyle = {
       '--grid-cols': cols,
@@ -249,12 +234,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
     } as React.CSSProperties;
 
     return (
-      <div
-        ref={ref}
-        className={gridClasses}
-        style={gridStyle}
-        {...props}
-      >
+      <div ref={ref} className={gridClasses} style={gridStyle} {...props}>
         {children}
       </div>
     );
@@ -268,22 +248,22 @@ export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
    * Stack direction
    */
   direction?: 'vertical' | 'horizontal';
-  
+
   /**
    * Gap between stack items
    */
   gap?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  
+
   /**
    * Alignment of items
    */
   align?: 'start' | 'center' | 'end' | 'stretch';
-  
+
   /**
    * Justification of items
    */
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-  
+
   /**
    * Whether items should wrap
    */

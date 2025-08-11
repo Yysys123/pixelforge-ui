@@ -10,37 +10,37 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
    * Header brand/logo content
    */
   brand?: React.ReactNode;
-  
+
   /**
    * Navigation items
    */
   navigation?: React.ReactNode;
-  
+
   /**
    * Action items (buttons, etc.)
    */
   actions?: React.ReactNode;
-  
+
   /**
    * Size variant for the header
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant for the header
    */
   variant?: 'default' | 'primary' | 'transparent' | 'bordered';
-  
+
   /**
    * Whether the header should be sticky
    */
   sticky?: boolean;
-  
+
   /**
    * Whether to show decorative patterns
    */
   showPatterns?: boolean;
-  
+
   /**
    * Whether the header has a shadow
    */
@@ -68,7 +68,8 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
     },
     ref
   ) => {
-    const headerId = props.id || `header-${Math.random().toString(36).substr(2, 9)}`;
+    const headerId =
+      props.id || `header-${Math.random().toString(36).substr(2, 9)}`;
 
     const headerClasses = clsx(
       styles.header,
@@ -90,7 +91,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
             <div className={styles['pattern-dots']} />
           </div>
         )}
-        
+
         <div className={styles['header-container']}>
           {brand && (
             <div className={styles['header-brand']}>
@@ -107,23 +108,17 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
               )}
             </div>
           )}
-          
+
           {navigation && (
             <nav className={styles['header-nav']} aria-label="Main navigation">
               {navigation}
             </nav>
           )}
-          
-          {actions && (
-            <div className={styles['header-actions']}>
-              {actions}
-            </div>
-          )}
-          
+
+          {actions && <div className={styles['header-actions']}>{actions}</div>}
+
           {children && (
-            <div className={styles['header-content']}>
-              {children}
-            </div>
+            <div className={styles['header-content']}>{children}</div>
           )}
         </div>
       </header>
@@ -133,17 +128,18 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
 
 Header.displayName = 'Header';
 
-export interface NavItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface NavItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Whether the nav item is active/current
    */
   active?: boolean;
-  
+
   /**
    * Visual variant for the nav item
    */
   variant?: 'default' | 'bold' | 'underline';
-  
+
   /**
    * Whether the nav item is disabled
    */
@@ -206,7 +202,7 @@ export interface NavListProps extends React.HTMLAttributes<HTMLUListElement> {
    * Direction of the navigation list
    */
   direction?: 'horizontal' | 'vertical';
-  
+
   /**
    * Gap between navigation items
    */
@@ -218,13 +214,7 @@ export interface NavListProps extends React.HTMLAttributes<HTMLUListElement> {
  */
 export const NavList = forwardRef<HTMLUListElement, NavListProps>(
   (
-    {
-      direction = 'horizontal',
-      gap = 'md',
-      className,
-      children,
-      ...props
-    },
+    { direction = 'horizontal', gap = 'md', className, children, ...props },
     ref
   ) => {
     const navListClasses = clsx(

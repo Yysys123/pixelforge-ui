@@ -397,7 +397,9 @@ describe('Alert', () => {
     });
 
     it('has no accessibility violations with dismissible alert', async () => {
-      const { container } = render(<Alert dismissible>Test alert message</Alert>);
+      const { container } = render(
+        <Alert dismissible>Test alert message</Alert>
+      );
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
@@ -434,7 +436,9 @@ describe('Alert', () => {
     });
 
     it('announces variant-specific semantics to screen readers', () => {
-      const { rerender } = render(<Alert variant="success">Success message</Alert>);
+      const { rerender } = render(
+        <Alert variant="success">Success message</Alert>
+      );
       expect(screen.getByRole('alert')).toHaveClass('variant-success');
 
       rerender(<Alert variant="danger">Error message</Alert>);
@@ -446,7 +450,7 @@ describe('Alert', () => {
 
     it('maintains focus management when dismissible', async () => {
       const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
-      
+
       render(
         <div>
           <button>Before Alert</button>
@@ -456,7 +460,9 @@ describe('Alert', () => {
       );
 
       const beforeButton = screen.getByText('Before Alert');
-      const dismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+      const dismissButton = screen.getByRole('button', {
+        name: 'Dismiss alert',
+      });
       const afterButton = screen.getByText('After Alert');
 
       beforeButton.focus();
@@ -471,18 +477,30 @@ describe('Alert', () => {
       const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
       const onDismiss = jest.fn();
 
-      render(<Alert dismissible onDismiss={onDismiss}>Test alert</Alert>);
+      render(
+        <Alert dismissible onDismiss={onDismiss}>
+          Test alert
+        </Alert>
+      );
 
-      const dismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+      const dismissButton = screen.getByRole('button', {
+        name: 'Dismiss alert',
+      });
       dismissButton.focus();
 
       await user.keyboard('{Enter}');
       expect(onDismiss).toHaveBeenCalledTimes(1);
 
       jest.clearAllMocks();
-      
-      render(<Alert dismissible onDismiss={onDismiss}>Test alert</Alert>);
-      const newDismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+
+      render(
+        <Alert dismissible onDismiss={onDismiss}>
+          Test alert
+        </Alert>
+      );
+      const newDismissButton = screen.getByRole('button', {
+        name: 'Dismiss alert',
+      });
       newDismissButton.focus();
 
       await user.keyboard(' ');
@@ -536,7 +554,9 @@ describe('Alert', () => {
 
       const alert = screen.getByRole('alert');
       const title = screen.getByText('Error Occurred');
-      const content = screen.getByText('Please check your input and try again.');
+      const content = screen.getByText(
+        'Please check your input and try again.'
+      );
 
       expect(alert).toContainElement(title);
       expect(alert).toContainElement(content);
@@ -551,25 +571,30 @@ describe('Alert', () => {
       );
 
       render(
-        <Alert 
-          title="Connection Failed" 
-          variant="danger" 
-          dismissible 
+        <Alert
+          title="Connection Failed"
+          variant="danger"
+          dismissible
           actions={actions}
         >
-          Unable to connect to the server. Please check your internet connection.
+          Unable to connect to the server. Please check your internet
+          connection.
         </Alert>
       );
 
       expect(screen.getByRole('alert')).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Dismiss alert' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Cancel' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Dismiss alert' })
+      ).toBeInTheDocument();
     });
 
     it('handles focus when alert auto-dismisses', async () => {
       const onDismiss = jest.fn();
-      
+
       render(
         <div>
           <button>Focus Target</button>
@@ -590,12 +615,16 @@ describe('Alert', () => {
 
     it('provides clear visual focus indicators', () => {
       render(<Alert dismissible>Test alert</Alert>);
-      
-      const dismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+
+      const dismissButton = screen.getByRole('button', {
+        name: 'Dismiss alert',
+      });
       dismissButton.focus();
-      
+
       expect(dismissButton).toHaveFocus();
-      expect(dismissButton).toHaveStyle('outline: 2px solid var(--alert-primary)');
+      expect(dismissButton).toHaveStyle(
+        'outline: 2px solid var(--alert-primary)'
+      );
     });
 
     it('announces alert content changes to screen readers', async () => {

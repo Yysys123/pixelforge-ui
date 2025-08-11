@@ -390,11 +390,13 @@ describe('Badge', () => {
 
     it('maintains focus management for interactive badges', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <div>
           <button>Before Badge</button>
-          <Badge interactive aria-label="Notification">5</Badge>
+          <Badge interactive aria-label="Notification">
+            5
+          </Badge>
           <button>After Badge</button>
         </div>
       );
@@ -434,7 +436,11 @@ describe('Badge', () => {
 
     it('provides proper ARIA attributes for interactive badges', () => {
       render(
-        <Badge interactive aria-label="Remove filter" aria-describedby="filter-help">
+        <Badge
+          interactive
+          aria-label="Remove filter"
+          aria-describedby="filter-help"
+        >
           Active
         </Badge>
       );
@@ -479,22 +485,28 @@ describe('Badge', () => {
         })),
       });
 
-      render(<Badge interactive rotation={15}>Reduced motion badge</Badge>);
+      render(
+        <Badge interactive rotation={15}>
+          Reduced motion badge
+        </Badge>
+      );
       expect(screen.getByRole('button')).toBeInTheDocument();
     });
 
     it('provides clear visual focus indicators', () => {
       render(<Badge interactive>Focus me</Badge>);
-      
+
       const badge = screen.getByRole('button');
       badge.focus();
-      
+
       expect(badge).toHaveFocus();
       expect(badge).toHaveStyle('outline: 2px solid var(--badge-primary)');
     });
 
     it('properly announces count changes to screen readers', () => {
-      const { rerender } = render(<Badge count={1} aria-label="1 notification" />);
+      const { rerender } = render(
+        <Badge count={1} aria-label="1 notification" />
+      );
       expect(screen.getByLabelText('1 notification')).toBeInTheDocument();
 
       rerender(<Badge count={5} aria-label="5 notifications" />);
@@ -504,9 +516,9 @@ describe('Badge', () => {
 
     it('handles dot badges with proper ARIA attributes', () => {
       render(
-        <Badge 
-          dot 
-          variant="success" 
+        <Badge
+          dot
+          variant="success"
           aria-label="Online status indicator"
           role="status"
         />
@@ -534,7 +546,11 @@ describe('Badge', () => {
     });
 
     it('maintains semantic structure with icons', () => {
-      const icon = <span aria-hidden="true" role="img">🔔</span>;
+      const icon = (
+        <span aria-hidden="true" role="img">
+          🔔
+        </span>
+      );
       render(
         <Badge icon={icon} aria-label="Notification with bell icon">
           New
@@ -549,10 +565,12 @@ describe('Badge', () => {
     it('provides proper context for overlay badges', () => {
       render(
         <div>
-          <div id="message-icon" aria-label="Messages">📧</div>
-          <Badge 
-            count={3} 
-            overlay 
+          <div id="message-icon" aria-label="Messages">
+            📧
+          </div>
+          <Badge
+            count={3}
+            overlay
             aria-describedby="message-icon"
             aria-label="3 unread messages"
           />
@@ -566,23 +584,23 @@ describe('Badge', () => {
     it('handles empty states accessibly', () => {
       const { container } = render(<Badge count={0} />);
       expect(container.firstChild).toBeNull();
-      
+
       // Should not create inaccessible empty elements
       expect(container.querySelector('[role]')).not.toBeInTheDocument();
     });
 
     it('supports internationalization with proper text direction', () => {
       document.dir = 'rtl';
-      
+
       render(<Badge count={123}>العربية</Badge>);
       expect(screen.getByText('123')).toBeInTheDocument();
-      
+
       document.dir = 'ltr'; // Reset
     });
 
     it('announces max count overflow appropriately', () => {
       render(<Badge count={150} max={99} aria-label="99+ notifications" />);
-      
+
       const badge = screen.getByLabelText('99+ notifications');
       expect(badge).toHaveTextContent('99+');
     });

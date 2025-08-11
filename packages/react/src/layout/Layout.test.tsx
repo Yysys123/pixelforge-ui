@@ -19,7 +19,9 @@ describe('Page', () => {
   });
 
   it('applies visual variants correctly', () => {
-    const { rerender } = render(<Page variant="contained" data-testid="page" />);
+    const { rerender } = render(
+      <Page variant="contained" data-testid="page" />
+    );
     let page = screen.getByTestId('page');
     expect(page).toHaveClass('variant-contained');
 
@@ -65,7 +67,9 @@ describe('Container', () => {
   });
 
   it('applies size variants correctly', () => {
-    const { rerender } = render(<Container size="sm" data-testid="container" />);
+    const { rerender } = render(
+      <Container size="sm" data-testid="container" />
+    );
     let container = screen.getByTestId('container');
     expect(container).toHaveClass('container-sm');
 
@@ -75,7 +79,9 @@ describe('Container', () => {
   });
 
   it('applies centering correctly', () => {
-    const { rerender } = render(<Container centered={true} data-testid="container" />);
+    const { rerender } = render(
+      <Container centered={true} data-testid="container" />
+    );
     let container = screen.getByTestId('container');
     expect(container).toHaveClass('centered');
 
@@ -85,7 +91,9 @@ describe('Container', () => {
   });
 
   it('applies padding variants correctly', () => {
-    const { rerender } = render(<Container padding="sm" data-testid="container" />);
+    const { rerender } = render(
+      <Container padding="sm" data-testid="container" />
+    );
     let container = screen.getByTestId('container');
     expect(container).toHaveClass('padding-sm');
 
@@ -125,37 +133,65 @@ describe('Section', () => {
   });
 
   it('renders as specified element when using "as" prop', () => {
-    const { rerender } = render(<Section as="article" data-testid="section">Content</Section>);
+    const { rerender } = render(
+      <Section as="article" data-testid="section">
+        Content
+      </Section>
+    );
     let section = screen.getByTestId('section');
     expect(section.tagName).toBe('ARTICLE');
 
-    rerender(<Section as="main" data-testid="section">Content</Section>);
+    rerender(
+      <Section as="main" data-testid="section">
+        Content
+      </Section>
+    );
     section = screen.getByTestId('section');
     expect(section.tagName).toBe('MAIN');
   });
 
   it('applies visual variants correctly', () => {
-    const { rerender } = render(<Section variant="primary" data-testid="section">Content</Section>);
+    const { rerender } = render(
+      <Section variant="primary" data-testid="section">
+        Content
+      </Section>
+    );
     let section = screen.getByTestId('section');
     expect(section).toHaveClass('variant-primary');
 
-    rerender(<Section variant="muted" data-testid="section">Content</Section>);
+    rerender(
+      <Section variant="muted" data-testid="section">
+        Content
+      </Section>
+    );
     section = screen.getByTestId('section');
     expect(section).toHaveClass('variant-muted');
   });
 
   it('applies spacing variants correctly', () => {
-    const { rerender } = render(<Section spacing="sm" data-testid="section">Content</Section>);
+    const { rerender } = render(
+      <Section spacing="sm" data-testid="section">
+        Content
+      </Section>
+    );
     let section = screen.getByTestId('section');
     expect(section).toHaveClass('spacing-sm');
 
-    rerender(<Section spacing="xl" data-testid="section">Content</Section>);
+    rerender(
+      <Section spacing="xl" data-testid="section">
+        Content
+      </Section>
+    );
     section = screen.getByTestId('section');
     expect(section).toHaveClass('spacing-xl');
   });
 
   it('applies bordered styling when bordered prop is true', () => {
-    render(<Section bordered={true} data-testid="section">Content</Section>);
+    render(
+      <Section bordered={true} data-testid="section">
+        Content
+      </Section>
+    );
     expect(screen.getByTestId('section')).toHaveClass('bordered');
   });
 
@@ -201,7 +237,7 @@ describe('Grid', () => {
   it('applies responsive breakpoints correctly', () => {
     const responsive = { sm: 2, md: 3, lg: 4, xl: 6 };
     render(<Grid cols={1} responsive={responsive} data-testid="grid" />);
-    
+
     const grid = screen.getByTestId('grid');
     expect(grid).toHaveStyle('--grid-cols: 1');
     expect(grid).toHaveStyle('--grid-cols-sm: 2');
@@ -243,7 +279,9 @@ describe('Stack', () => {
   });
 
   it('applies direction correctly', () => {
-    const { rerender } = render(<Stack direction="vertical" data-testid="stack" />);
+    const { rerender } = render(
+      <Stack direction="vertical" data-testid="stack" />
+    );
     let stack = screen.getByTestId('stack');
     expect(stack).toHaveClass('direction-vertical');
 

@@ -287,9 +287,9 @@ describe('Input', () => {
 
     it('should not have accessibility violations with helper text', async () => {
       const { container } = render(
-        <Input 
-          label="Password" 
-          type="password" 
+        <Input
+          label="Password"
+          type="password"
           helperText="Must be at least 8 characters"
           required
         />
@@ -316,7 +316,7 @@ describe('Input', () => {
 
     it('maintains proper focus management', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <div>
           <button>Before Input</button>
@@ -356,37 +356,41 @@ describe('Input', () => {
     });
 
     it('associates error messages with input using aria-describedby', () => {
-      render(<Input label="Email" error="Please enter a valid email address" />);
-      
+      render(
+        <Input label="Email" error="Please enter a valid email address" />
+      );
+
       const input = screen.getByRole('textbox');
       const errorMessage = screen.getByRole('alert');
-      
+
       expect(input).toHaveAttribute('aria-describedby', errorMessage.id);
-      expect(errorMessage).toHaveTextContent('Please enter a valid email address');
+      expect(errorMessage).toHaveTextContent(
+        'Please enter a valid email address'
+      );
     });
 
     it('associates helper text with input using aria-describedby', () => {
       render(<Input label="Username" helperText="Must be 3-20 characters" />);
-      
+
       const input = screen.getByRole('textbox');
       const helperText = screen.getByText('Must be 3-20 characters');
-      
+
       expect(input).toHaveAttribute('aria-describedby', helperText.id);
     });
 
     it('combines error and helper text in aria-describedby', () => {
       render(
-        <Input 
-          label="Email" 
+        <Input
+          label="Email"
           helperText="We'll never share your email"
           error="Please enter a valid email"
         />
       );
-      
+
       const input = screen.getByRole('textbox');
       const helperText = screen.getByText("We'll never share your email");
       const errorMessage = screen.getByRole('alert');
-      
+
       const describedBy = input.getAttribute('aria-describedby');
       expect(describedBy).toContain(helperText.id);
       expect(describedBy).toContain(errorMessage.id);
@@ -394,10 +398,10 @@ describe('Input', () => {
 
     it('provides proper required field indication', () => {
       render(<Input label="Required Field" required />);
-      
+
       const input = screen.getByRole('textbox');
       const label = screen.getByText('Required Field');
-      
+
       expect(input).toHaveAttribute('required');
       expect(input).toHaveAttribute('aria-required', 'true');
       expect(label).toHaveClass('required');
@@ -443,24 +447,24 @@ describe('Input', () => {
 
     it('provides clear visual focus indicators', () => {
       render(<Input label="Focus me" />);
-      
+
       const input = screen.getByRole('textbox');
       input.focus();
-      
+
       expect(input).toHaveFocus();
       expect(input).toHaveStyle('outline: 2px solid var(--input-primary)');
     });
 
     it('handles password inputs with proper accessibility', () => {
       render(
-        <Input 
-          label="Password" 
-          type="password" 
+        <Input
+          label="Password"
+          type="password"
           helperText="Must be at least 8 characters"
           required
         />
       );
-      
+
       const input = screen.getByLabelText('Password');
       expect(input).toHaveAttribute('type', 'password');
       expect(input).toHaveAttribute('required');
@@ -468,24 +472,28 @@ describe('Input', () => {
     });
 
     it('announces validation states to screen readers', () => {
-      const { rerender } = render(<Input label="Email" value="invalid-email" />);
-      
+      const { rerender } = render(
+        <Input label="Email" value="invalid-email" />
+      );
+
       rerender(
-        <Input 
-          label="Email" 
-          value="invalid-email" 
+        <Input
+          label="Email"
+          value="invalid-email"
           error="Please enter a valid email address"
         />
       );
-      
+
       const errorMessage = screen.getByRole('alert');
       expect(errorMessage).toBeInTheDocument();
-      expect(errorMessage).toHaveTextContent('Please enter a valid email address');
+      expect(errorMessage).toHaveTextContent(
+        'Please enter a valid email address'
+      );
     });
 
     it('supports autocomplete attributes for better UX', () => {
       render(<Input label="Email" type="email" autoComplete="email" />);
-      
+
       const input = screen.getByRole('textbox');
       expect(input).toHaveAttribute('autocomplete', 'email');
       expect(input).toHaveAttribute('type', 'email');
@@ -493,26 +501,34 @@ describe('Input', () => {
 
     it('handles placeholder text accessibly', () => {
       render(<Input label="Search" placeholder="Enter keywords..." />);
-      
+
       const input = screen.getByRole('textbox');
       expect(input).toHaveAttribute('placeholder', 'Enter keywords...');
-      
+
       // Label should still be present for accessibility
       expect(screen.getByLabelText('Search')).toBeInTheDocument();
     });
 
     it('maintains semantic structure with icons', () => {
-      const searchIcon = <span aria-hidden="true" role="img">🔍</span>;
-      const clearIcon = <span aria-hidden="true" role="img">✕</span>;
-      
+      const searchIcon = (
+        <span aria-hidden="true" role="img">
+          🔍
+        </span>
+      );
+      const clearIcon = (
+        <span aria-hidden="true" role="img">
+          ✕
+        </span>
+      );
+
       render(
-        <Input 
-          label="Search with icons" 
+        <Input
+          label="Search with icons"
           startIcon={searchIcon}
           endIcon={clearIcon}
         />
       );
-      
+
       const input = screen.getByLabelText('Search with icons');
       expect(input).toBeInTheDocument();
       expect(screen.getAllByRole('img')).toHaveLength(2);
@@ -520,38 +536,38 @@ describe('Input', () => {
 
     it('supports internationalization with proper text direction', () => {
       document.dir = 'rtl';
-      
+
       render(<Input label="البحث" placeholder="أدخل الكلمات المفتاحية..." />);
-      
+
       const input = screen.getByLabelText('البحث');
       expect(input).toBeInTheDocument();
-      
+
       document.dir = 'ltr'; // Reset
     });
 
     it('handles form validation states appropriately', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <form>
           <Input label="Email" type="email" required />
           <button type="submit">Submit</button>
         </form>
       );
-      
+
       const input = screen.getByRole('textbox');
       const submitButton = screen.getByText('Submit');
-      
+
       // Try to submit without filling required field
       await user.click(submitButton);
-      
+
       // Input should be invalid
       expect(input).toBeInvalid();
     });
 
     it('provides proper context for screen readers with complex states', () => {
       render(
-        <Input 
+        <Input
           label="Password"
           type="password"
           required
@@ -560,17 +576,17 @@ describe('Input', () => {
           helperText="Minimum 8 characters, include uppercase, lowercase, and numbers"
         />
       );
-      
+
       const input = screen.getByRole('textbox');
       const label = screen.getByText('Password');
       const errorMessage = screen.getByRole('alert');
       const helperText = screen.getByText(/Minimum 8 characters/);
-      
+
       expect(input).toHaveAttribute('type', 'password');
       expect(input).toHaveAttribute('required');
       expect(input).toHaveAttribute('aria-invalid', 'true');
       expect(label).toHaveClass('required');
-      
+
       const describedBy = input.getAttribute('aria-describedby');
       expect(describedBy).toContain(errorMessage.id);
       expect(describedBy).toContain(helperText.id);

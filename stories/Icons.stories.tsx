@@ -286,7 +286,8 @@ export const AllIcons: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All available icons in the PixelForge UI icon set. Over 80 carefully crafted icons covering navigation, media, communication, files, and more.',
+        story:
+          'All available icons in the PixelForge UI icon set. Over 80 carefully crafted icons covering navigation, media, communication, files, and more.',
       },
     },
   },

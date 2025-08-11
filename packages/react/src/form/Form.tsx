@@ -9,42 +9,42 @@ export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
    * Form title
    */
   title?: string;
-  
+
   /**
    * Form description
    */
   description?: string;
-  
+
   /**
    * Size variant for the form
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant for the form
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent';
-  
+
   /**
    * Whether to show decorative patterns
    */
   showPatterns?: boolean;
-  
+
   /**
    * Loading state
    */
   loading?: boolean;
-  
+
   /**
    * Error message for the entire form
    */
   error?: string;
-  
+
   /**
    * Success message for the form
    */
   success?: string;
-  
+
   /**
    * Custom className for the form wrapper
    */
@@ -73,11 +73,13 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
     },
     ref
   ) => {
-    const formId = props.id || `form-${Math.random().toString(36).substr(2, 9)}`;
+    const formId =
+      props.id || `form-${Math.random().toString(36).substr(2, 9)}`;
     const errorId = error ? `${formId}-error` : undefined;
     const successId = success ? `${formId}-success` : undefined;
-    
-    const describedBy = [errorId, successId].filter(Boolean).join(' ') || undefined;
+
+    const describedBy =
+      [errorId, successId].filter(Boolean).join(' ') || undefined;
 
     const wrapperClasses = clsx(
       styles['form-container'],
@@ -89,10 +91,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
       wrapperClassName
     );
 
-    const formClasses = clsx(
-      styles.form,
-      className
-    );
+    const formClasses = clsx(styles.form, className);
 
     return (
       <div className={wrapperClasses}>
@@ -102,7 +101,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
             <div className={styles['pattern-dots']} />
           </div>
         )}
-        
+
         {(title || description) && (
           <header className={styles['form-header']}>
             {title && (
@@ -125,7 +124,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
             )}
           </header>
         )}
-        
+
         <form
           ref={ref}
           id={formId}
@@ -133,10 +132,8 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
           aria-describedby={describedBy}
           {...props}
         >
-          <div className={styles['form-content']}>
-            {children}
-          </div>
-          
+          <div className={styles['form-content']}>{children}</div>
+
           {error && (
             <div className={styles['form-message']} role="alert" id={errorId}>
               <Typography
@@ -149,9 +146,13 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
               </Typography>
             </div>
           )}
-          
+
           {success && (
-            <div className={styles['form-message']} role="status" id={successId}>
+            <div
+              className={styles['form-message']}
+              role="status"
+              id={successId}
+            >
               <Typography
                 variant="body2"
                 color="success"
@@ -163,7 +164,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
             </div>
           )}
         </form>
-        
+
         {loading && (
           <div className={styles['loading-overlay']}>
             <div className={styles['loading-spinner']}>
@@ -176,7 +177,11 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
                 />
               </svg>
             </div>
-            <Typography variant="body2" weight="bold" className={styles['loading-text']}>
+            <Typography
+              variant="body2"
+              weight="bold"
+              className={styles['loading-text']}
+            >
               Processing...
             </Typography>
           </div>
@@ -193,27 +198,27 @@ export interface FormFieldProps {
    * Field label
    */
   label?: string;
-  
+
   /**
    * Whether the field is required
    */
   required?: boolean;
-  
+
   /**
    * Helper text for the field
    */
   helperText?: string;
-  
+
   /**
    * Error message for the field
    */
   error?: string;
-  
+
   /**
    * Custom className for the field wrapper
    */
   className?: string;
-  
+
   /**
    * Form field content
    */
@@ -249,14 +254,16 @@ export const FormField: React.FC<FormFieldProps> = ({
           className={styles['field-label']}
         >
           {label}
-          {required && <span className={styles['required-mark']} aria-label="required">*</span>}
+          {required && (
+            <span className={styles['required-mark']} aria-label="required">
+              *
+            </span>
+          )}
         </Typography>
       )}
-      
-      <div className={styles['field-content']}>
-        {children}
-      </div>
-      
+
+      <div className={styles['field-content']}>{children}</div>
+
       {error && (
         <Typography
           variant="caption"
@@ -267,7 +274,7 @@ export const FormField: React.FC<FormFieldProps> = ({
           {error}
         </Typography>
       )}
-      
+
       {helperText && !error && (
         <Typography
           variant="caption"
@@ -286,17 +293,17 @@ export interface FormActionsProps {
    * Layout direction for actions
    */
   direction?: 'horizontal' | 'vertical';
-  
+
   /**
    * Alignment of actions
    */
   align?: 'left' | 'center' | 'right';
-  
+
   /**
    * Custom className
    */
   className?: string;
-  
+
   /**
    * Form actions content
    */
@@ -319,9 +326,5 @@ export const FormActions: React.FC<FormActionsProps> = ({
     className
   );
 
-  return (
-    <div className={actionsClasses}>
-      {children}
-    </div>
-  );
+  return <div className={actionsClasses}>{children}</div>;
 };

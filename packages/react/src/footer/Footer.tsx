@@ -9,37 +9,37 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
    * Footer brand/logo content
    */
   brand?: React.ReactNode;
-  
+
   /**
    * Copyright text
    */
   copyright?: string;
-  
+
   /**
    * Footer links sections
    */
   links?: FooterSection[];
-  
+
   /**
    * Social media links
    */
   social?: SocialLink[];
-  
+
   /**
    * Size variant for the footer
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant for the footer
    */
   variant?: 'default' | 'primary' | 'minimal' | 'bordered';
-  
+
   /**
    * Whether to show decorative patterns
    */
   showPatterns?: boolean;
-  
+
   /**
    * Layout variant
    */
@@ -51,24 +51,24 @@ export interface FooterSection {
    * Section title
    */
   title: string;
-  
+
   /**
    * Section links
    */
-  links: FooterLink[];
+  links: FooterLinkType[];
 }
 
-export interface FooterLink {
+export interface FooterLinkType {
   /**
    * Link text
    */
   label: string;
-  
+
   /**
    * Link URL
    */
   href: string;
-  
+
   /**
    * Whether link opens in new tab
    */
@@ -80,17 +80,17 @@ export interface SocialLink {
    * Platform name
    */
   platform: string;
-  
+
   /**
    * Link URL
    */
   href: string;
-  
+
   /**
    * Icon for the platform
    */
   icon?: React.ReactNode;
-  
+
   /**
    * Accessible label
    */
@@ -118,7 +118,8 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
     },
     ref
   ) => {
-    const footerId = props.id || `footer-${Math.random().toString(36).substr(2, 9)}`;
+    const footerId =
+      props.id || `footer-${Math.random().toString(36).substr(2, 9)}`;
     const currentYear = new Date().getFullYear();
 
     const footerClasses = clsx(
@@ -140,7 +141,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
           {links.map((section, index) => (
             <div key={index} className={styles['link-section']}>
               <Typography
-                variant="h6"
+                variant="h3"
                 weight="bold"
                 className={styles['section-title']}
               >
@@ -157,7 +158,10 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
                     >
                       {link.label}
                       {link.external && (
-                        <span className={styles['external-icon']} aria-hidden="true">
+                        <span
+                          className={styles['external-icon']}
+                          aria-hidden="true"
+                        >
                           ↗
                         </span>
                       )}
@@ -177,7 +181,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
       return (
         <div className={styles['footer-social']}>
           <Typography
-            variant="h6"
+            variant="h3"
             weight="bold"
             className={styles['social-title']}
           >
@@ -191,7 +195,9 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
                 className={styles['social-link']}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={socialLink.label || `Follow us on ${socialLink.platform}`}
+                aria-label={
+                  socialLink.label || `Follow us on ${socialLink.platform}`
+                }
                 title={socialLink.label || socialLink.platform}
               >
                 {socialLink.icon ? (
@@ -216,14 +222,14 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
             <div className={styles['pattern-diamonds']} />
           </div>
         )}
-        
+
         <div className={styles['footer-container']}>
           <div className={styles['footer-main']}>
             {brand && (
               <div className={styles['footer-brand']}>
                 {typeof brand === 'string' ? (
                   <Typography
-                    variant={size === 'lg' ? 'h3' : size === 'sm' ? 'h5' : 'h4'}
+                    variant="h2"
                     weight="bold"
                     className={styles['brand-text']}
                   >
@@ -234,17 +240,15 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
                 )}
               </div>
             )}
-            
+
             {renderLinks()}
             {renderSocial()}
-            
+
             {children && (
-              <div className={styles['footer-content']}>
-                {children}
-              </div>
+              <div className={styles['footer-content']}>{children}</div>
             )}
           </div>
-          
+
           {copyright && (
             <div className={styles['footer-bottom']}>
               <Typography
@@ -264,12 +268,13 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
 
 Footer.displayName = 'Footer';
 
-export interface FooterLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface FooterLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Whether the link is external
    */
   external?: boolean;
-  
+
   /**
    * Visual variant for the link
    */
@@ -281,13 +286,7 @@ export interface FooterLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEl
  */
 export const FooterLink = forwardRef<HTMLAnchorElement, FooterLinkProps>(
   (
-    {
-      external = false,
-      variant = 'default',
-      className,
-      children,
-      ...props
-    },
+    { external = false, variant = 'default', className, children, ...props },
     ref
   ) => {
     const linkClasses = clsx(

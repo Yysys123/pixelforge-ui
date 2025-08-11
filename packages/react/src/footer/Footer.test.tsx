@@ -42,7 +42,9 @@ describe('Footer', () => {
 
   it('renders brand content', () => {
     render(<Footer brand="PixelForge UI" />);
-    expect(screen.getByRole('heading', { name: 'PixelForge UI' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'PixelForge UI' })
+    ).toBeInTheDocument();
   });
 
   it('renders custom brand element', () => {
@@ -53,21 +55,33 @@ describe('Footer', () => {
 
   it('renders copyright with current year', () => {
     const currentYear = new Date().getFullYear();
-    render(<Footer copyright="© {year} PixelForge UI. All rights reserved." />);
-    expect(screen.getByText(`© ${currentYear} PixelForge UI. All rights reserved.`)).toBeInTheDocument();
+    render(
+      <Footer copyright="© {year} PixelForge UI. All rights reserved." />
+    );
+    expect(
+      screen.getByText(`© ${currentYear} PixelForge UI. All rights reserved.`)
+    ).toBeInTheDocument();
   });
 
   it('renders link sections correctly', () => {
     render(<Footer links={mockLinkSections} />);
-    
+
     // Check section titles
-    expect(screen.getByRole('heading', { name: 'Products' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Support' })).toBeInTheDocument();
-    
+    expect(
+      screen.getByRole('heading', { name: 'Products' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Support' })
+    ).toBeInTheDocument();
+
     // Check links
-    expect(screen.getByRole('link', { name: 'Components' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Documentation' })).toBeInTheDocument();
-    
+    expect(
+      screen.getByRole('link', { name: 'Components' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'Documentation' })
+    ).toBeInTheDocument();
+
     // Check external link
     const externalLink = screen.getByRole('link', { name: /Themes/ });
     expect(externalLink).toHaveAttribute('target', '_blank');
@@ -76,15 +90,24 @@ describe('Footer', () => {
 
   it('renders social links correctly', () => {
     render(<Footer social={mockSocialLinks} />);
-    
-    expect(screen.getByRole('heading', { name: 'Follow Us' })).toBeInTheDocument();
-    
-    const twitterLink = screen.getByRole('link', { name: 'Follow us on Twitter' });
-    expect(twitterLink).toHaveAttribute('href', 'https://twitter.com/pixelforge');
+
+    expect(
+      screen.getByRole('heading', { name: 'Follow Us' })
+    ).toBeInTheDocument();
+
+    const twitterLink = screen.getByRole('link', {
+      name: 'Follow us on Twitter',
+    });
+    expect(twitterLink).toHaveAttribute(
+      'href',
+      'https://twitter.com/pixelforge'
+    );
     expect(twitterLink).toHaveAttribute('target', '_blank');
     expect(twitterLink).toHaveAttribute('rel', 'noopener noreferrer');
-    
-    const githubLink = screen.getByRole('link', { name: 'Follow us on GitHub' });
+
+    const githubLink = screen.getByRole('link', {
+      name: 'Follow us on GitHub',
+    });
     expect(githubLink).toHaveAttribute('href', 'https://github.com/pixelforge');
   });
 
@@ -99,7 +122,9 @@ describe('Footer', () => {
   });
 
   it('applies visual variants correctly', () => {
-    const { rerender } = render(<Footer variant="primary" data-testid="footer" />);
+    const { rerender } = render(
+      <Footer variant="primary" data-testid="footer" />
+    );
     let footer = screen.getByTestId('footer');
     expect(footer).toHaveClass('variant-primary');
 
@@ -109,7 +134,9 @@ describe('Footer', () => {
   });
 
   it('applies layout variants correctly', () => {
-    const { rerender } = render(<Footer layout="stacked" data-testid="footer" />);
+    const { rerender } = render(
+      <Footer layout="stacked" data-testid="footer" />
+    );
     let footer = screen.getByTestId('footer');
     expect(footer).toHaveClass('layout-stacked');
 
@@ -152,10 +179,18 @@ describe('Footer', () => {
     );
 
     // Check all sections are present
-    expect(screen.getByRole('heading', { name: 'PixelForge UI' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Products' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Support' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Follow Us' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'PixelForge UI' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Products' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Support' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Follow Us' })
+    ).toBeInTheDocument();
     expect(screen.getByText(/© \d{4} PixelForge UI/)).toBeInTheDocument();
   });
 
@@ -185,34 +220,50 @@ describe('FooterLink', () => {
   });
 
   it('applies external link attributes when external prop is true', () => {
-    render(<FooterLink href="https://external.com" external={true}>External Link</FooterLink>);
+    render(
+      <FooterLink href="https://external.com" external={true}>
+        External Link
+      </FooterLink>
+    );
     const link = screen.getByRole('link', { name: /External Link/ });
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
   it('shows external icon for external links', () => {
-    render(<FooterLink href="https://external.com" external={true}>External Link</FooterLink>);
+    render(
+      <FooterLink href="https://external.com" external={true}>
+        External Link
+      </FooterLink>
+    );
     // The external icon should be present in the link text
     expect(screen.getByText('↗')).toBeInTheDocument();
   });
 
   it('applies variant styles correctly', () => {
     const { rerender } = render(
-      <FooterLink variant="bold" data-testid="footer-link">Bold Link</FooterLink>
+      <FooterLink variant="bold" data-testid="footer-link">
+        Bold Link
+      </FooterLink>
     );
     let link = screen.getByTestId('footer-link');
     expect(link).toHaveClass('link-variant-bold');
 
     rerender(
-      <FooterLink variant="muted" data-testid="footer-link">Muted Link</FooterLink>
+      <FooterLink variant="muted" data-testid="footer-link">
+        Muted Link
+      </FooterLink>
     );
     link = screen.getByTestId('footer-link');
     expect(link).toHaveClass('link-variant-muted');
   });
 
   it('does not apply external attributes when external prop is false', () => {
-    render(<FooterLink href="/internal" external={false}>Internal Link</FooterLink>);
+    render(
+      <FooterLink href="/internal" external={false}>
+        Internal Link
+      </FooterLink>
+    );
     const link = screen.getByRole('link', { name: 'Internal Link' });
     expect(link).not.toHaveAttribute('target');
     expect(link).not.toHaveAttribute('rel');

@@ -245,19 +245,24 @@ export const CustomIcons: Story = {
       <Checkbox
         label="Custom check icon"
         checked
-        checkedIcon={<span style={{ color: 'white', fontSize: '12px' }}>★</span>}
+        checkedIcon={
+          <span style={{ color: 'white', fontSize: '12px' }}>★</span>
+        }
       />
       <Checkbox
         label="Custom indeterminate icon"
         indeterminate
-        indeterminateIcon={<span style={{ color: 'white', fontSize: '12px' }}>◉</span>}
+        indeterminateIcon={
+          <span style={{ color: 'white', fontSize: '12px' }}>◉</span>
+        }
       />
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Checkboxes with custom icons for checked and indeterminate states.',
+        story:
+          'Checkboxes with custom icons for checked and indeterminate states.',
       },
     },
   },

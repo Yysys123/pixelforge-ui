@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Header, NavItem, NavList, Button, Typography } from '../packages/react/src';
+import {
+  Header,
+  NavItem,
+  NavList,
+  Button,
+  Typography,
+} from '../packages/react/src';
 
 const meta: Meta<typeof Header> = {
   title: 'Layout Components/Header',
@@ -8,7 +14,8 @@ const meta: Meta<typeof Header> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Header component with brutalist design elements. Provides navigation, branding, and action areas with responsive behavior.',
+        component:
+          'Header component with brutalist design elements. Provides navigation, branding, and action areas with responsive behavior.',
       },
     },
   },
@@ -47,7 +54,9 @@ type Story = StoryObj<typeof Header>;
 
 const defaultNavigation = (
   <NavList>
-    <NavItem href="/" active>Home</NavItem>
+    <NavItem href="/" active>
+      Home
+    </NavItem>
     <NavItem href="/components">Components</NavItem>
     <NavItem href="/docs">Documentation</NavItem>
     <NavItem href="/examples">Examples</NavItem>
@@ -56,7 +65,9 @@ const defaultNavigation = (
 
 const defaultActions = (
   <>
-    <Button variant="outline" size="sm">Login</Button>
+    <Button variant="outline" size="sm">
+      Login
+    </Button>
     <Button size="sm">Sign Up</Button>
   </>
 );
@@ -70,12 +81,8 @@ export const Default: Story = {
     showPatterns: false,
     shadow: true,
   },
-  render: (args) => (
-    <Header
-      {...args}
-      navigation={defaultNavigation}
-      actions={defaultActions}
-    />
+  render: args => (
+    <Header {...args} navigation={defaultNavigation} actions={defaultActions} />
   ),
 };
 
@@ -88,21 +95,21 @@ export const Variants: Story = {
         navigation={defaultNavigation}
         actions={defaultActions}
       />
-      
+
       <Header
         brand="Primary Header"
         variant="primary"
         navigation={defaultNavigation}
         actions={defaultActions}
       />
-      
+
       <Header
         brand="Transparent Header"
         variant="transparent"
         navigation={defaultNavigation}
         actions={defaultActions}
       />
-      
+
       <Header
         brand="Bordered Header"
         variant="bordered"
@@ -122,14 +129,14 @@ export const Sizes: Story = {
         navigation={defaultNavigation}
         actions={defaultActions}
       />
-      
+
       <Header
         brand="Medium Header"
         size="md"
         navigation={defaultNavigation}
         actions={defaultActions}
       />
-      
+
       <Header
         brand="Large Header"
         size="lg"
@@ -146,12 +153,8 @@ export const WithPatterns: Story = {
     showPatterns: true,
     variant: 'primary',
   },
-  render: (args) => (
-    <Header
-      {...args}
-      navigation={defaultNavigation}
-      actions={defaultActions}
-    />
+  render: args => (
+    <Header {...args} navigation={defaultNavigation} actions={defaultActions} />
   ),
 };
 
@@ -165,7 +168,7 @@ export const StickyHeader: Story = {
         navigation={defaultNavigation}
         actions={defaultActions}
       />
-      
+
       <div style={{ padding: '2rem' }}>
         <Typography variant="h2" weight="bold" style={{ marginBottom: '1rem' }}>
           Scroll down to see the sticky header
@@ -173,11 +176,12 @@ export const StickyHeader: Story = {
         <Typography variant="body1" color="muted">
           The header will remain at the top of the viewport as you scroll.
         </Typography>
-        
+
         {Array.from({ length: 20 }, (_, i) => (
           <Typography key={i} variant="body1" style={{ marginBottom: '1rem' }}>
-            This is paragraph {i + 1}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            This is paragraph {i + 1}. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
           </Typography>
         ))}
       </div>
@@ -190,17 +194,19 @@ export const CustomBrand: Story = {
     <Header
       brand={
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div style={{ 
-            width: '32px', 
-            height: '32px', 
-            backgroundColor: '#3b82f6', 
-            borderRadius: '4px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: 'bold'
-          }}>
+          <div
+            style={{
+              width: '32px',
+              height: '32px',
+              backgroundColor: '#3b82f6',
+              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+            }}
+          >
             PF
           </div>
           <Typography variant="h4" weight="bold">
@@ -225,14 +231,16 @@ export const NavigationVariants: Story = {
           brand="Brand"
           navigation={
             <NavList>
-              <NavItem href="/" active>Home</NavItem>
+              <NavItem href="/" active>
+                Home
+              </NavItem>
               <NavItem href="/about">About</NavItem>
               <NavItem href="/contact">Contact</NavItem>
             </NavList>
           }
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Bold Navigation
@@ -241,14 +249,20 @@ export const NavigationVariants: Story = {
           brand="Brand"
           navigation={
             <NavList>
-              <NavItem href="/" variant="bold" active>Home</NavItem>
-              <NavItem href="/about" variant="bold">About</NavItem>
-              <NavItem href="/contact" variant="bold">Contact</NavItem>
+              <NavItem href="/" variant="bold" active>
+                Home
+              </NavItem>
+              <NavItem href="/about" variant="bold">
+                About
+              </NavItem>
+              <NavItem href="/contact" variant="bold">
+                Contact
+              </NavItem>
             </NavList>
           }
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Underline Navigation
@@ -257,14 +271,20 @@ export const NavigationVariants: Story = {
           brand="Brand"
           navigation={
             <NavList>
-              <NavItem href="/" variant="underline" active>Home</NavItem>
-              <NavItem href="/about" variant="underline">About</NavItem>
-              <NavItem href="/contact" variant="underline">Contact</NavItem>
+              <NavItem href="/" variant="underline" active>
+                Home
+              </NavItem>
+              <NavItem href="/about" variant="underline">
+                About
+              </NavItem>
+              <NavItem href="/contact" variant="underline">
+                Contact
+              </NavItem>
             </NavList>
           }
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Mixed Navigation with Disabled Item
@@ -273,10 +293,16 @@ export const NavigationVariants: Story = {
           brand="Brand"
           navigation={
             <NavList>
-              <NavItem href="/" active>Home</NavItem>
+              <NavItem href="/" active>
+                Home
+              </NavItem>
               <NavItem href="/about">About</NavItem>
-              <NavItem href="/premium" variant="bold">Premium</NavItem>
-              <NavItem href="/admin" disabled>Admin</NavItem>
+              <NavItem href="/premium" variant="bold">
+                Premium
+              </NavItem>
+              <NavItem href="/admin" disabled>
+                Admin
+              </NavItem>
             </NavList>
           }
         />
@@ -297,13 +323,15 @@ export const ActionsVariations: Story = {
           navigation={defaultNavigation}
           actions={
             <>
-              <Button variant="outline" size="sm">Login</Button>
+              <Button variant="outline" size="sm">
+                Login
+              </Button>
               <Button size="sm">Sign Up</Button>
             </>
           }
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Single Action
@@ -314,7 +342,7 @@ export const ActionsVariations: Story = {
           actions={<Button>Get Started</Button>}
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Multiple Actions
@@ -324,14 +352,18 @@ export const ActionsVariations: Story = {
           navigation={defaultNavigation}
           actions={
             <>
-              <Button variant="outline" size="sm">Docs</Button>
-              <Button variant="secondary" size="sm">Support</Button>
+              <Button variant="outline" size="sm">
+                Docs
+              </Button>
+              <Button variant="secondary" size="sm">
+                Support
+              </Button>
               <Button size="sm">Dashboard</Button>
             </>
           }
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Text and Button Actions
@@ -360,7 +392,9 @@ export const ResponsiveExample: Story = {
         brand="Responsive Header"
         navigation={
           <NavList>
-            <NavItem href="/" active>Home</NavItem>
+            <NavItem href="/" active>
+              Home
+            </NavItem>
             <NavItem href="/products">Products</NavItem>
             <NavItem href="/solutions">Solutions</NavItem>
             <NavItem href="/pricing">Pricing</NavItem>
@@ -370,18 +404,21 @@ export const ResponsiveExample: Story = {
         }
         actions={
           <>
-            <Button variant="outline" size="sm">Login</Button>
+            <Button variant="outline" size="sm">
+              Login
+            </Button>
             <Button size="sm">Start Free Trial</Button>
           </>
         }
       />
-      
+
       <div style={{ padding: '2rem' }}>
         <Typography variant="h3" weight="bold" style={{ marginBottom: '1rem' }}>
           Resize the viewport to see responsive behavior
         </Typography>
         <Typography variant="body1" color="muted">
-          On mobile devices, the navigation will stack vertically and the layout will adapt.
+          On mobile devices, the navigation will stack vertically and the layout
+          will adapt.
         </Typography>
       </div>
     </div>

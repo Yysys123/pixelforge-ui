@@ -59,7 +59,7 @@ describe('Checkbox', () => {
       render(<Checkbox disabled />);
       const checkbox = screen.getByRole('checkbox');
       expect(checkbox).toBeDisabled();
-      
+
       const wrapper = checkbox.closest('div');
       expect(wrapper).toHaveClass('disabled');
     });
@@ -94,7 +94,7 @@ describe('Checkbox', () => {
       render(<Checkbox error="Error message" />);
       const checkbox = screen.getByRole('checkbox');
       const errorMessage = screen.getByRole('alert');
-      
+
       expect(checkbox).toHaveAttribute('aria-describedby', errorMessage.id);
     });
   });
@@ -102,42 +102,34 @@ describe('Checkbox', () => {
   describe('Helper text', () => {
     it('displays helper text', () => {
       render(<Checkbox helperText="Check this box to continue" />);
-      expect(screen.getByText('Check this box to continue')).toBeInTheDocument();
+      expect(
+        screen.getByText('Check this box to continue')
+      ).toBeInTheDocument();
     });
 
     it('associates helper text with checkbox', () => {
       render(<Checkbox helperText="Helper text" />);
       const checkbox = screen.getByRole('checkbox');
       const helperText = screen.getByText('Helper text');
-      
+
       expect(checkbox).toHaveAttribute('aria-describedby', helperText.id);
     });
 
     it('combines error and helper text in aria-describedby', () => {
-      render(
-        <Checkbox 
-          helperText="Helper text"
-          error="Error message"
-        />
-      );
-      
+      render(<Checkbox helperText="Helper text" error="Error message" />);
+
       const checkbox = screen.getByRole('checkbox');
       const helperText = screen.getByText('Helper text');
       const errorMessage = screen.getByRole('alert');
-      
+
       const describedBy = checkbox.getAttribute('aria-describedby');
       expect(describedBy).toContain(errorMessage.id);
       expect(describedBy).toContain(helperText.id);
     });
 
     it('hides helper text when error is present', () => {
-      render(
-        <Checkbox 
-          helperText="Helper text"
-          error="Error message"
-        />
-      );
-      
+      render(<Checkbox helperText="Helper text" error="Error message" />);
+
       expect(screen.getByRole('alert')).toBeInTheDocument();
       expect(screen.queryByText('Helper text')).not.toBeInTheDocument();
     });
@@ -224,9 +216,7 @@ describe('Checkbox', () => {
     });
 
     it('has no accessibility violations when disabled', async () => {
-      const { container } = render(
-        <Checkbox label="Test checkbox" disabled />
-      );
+      const { container } = render(<Checkbox label="Test checkbox" disabled />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
@@ -234,7 +224,7 @@ describe('Checkbox', () => {
     it('provides proper ARIA attributes', () => {
       render(<Checkbox label="Test checkbox" required />);
       const checkbox = screen.getByRole('checkbox');
-      
+
       expect(checkbox).toHaveAttribute('type', 'checkbox');
       expect(checkbox).toHaveAttribute('required');
       expect(checkbox).toHaveAttribute('aria-invalid', 'false');
@@ -248,7 +238,7 @@ describe('Checkbox', () => {
 
     it('maintains focus management', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <div>
           <button>Before Checkbox</button>
@@ -271,10 +261,10 @@ describe('Checkbox', () => {
 
     it('provides clear visual focus indicators', () => {
       render(<Checkbox label="Focus me" />);
-      
+
       const checkbox = screen.getByRole('checkbox');
       checkbox.focus();
-      
+
       expect(checkbox).toHaveFocus();
     });
 
@@ -318,10 +308,10 @@ describe('Checkbox', () => {
 
     it('supports internationalization', () => {
       document.dir = 'rtl';
-      
+
       render(<Checkbox label="مربع الاختيار" />);
       expect(screen.getByLabelText('مربع الاختيار')).toBeInTheDocument();
-      
+
       document.dir = 'ltr'; // Reset
     });
   });
@@ -341,7 +331,7 @@ describe('Checkbox', () => {
 
     it('supports form validation', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <form>
           <Checkbox required label="Required checkbox" />
@@ -385,18 +375,20 @@ describe('Checkbox', () => {
       const checkbox1 = screen.getByLabelText('Checkbox 1');
       const checkbox2 = screen.getByLabelText('Checkbox 2');
 
-      expect(checkbox1.getAttribute('id')).not.toBe(checkbox2.getAttribute('id'));
+      expect(checkbox1.getAttribute('id')).not.toBe(
+        checkbox2.getAttribute('id')
+      );
     });
 
     it('handles indeterminate prop changes', () => {
       const { rerender } = render(<Checkbox />);
       const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
-      
+
       expect(checkbox.indeterminate).toBe(false);
-      
+
       rerender(<Checkbox indeterminate />);
       expect(checkbox.indeterminate).toBe(true);
-      
+
       rerender(<Checkbox indeterminate={false} />);
       expect(checkbox.indeterminate).toBe(false);
     });

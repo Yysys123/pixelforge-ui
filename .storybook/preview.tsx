@@ -7,7 +7,7 @@ const preview: Preview = {
   parameters: {
     // Set default view mode to docs
     viewMode: 'docs',
-    
+
     // Set initial story to Overview
     options: {
       storySort: {
@@ -15,7 +15,7 @@ const preview: Preview = {
         method: 'alphabetical',
       },
     },
-    
+
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {

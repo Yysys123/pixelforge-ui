@@ -4,52 +4,53 @@ import { Typography } from '../typography/Typography';
 import styles from './Checkbox.module.css';
 import '../styles/utilities.css';
 
-export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+export interface CheckboxProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   /**
    * Label text for the checkbox
    */
   label?: string;
-  
+
   /**
    * Size variant
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent';
-  
+
   /**
    * Whether the checkbox is in an indeterminate state
    */
   indeterminate?: boolean;
-  
+
   /**
    * Error message to display
    */
   error?: string;
-  
+
   /**
    * Helper text to display below the checkbox
    */
   helperText?: string;
-  
+
   /**
    * Whether the checkbox is required
    */
   required?: boolean;
-  
+
   /**
    * Custom className for the wrapper
    */
   wrapperClassName?: string;
-  
+
   /**
    * Custom icon to show when checked
    */
   checkedIcon?: React.ReactNode;
-  
+
   /**
    * Custom icon to show when indeterminate
    */
@@ -80,11 +81,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     },
     ref
   ) => {
-    const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+    const checkboxId =
+      id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
     const errorId = error ? `${checkboxId}-error` : undefined;
     const helperId = helperText ? `${checkboxId}-helper` : undefined;
-    
-    const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+
+    const describedBy =
+      [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
     const wrapperClasses = clsx(
       styles.wrapper,
@@ -106,13 +109,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       className
     );
 
-    const labelClasses = clsx(
-      styles.label,
-      {
-        [styles.disabled]: disabled,
-        [styles.required]: required,
-      }
-    );
+    const labelClasses = clsx(styles.label, {
+      [styles.disabled]: disabled,
+      [styles.required]: required,
+    });
 
     // Handle indeterminate state
     React.useEffect(() => {
@@ -135,27 +135,33 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-describedby={describedBy}
             {...props}
           />
-          
+
           <span className={styles['checkbox-mark']}>
-            {indeterminate && indeterminateIcon ? (
-              indeterminateIcon
-            ) : props.checked && checkedIcon ? (
-              checkedIcon
-            ) : null}
+            {indeterminate && indeterminateIcon
+              ? indeterminateIcon
+              : props.checked && checkedIcon
+                ? checkedIcon
+                : null}
           </span>
-          
+
           {label && (
             <Typography
-              variant={size === 'lg' ? 'body1' : size === 'sm' ? 'caption' : 'body2'}
+              variant={
+                size === 'lg' ? 'body1' : size === 'sm' ? 'caption' : 'body2'
+              }
               weight="medium"
               className={labelClasses}
             >
               {label}
-              {required && <span className={styles['required-mark']} aria-label="required">*</span>}
+              {required && (
+                <span className={styles['required-mark']} aria-label="required">
+                  *
+                </span>
+              )}
             </Typography>
           )}
         </label>
-        
+
         {error && (
           <Typography
             variant="caption"
@@ -167,7 +173,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {error}
           </Typography>
         )}
-        
+
         {helperText && !error && (
           <Typography
             variant="caption"
@@ -190,22 +196,22 @@ export interface CheckboxGroupProps {
    * Checkbox group name
    */
   name: string;
-  
+
   /**
    * Currently selected values
    */
   value?: string[];
-  
+
   /**
    * Default selected values
    */
   defaultValue?: string[];
-  
+
   /**
    * Callback when selection changes
    */
   onChange?: (value: string[]) => void;
-  
+
   /**
    * Checkbox options
    */
@@ -215,42 +221,42 @@ export interface CheckboxGroupProps {
     disabled?: boolean;
     helperText?: string;
   }>;
-  
+
   /**
    * Group label
    */
   label?: string;
-  
+
   /**
    * Size variant for all checkboxes
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant for all checkboxes
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent';
-  
+
   /**
    * Layout direction
    */
   direction?: 'vertical' | 'horizontal';
-  
+
   /**
    * Whether the group is required
    */
   required?: boolean;
-  
+
   /**
    * Error message for the group
    */
   error?: string;
-  
+
   /**
    * Helper text for the group
    */
   helperText?: string;
-  
+
   /**
    * Custom className for the group wrapper
    */
@@ -276,20 +282,23 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   helperText,
   className,
 }) => {
-  const [internalValue, setInternalValue] = React.useState<string[]>(defaultValue || []);
+  const [internalValue, setInternalValue] = React.useState<string[]>(
+    defaultValue || []
+  );
   const value = controlledValue !== undefined ? controlledValue : internalValue;
-  
+
   const groupId = `checkbox-group-${Math.random().toString(36).substr(2, 9)}`;
   const errorId = error ? `${groupId}-error` : undefined;
   const helperId = helperText ? `${groupId}-helper` : undefined;
-  
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+
+  const describedBy =
+    [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   const handleChange = (optionValue: string, checked: boolean) => {
     const newValue = checked
       ? [...value, optionValue]
       : value.filter(v => v !== optionValue);
-    
+
     if (controlledValue === undefined) {
       setInternalValue(newValue);
     }
@@ -311,13 +320,17 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
         <legend className={styles['group-legend']}>
           <Typography variant="body2" weight="bold">
             {label}
-            {required && <span className={styles['required-mark']} aria-label="required">*</span>}
+            {required && (
+              <span className={styles['required-mark']} aria-label="required">
+                *
+              </span>
+            )}
           </Typography>
         </legend>
       )}
-      
+
       <div className={styles['checkbox-list']}>
-        {options.map((option) => (
+        {options.map(option => (
           <Checkbox
             key={option.value}
             name={name}
@@ -329,11 +342,11 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             size={size}
             variant={variant}
             required={required}
-            onChange={(e) => handleChange(option.value, e.target.checked)}
+            onChange={e => handleChange(option.value, e.target.checked)}
           />
         ))}
       </div>
-      
+
       {error && (
         <Typography
           variant="caption"
@@ -345,7 +358,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
           {error}
         </Typography>
       )}
-      
+
       {helperText && !error && (
         <Typography
           variant="caption"

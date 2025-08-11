@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Footer, FooterLink, Typography, Page, Container } from '../packages/react/src';
+import {
+  Footer,
+  FooterLink,
+  Typography,
+  Page,
+  Container,
+} from '../packages/react/src';
 import type { FooterSection, SocialLink } from '../packages/react/src';
 
 const meta: Meta<typeof Footer> = {
@@ -9,7 +15,8 @@ const meta: Meta<typeof Footer> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Footer component with brutalist design elements. Provides branding, links, and social media sections with responsive behavior.',
+        component:
+          'Footer component with brutalist design elements. Provides branding, links, and social media sections with responsive behavior.',
       },
     },
   },
@@ -71,8 +78,16 @@ const defaultLinks: FooterSection[] = [
     links: [
       { label: 'Help Center', href: '/help' },
       { label: 'Contact Us', href: '/contact' },
-      { label: 'Discord', href: 'https://discord.gg/pixelforge', external: true },
-      { label: 'GitHub Issues', href: 'https://github.com/pixelforge/issues', external: true },
+      {
+        label: 'Discord',
+        href: 'https://discord.gg/pixelforge',
+        external: true,
+      },
+      {
+        label: 'GitHub Issues',
+        href: 'https://github.com/pixelforge/issues',
+        external: true,
+      },
     ],
   },
 ];
@@ -113,12 +128,18 @@ export const Default: Story = {
     layout: 'columns',
     showPatterns: false,
   },
-  render: (args) => (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+  render: args => (
+    <div
+      style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+    >
       <Page>
         <Container>
           <div style={{ flex: 1, padding: '2rem 0' }}>
-            <Typography variant="h2" weight="bold" style={{ marginBottom: '1rem' }}>
+            <Typography
+              variant="h2"
+              weight="bold"
+              style={{ marginBottom: '1rem' }}
+            >
               Page Content
             </Typography>
             <Typography variant="body1" color="muted">
@@ -127,12 +148,8 @@ export const Default: Story = {
           </div>
         </Container>
       </Page>
-      
-      <Footer
-        {...args}
-        links={defaultLinks}
-        social={defaultSocial}
-      />
+
+      <Footer {...args} links={defaultLinks} social={defaultSocial} />
     </div>
   ),
 };
@@ -146,21 +163,21 @@ export const Variants: Story = {
         copyright="© {year} Company Name"
         links={defaultLinks.slice(0, 2)}
       />
-      
+
       <Footer
         brand="Primary Footer"
         variant="primary"
         copyright="© {year} Company Name"
         links={defaultLinks.slice(0, 2)}
       />
-      
+
       <Footer
         brand="Minimal Footer"
         variant="minimal"
         copyright="© {year} Company Name"
         links={defaultLinks.slice(0, 1)}
       />
-      
+
       <Footer
         brand="Bordered Footer"
         variant="bordered"
@@ -186,7 +203,7 @@ export const Layouts: Story = {
           social={defaultSocial}
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Stacked Layout
@@ -199,7 +216,7 @@ export const Layouts: Story = {
           social={defaultSocial.slice(0, 3)}
         />
       </div>
-      
+
       <div>
         <Typography variant="h4" weight="bold" style={{ marginBottom: '1rem' }}>
           Inline Layout
@@ -225,14 +242,14 @@ export const Sizes: Story = {
         copyright="© {year} Company"
         links={defaultLinks.slice(0, 2)}
       />
-      
+
       <Footer
         brand="Medium Footer"
         size="md"
         copyright="© {year} Company"
         links={defaultLinks.slice(0, 2)}
       />
-      
+
       <Footer
         brand="Large Footer"
         size="lg"
@@ -249,7 +266,7 @@ export const WithPatterns: Story = {
     showPatterns: true,
     variant: 'primary',
   },
-  render: (args) => (
+  render: args => (
     <Footer
       {...args}
       copyright="© {year} PixelForge UI. All rights reserved."
@@ -297,17 +314,19 @@ export const CustomBrand: Story = {
     <Footer
       brand={
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div style={{ 
-            width: '40px', 
-            height: '40px', 
-            backgroundColor: '#3b82f6', 
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: 'bold'
-          }}>
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              backgroundColor: '#3b82f6',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+            }}
+          >
             PF
           </div>
           <div>
@@ -334,37 +353,49 @@ export const WithCustomContent: Story = {
       copyright="© {year} Custom Company"
       links={defaultLinks.slice(0, 2)}
     >
-      <div style={{ 
-        background: 'rgba(59, 130, 246, 0.1)', 
-        padding: '1rem', 
-        borderRadius: '8px',
-        border: '2px solid rgba(59, 130, 246, 0.2)'
-      }}>
-        <Typography variant="h5" weight="bold" style={{ marginBottom: '0.5rem' }}>
+      <div
+        style={{
+          background: 'rgba(59, 130, 246, 0.1)',
+          padding: '1rem',
+          borderRadius: '8px',
+          border: '2px solid rgba(59, 130, 246, 0.2)',
+        }}
+      >
+        <Typography
+          variant="h5"
+          weight="bold"
+          style={{ marginBottom: '0.5rem' }}
+        >
           Newsletter Signup
         </Typography>
-        <Typography variant="body2" color="muted" style={{ marginBottom: '1rem' }}>
+        <Typography
+          variant="body2"
+          color="muted"
+          style={{ marginBottom: '1rem' }}
+        >
           Stay updated with our latest features and releases.
         </Typography>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <input 
-            type="email" 
+          <input
+            type="email"
             placeholder="Enter your email"
-            style={{ 
+            style={{
               flex: 1,
               padding: '0.5rem',
               border: '2px solid #ccc',
-              borderRadius: '4px'
+              borderRadius: '4px',
             }}
           />
-          <button style={{ 
-            padding: '0.5rem 1rem',
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            fontWeight: 'bold'
-          }}>
+          <button
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: '#3b82f6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              fontWeight: 'bold',
+            }}
+          >
             Subscribe
           </button>
         </div>
@@ -375,25 +406,38 @@ export const WithCustomContent: Story = {
 
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+    >
       {/* Main content */}
       <Page>
         <Container>
           <div style={{ padding: '4rem 0', textAlign: 'center' }}>
-            <Typography variant="h1" weight="bold" style={{ marginBottom: '1rem' }}>
+            <Typography
+              variant="h1"
+              weight="bold"
+              style={{ marginBottom: '1rem' }}
+            >
               Welcome to PixelForge UI
             </Typography>
-            <Typography variant="h4" color="muted" style={{ marginBottom: '2rem' }}>
+            <Typography
+              variant="h4"
+              color="muted"
+              style={{ marginBottom: '2rem' }}
+            >
               The complete brutalist React component library
             </Typography>
-            <Typography variant="body1" style={{ maxWidth: '600px', margin: '0 auto' }}>
-              Build bold, accessible, and impactful user interfaces with our comprehensive
-              collection of brutalist-designed React components.
+            <Typography
+              variant="body1"
+              style={{ maxWidth: '600px', margin: '0 auto' }}
+            >
+              Build bold, accessible, and impactful user interfaces with our
+              comprehensive collection of brutalist-designed React components.
             </Typography>
           </div>
         </Container>
       </Page>
-      
+
       {/* Footer */}
       <Footer
         brand="PixelForge UI"
@@ -422,9 +466,21 @@ export const CompleteExample: Story = {
           {
             title: 'Community',
             links: [
-              { label: 'GitHub', href: 'https://github.com/pixelforge', external: true },
-              { label: 'Discord', href: 'https://discord.gg/pixelforge', external: true },
-              { label: 'Twitter', href: 'https://twitter.com/pixelforge', external: true },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/pixelforge',
+                external: true,
+              },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/pixelforge',
+                external: true,
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/pixelforge',
+                external: true,
+              },
               { label: 'Blog', href: '/blog' },
             ],
           },

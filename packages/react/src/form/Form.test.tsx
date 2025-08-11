@@ -12,20 +12,23 @@ describe('Form', () => {
 
   it('renders with title and description', () => {
     render(
-      <Form
-        title="Test Form"
-        description="This is a test form description"
-      >
+      <Form title="Test Form" description="This is a test form description">
         <div>Form content</div>
       </Form>
     );
-    
-    expect(screen.getByRole('heading', { name: 'Test Form' })).toBeInTheDocument();
-    expect(screen.getByText('This is a test form description')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('heading', { name: 'Test Form' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('This is a test form description')
+    ).toBeInTheDocument();
   });
 
   it('applies size variants correctly', () => {
-    const { rerender } = render(<Form size="sm" wrapperClassName="test-wrapper" />);
+    const { rerender } = render(
+      <Form size="sm" wrapperClassName="test-wrapper" />
+    );
     let wrapper = document.querySelector('.test-wrapper');
     expect(wrapper).toHaveClass('size-sm');
 
@@ -35,7 +38,9 @@ describe('Form', () => {
   });
 
   it('applies visual variants correctly', () => {
-    const { rerender } = render(<Form variant="primary" wrapperClassName="test-wrapper" />);
+    const { rerender } = render(
+      <Form variant="primary" wrapperClassName="test-wrapper" />
+    );
     let wrapper = document.querySelector('.test-wrapper');
     expect(wrapper).toHaveClass('variant-primary');
 
@@ -63,14 +68,18 @@ describe('Form', () => {
 
   it('shows/hides patterns based on showPatterns prop', () => {
     const { rerender } = render(<Form showPatterns={true} />);
-    expect(document.querySelector('[class*="pattern-grid"]')).toBeInTheDocument();
+    expect(
+      document.querySelector('[class*="pattern-grid"]')
+    ).toBeInTheDocument();
 
     rerender(<Form showPatterns={false} />);
-    expect(document.querySelector('[class*="pattern-grid"]')).not.toBeInTheDocument();
+    expect(
+      document.querySelector('[class*="pattern-grid"]')
+    ).not.toBeInTheDocument();
   });
 
   it('handles form submission', () => {
-    const handleSubmit = jest.fn((e) => e.preventDefault());
+    const handleSubmit = jest.fn(e => e.preventDefault());
     render(
       <Form onSubmit={handleSubmit}>
         <Button type="submit">Submit</Button>
@@ -83,23 +92,26 @@ describe('Form', () => {
 
   it('sets correct aria-describedby when error or success is present', () => {
     const { rerender } = render(<Form error="Error message" id="test-form" />);
-    let form = screen.getByRole('form');
+    let form = document.getElementById('test-form');
     expect(form).toHaveAttribute('aria-describedby', 'test-form-error');
 
     rerender(<Form success="Success message" id="test-form" />);
-    form = screen.getByRole('form');
+    form = document.getElementById('test-form');
     expect(form).toHaveAttribute('aria-describedby', 'test-form-success');
 
     rerender(<Form error="Error" success="Success" id="test-form" />);
-    form = screen.getByRole('form');
-    expect(form).toHaveAttribute('aria-describedby', 'test-form-error test-form-success');
+    form = document.getElementById('test-form');
+    expect(form).toHaveAttribute(
+      'aria-describedby',
+      'test-form-error test-form-success'
+    );
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(
       <Form title="Accessible Form" description="Form description">
         <FormField label="Name" required>
-          <Input type="text" id="name" name="name" required />
+          <Input type="text" id="name" name="name" required aria-label="Name" />
         </FormField>
         <FormActions>
           <Button type="submit">Submit</Button>
@@ -157,8 +169,8 @@ describe('FormField', () => {
 
   it('hides helper text when error is present', () => {
     render(
-      <FormField 
-        label="Email" 
+      <FormField
+        label="Email"
         helperText="Enter your email address"
         error="Invalid email"
       >
@@ -166,24 +178,31 @@ describe('FormField', () => {
       </FormField>
     );
 
-    expect(screen.queryByText('Enter your email address')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Enter your email address')
+    ).not.toBeInTheDocument();
     expect(screen.getByText('Invalid email')).toBeInTheDocument();
   });
 
   it('applies error class when error is present', () => {
-    render(
-      <FormField label="Email" error="Invalid email" data-testid="form-field">
+    const { container } = render(
+      <FormField label="Email" error="Invalid email">
         <Input type="email" />
       </FormField>
     );
 
-    expect(screen.getByTestId('form-field')).toHaveClass('error');
+    const formField = container.querySelector('.form-field');
+    expect(formField).toHaveClass('error');
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <FormField label="Email Address" helperText="We'll never share your email" required>
-        <Input type="email" id="email" name="email" required />
+      <FormField
+        label="Email Address"
+        helperText="We'll never share your email"
+        required
+      >
+        <Input type="email" id="email" name="email" required aria-label="Email Address" />
       </FormField>
     );
 
@@ -194,46 +213,47 @@ describe('FormField', () => {
 
 describe('FormActions', () => {
   it('renders actions with horizontal layout by default', () => {
-    render(
-      <FormActions data-testid="form-actions">
+    const { container } = render(
+      <FormActions>
         <Button>Cancel</Button>
         <Button>Submit</Button>
       </FormActions>
     );
 
-    const actions = screen.getByTestId('form-actions');
+    const actions = container.querySelector('.form-actions');
     expect(actions).toHaveClass('direction-horizontal');
     expect(actions).toHaveClass('align-right');
   });
 
   it('applies vertical layout', () => {
-    render(
-      <FormActions direction="vertical" data-testid="form-actions">
+    const { container } = render(
+      <FormActions direction="vertical">
         <Button>Cancel</Button>
         <Button>Submit</Button>
       </FormActions>
     );
 
-    expect(screen.getByTestId('form-actions')).toHaveClass('direction-vertical');
+    const actions = container.querySelector('.form-actions');
+    expect(actions).toHaveClass('direction-vertical');
   });
 
   it('applies alignment correctly', () => {
-    const { rerender } = render(
-      <FormActions align="left" data-testid="form-actions">
+    const { rerender, container } = render(
+      <FormActions align="left">
         <Button>Submit</Button>
       </FormActions>
     );
-    
-    let actions = screen.getByTestId('form-actions');
+
+    let actions = container.querySelector('.form-actions');
     expect(actions).toHaveClass('align-left');
 
     rerender(
-      <FormActions align="center" data-testid="form-actions">
+      <FormActions align="center">
         <Button>Submit</Button>
       </FormActions>
     );
-    
-    actions = screen.getByTestId('form-actions');
+
+    actions = container.querySelector('.form-actions');
     expect(actions).toHaveClass('align-center');
   });
 
@@ -247,7 +267,9 @@ describe('FormActions', () => {
     );
 
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Save Draft' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Save Draft' })
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
 

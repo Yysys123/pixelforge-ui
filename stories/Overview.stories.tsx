@@ -141,25 +141,19 @@ export const Introduction: Story = {
             >
               <Grid cols={2} gap={4}>
                 <FormField label="First Name" required>
-                  <Input
-                    placeholder="Enter your first name"
-                    required
-                  />
+                  <Input placeholder="Enter your first name" required />
                 </FormField>
                 <FormField label="Last Name" required>
-                  <Input
-                    placeholder="Enter your last name"
-                    required
-                  />
+                  <Input placeholder="Enter your last name" required />
                 </FormField>
               </Grid>
-              
-              <FormField label="Email" required helperText="We'll never share your email">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  required
-                />
+
+              <FormField
+                label="Email"
+                required
+                helperText="We'll never share your email"
+              >
+                <Input type="email" placeholder="Enter your email" required />
               </FormField>
 
               <CheckboxGroup
@@ -226,12 +220,21 @@ export const Introduction: Story = {
           {/* Layout Components */}
           <Stack spacing={2}>
             <Typography variant="h3">Layout Components</Typography>
-            <Typography variant="body2" color="muted" style={{ marginBottom: '1rem' }}>
-              Comprehensive layout system with Page, Container, Section, Grid, and Stack components
+            <Typography
+              variant="body2"
+              color="muted"
+              style={{ marginBottom: '1rem' }}
+            >
+              Comprehensive layout system with Page, Container, Section, Grid,
+              and Stack components
             </Typography>
-            
+
             <Section variant="primary" spacing="md" bordered>
-              <Typography variant="h5" weight="bold" style={{ marginBottom: '0.5rem' }}>
+              <Typography
+                variant="h5"
+                weight="bold"
+                style={{ marginBottom: '0.5rem' }}
+              >
                 Primary Section
               </Typography>
               <Typography variant="body2" color="muted">
@@ -240,14 +243,41 @@ export const Introduction: Story = {
             </Section>
 
             <Grid cols={3} gap={4}>
-              <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
-                <Typography variant="body2" weight="bold">Grid Item 1</Typography>
+              <div
+                style={{
+                  backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                }}
+              >
+                <Typography variant="body2" weight="bold">
+                  Grid Item 1
+                </Typography>
               </div>
-              <div style={{ backgroundColor: 'rgba(34, 197, 94, 0.1)', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
-                <Typography variant="body2" weight="bold">Grid Item 2</Typography>
+              <div
+                style={{
+                  backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                }}
+              >
+                <Typography variant="body2" weight="bold">
+                  Grid Item 2
+                </Typography>
               </div>
-              <div style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
-                <Typography variant="body2" weight="bold">Grid Item 3</Typography>
+              <div
+                style={{
+                  backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                }}
+              >
+                <Typography variant="body2" weight="bold">
+                  Grid Item 3
+                </Typography>
               </div>
             </Grid>
           </Stack>
@@ -255,20 +285,26 @@ export const Introduction: Story = {
           {/* Navigation Components */}
           <Stack spacing={2}>
             <Typography variant="h3">Navigation</Typography>
-            <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
+            <div
+              style={{
+                border: '2px solid #e5e7eb',
+                borderRadius: '8px',
+                overflow: 'hidden',
+              }}
+            >
               <Header
                 brand="PixelForge UI"
                 variant="primary"
                 navigation={
                   <NavList>
-                    <NavItem href="/" active>Home</NavItem>
+                    <NavItem href="/" active>
+                      Home
+                    </NavItem>
                     <NavItem href="/components">Components</NavItem>
                     <NavItem href="/docs">Documentation</NavItem>
                   </NavList>
                 }
-                actions={
-                  <Button size="sm">Get Started</Button>
-                }
+                actions={<Button size="sm">Get Started</Button>}
               />
             </div>
           </Stack>

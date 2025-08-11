@@ -118,7 +118,7 @@ const productData: Product[] = [
     id: 'p4',
     name: 'Desk Lamp',
     category: 'Furniture',
-    price: 45.50,
+    price: 45.5,
     stock: 0,
     rating: 4.0,
     featured: false,
@@ -146,7 +146,9 @@ const userColumns: TableColumn<User>[] = [
         />
         <div>
           <div style={{ fontWeight: 'bold' }}>{record.name}</div>
-          <div style={{ fontSize: '0.875em', opacity: 0.7 }}>{record.email}</div>
+          <div style={{ fontSize: '0.875em', opacity: 0.7 }}>
+            {record.email}
+          </div>
         </div>
       </div>
     ),
@@ -273,7 +275,14 @@ const productColumns: TableColumn<Product>[] = [
     sortable: true,
     align: 'center',
     render: (rating: number) => (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '4px',
+        }}
+      >
         <span>{'⭐'.repeat(Math.floor(rating))}</span>
         <span style={{ fontSize: '0.875em' }}>({rating})</span>
       </div>
@@ -392,29 +401,31 @@ export const WithSelection: Story = {
 export const WithSorting: Story = {
   render: () => {
     const [sortKey, setSortKey] = useState<string>('');
-    const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | null>(null);
-    
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | null>(
+      null
+    );
+
     const sortedData = useMemo(() => {
       if (!sortKey || !sortDirection) return userData.slice(0, 4);
-      
+
       return [...userData.slice(0, 4)].sort((a, b) => {
         const aVal = a[sortKey as keyof User];
         const bVal = b[sortKey as keyof User];
-        
+
         if (typeof aVal === 'string' && typeof bVal === 'string') {
-          return sortDirection === 'asc' 
+          return sortDirection === 'asc'
             ? aVal.localeCompare(bVal)
             : bVal.localeCompare(aVal);
         }
-        
+
         if (typeof aVal === 'number' && typeof bVal === 'number') {
           return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
         }
-        
+
         return 0;
       });
     }, [sortKey, sortDirection]);
-    
+
     return (
       <Table
         columns={simpleColumns}
@@ -467,25 +478,30 @@ export const UserManagement: Story = {
   render: () => {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
-    
+
     const handleSelectionChange = (keys: string[], rows: User[]) => {
       setSelectedRows(keys);
       console.log('Selected:', keys, rows);
     };
-    
+
     const handleRefresh = () => {
       setLoading(true);
       setTimeout(() => setLoading(false), 2000);
     };
-    
+
     return (
       <div>
-        <div style={{ marginBottom: '16px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div
+          style={{
+            marginBottom: '16px',
+            display: 'flex',
+            gap: '8px',
+            alignItems: 'center',
+          }}
+        >
           <Button onClick={handleRefresh}>Refresh Data</Button>
           {selectedRows.length > 0 && (
-            <Badge variant="primary">
-              {selectedRows.length} selected
-            </Badge>
+            <Badge variant="primary">{selectedRows.length} selected</Badge>
           )}
         </div>
         <Table
@@ -495,7 +511,7 @@ export const UserManagement: Story = {
           selectedRowKeys={selectedRows}
           onSelectionChange={handleSelectionChange}
           loading={loading}
-          rowKey={(record) => record.id}
+          rowKey={record => record.id}
         />
       </div>
     );
@@ -542,17 +558,17 @@ export const FullFeatured: Story = {
     const [data, setData] = useState(userData);
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
-    
+
     const handleDelete = (id: string) => {
       setData(prev => prev.filter(user => user.id !== id));
       setSelectedRows(prev => prev.filter(key => key !== id));
     };
-    
+
     const handleBulkDelete = () => {
       setData(prev => prev.filter(user => !selectedRows.includes(user.id)));
       setSelectedRows([]);
     };
-    
+
     const columnsWithActions: TableColumn<User>[] = [
       ...userColumns.slice(0, -1), // Remove the original actions column
       {
@@ -560,12 +576,14 @@ export const FullFeatured: Story = {
         title: 'Actions',
         align: 'center',
         render: (_, record) => (
-          <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
+          <div
+            style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}
+          >
             <Button size="sm" variant="outline">
               Edit
             </Button>
-            <Button 
-              size="sm" 
+            <Button
+              size="sm"
               variant="danger"
               onClick={() => handleDelete(record.id)}
             >
@@ -575,51 +593,49 @@ export const FullFeatured: Story = {
         ),
       },
     ];
-    
+
     return (
       <div>
-        <div style={{ 
-          marginBottom: '16px', 
-          display: 'flex', 
-          gap: '8px', 
-          alignItems: 'center',
-          flexWrap: 'wrap'
-        }}>
-          <Button 
+        <div
+          style={{
+            marginBottom: '16px',
+            display: 'flex',
+            gap: '8px',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Button
             onClick={() => setLoading(!loading)}
             variant={loading ? 'danger' : 'secondary'}
           >
             {loading ? 'Stop Loading' : 'Start Loading'}
           </Button>
-          
+
           {selectedRows.length > 0 && (
             <>
-              <Badge variant="primary">
-                {selectedRows.length} selected
-              </Badge>
-              <Button 
-                variant="danger" 
-                size="sm"
-                onClick={handleBulkDelete}
-              >
+              <Badge variant="primary">{selectedRows.length} selected</Badge>
+              <Button variant="danger" size="sm" onClick={handleBulkDelete}>
                 Delete Selected
               </Button>
             </>
           )}
-          
-          <div style={{ marginLeft: 'auto', fontSize: '0.875em', opacity: 0.7 }}>
+
+          <div
+            style={{ marginLeft: 'auto', fontSize: '0.875em', opacity: 0.7 }}
+          >
             Total: {data.length} users
           </div>
         </div>
-        
+
         <Table
           columns={columnsWithActions}
           dataSource={data}
           selectable
           selectedRowKeys={selectedRows}
-          onSelectionChange={(keys) => setSelectedRows(keys)}
+          onSelectionChange={keys => setSelectedRows(keys)}
           loading={loading}
-          rowKey={(record) => record.id}
+          rowKey={record => record.id}
           size="md"
           variant="default"
           emptyText="No users found. All users have been deleted!"

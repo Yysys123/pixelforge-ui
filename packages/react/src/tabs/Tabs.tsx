@@ -1,4 +1,10 @@
-import React, { forwardRef, useState, Children, isValidElement, cloneElement } from 'react';
+import React, {
+  forwardRef,
+  useState,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react';
 import { clsx } from 'clsx';
 import { Typography } from '../typography/Typography';
 import styles from './Tabs.module.css';
@@ -9,104 +15,105 @@ export interface TabItem {
    * Unique key for the tab
    */
   key: string;
-  
+
   /**
    * Tab label text
    */
   label: string;
-  
+
   /**
    * Tab content
    */
   content: React.ReactNode;
-  
+
   /**
    * Whether the tab is disabled
    */
   disabled?: boolean;
-  
+
   /**
    * Icon to display in the tab
    */
   icon?: React.ReactNode;
-  
+
   /**
    * Badge content to show on the tab
    */
   badge?: React.ReactNode;
-  
+
   /**
    * Whether to show decorative pattern
    */
   showPattern?: boolean;
 }
 
-export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface TabsProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * Tab items configuration
    */
   items?: TabItem[];
-  
+
   /**
    * Active tab key
    */
   activeKey?: string;
-  
+
   /**
    * Default active tab key
    */
   defaultActiveKey?: string;
-  
+
   /**
    * Callback when active tab changes
    */
   onChange?: (key: string) => void;
-  
+
   /**
    * Tab bar position
    */
   position?: 'top' | 'bottom' | 'left' | 'right';
-  
+
   /**
    * Size variant
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Visual variant
    */
   variant?: 'default' | 'primary' | 'secondary' | 'accent';
-  
+
   /**
    * Whether tabs should take full width
    */
   fullWidth?: boolean;
-  
+
   /**
    * Whether to show decorative patterns
    */
   showPatterns?: boolean;
-  
+
   /**
    * Whether tabs are centered
    */
   centered?: boolean;
-  
+
   /**
    * Tab style type
    */
   type?: 'line' | 'card' | 'brutalist';
-  
+
   /**
    * Whether to show tab indicators
    */
   showIndicator?: boolean;
-  
+
   /**
    * Custom tab bar extra content
    */
   tabBarExtraContent?: React.ReactNode;
-  
+
   /**
    * Children (alternative to items prop)
    */
@@ -118,32 +125,32 @@ export interface TabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
    * Tab pane key
    */
   key: string;
-  
+
   /**
    * Tab title
    */
   tab: React.ReactNode;
-  
+
   /**
    * Whether the tab is disabled
    */
   disabled?: boolean;
-  
+
   /**
    * Whether to force render the content
    */
   forceRender?: boolean;
-  
+
   /**
    * Icon for the tab
    */
   icon?: React.ReactNode;
-  
+
   /**
    * Badge for the tab
    */
   badge?: React.ReactNode;
-  
+
   /**
    * Children content
    */
@@ -192,42 +199,52 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     ref
   ) => {
     // Process children to extract tab items if items prop is not provided
-    const processedItems = items || Children.map(children, (child, index) => {
-      if (isValidElement<TabPaneProps>(child) && child.type === TabPane) {
-        return {
-          key: child.key?.toString() || index.toString(),
-          label: child.props.tab as string,
-          content: child.props.children,
-          disabled: child.props.disabled,
-          icon: child.props.icon,
-          badge: child.props.badge,
-        };
-      }
-      return null;
-    })?.filter(Boolean) || [];
+    const processedItems =
+      items ||
+      Children.map(children, (child, index) => {
+        if (isValidElement<TabPaneProps>(child) && child.type === TabPane) {
+          return {
+            key: child.key?.toString() || index.toString(),
+            label: child.props.tab as string,
+            content: child.props.children,
+            disabled: child.props.disabled,
+            icon: child.props.icon,
+            badge: child.props.badge,
+          };
+        }
+        return null;
+      })?.filter(Boolean) ||
+      [];
 
     const [internalActiveKey, setInternalActiveKey] = useState(
       defaultActiveKey || processedItems[0]?.key || ''
     );
 
-    const activeKey = controlledActiveKey !== undefined ? controlledActiveKey : internalActiveKey;
+    const activeKey =
+      controlledActiveKey !== undefined
+        ? controlledActiveKey
+        : internalActiveKey;
 
     const handleTabClick = (key: string, disabled?: boolean) => {
       if (disabled) return;
-      
+
       if (controlledActiveKey === undefined) {
         setInternalActiveKey(key);
       }
       onChange?.(key);
     };
 
-    const handleKeyDown = (event: React.KeyboardEvent, tabKey: string, tabIndex: number) => {
+    const handleKeyDown = (
+      event: React.KeyboardEvent,
+      tabKey: string,
+      tabIndex: number
+    ) => {
       const { key } = event;
       const enabledTabs = processedItems.filter(item => !item.disabled);
       const currentIndex = enabledTabs.findIndex(tab => tab.key === tabKey);
-      
+
       let targetIndex = currentIndex;
-      
+
       switch (key) {
         case 'ArrowRight':
         case 'ArrowDown':
@@ -237,7 +254,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         case 'ArrowLeft':
         case 'ArrowUp':
           event.preventDefault();
-          targetIndex = currentIndex === 0 ? enabledTabs.length - 1 : currentIndex - 1;
+          targetIndex =
+            currentIndex === 0 ? enabledTabs.length - 1 : currentIndex - 1;
           break;
         case 'Home':
           event.preventDefault();
@@ -250,10 +268,12 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         default:
           return;
       }
-      
+
       const targetTab = enabledTabs[targetIndex];
       if (targetTab) {
-        const tabElement = document.querySelector(`[data-tab-key="${targetTab.key}"]`) as HTMLElement;
+        const tabElement = document.querySelector(
+          `[data-tab-key="${targetTab.key}"]`
+        ) as HTMLElement;
         tabElement?.focus();
       }
     };
@@ -274,20 +294,14 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       className
     );
 
-    const tabBarClasses = clsx(
-      styles['tab-bar'],
-      {
-        [styles['full-width']]: fullWidth,
-        [styles.centered]: centered,
-      }
-    );
+    const tabBarClasses = clsx(styles['tab-bar'], {
+      [styles['full-width']]: fullWidth,
+      [styles.centered]: centered,
+    });
 
-    const tabListClasses = clsx(
-      styles['tab-list'],
-      {
-        [styles['full-width']]: fullWidth,
-      }
-    );
+    const tabListClasses = clsx(styles['tab-list'], {
+      [styles['full-width']]: fullWidth,
+    });
 
     const GeometricIndicator = ({ isActive }: { isActive: boolean }) => (
       <div className={clsx(styles.indicator, { [styles.active]: isActive })}>
@@ -315,7 +329,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     );
 
     const TabContent = () => (
-      <div 
+      <div
         className={styles['tab-content']}
         role="tabpanel"
         id={`tabpanel-${activeKey}`}
@@ -328,9 +342,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
             <div className={styles['pattern-dots']} />
           </div>
         )}
-        <div className={styles['content-inner']}>
-          {activeItem?.content}
-        </div>
+        <div className={styles['content-inner']}>{activeItem?.content}</div>
       </div>
     );
 
@@ -341,21 +353,18 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
             <div className={styles['pattern-border']} />
           </div>
         )}
-        
+
         <div className={styles['tab-bar-inner']}>
           <div className={tabListClasses} role="tablist">
-            {processedItems.map((item) => {
+            {processedItems.map(item => {
               const isActive = item.key === activeKey;
-              const tabClasses = clsx(
-                styles.tab,
-                {
-                  [styles.active]: isActive,
-                  [styles.disabled]: item.disabled,
-                  [styles['with-icon']]: item.icon,
-                  [styles['with-badge']]: item.badge,
-                  [styles['with-pattern']]: item.showPattern,
-                }
-              );
+              const tabClasses = clsx(styles.tab, {
+                [styles.active]: isActive,
+                [styles.disabled]: item.disabled,
+                [styles['with-icon']]: item.icon,
+                [styles['with-badge']]: item.badge,
+                [styles['with-pattern']]: item.showPattern,
+              });
 
               return (
                 <button
@@ -370,12 +379,16 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                   data-tab-key={item.key}
                   className={tabClasses}
                   onClick={() => handleTabClick(item.key, item.disabled)}
-                  onKeyDown={(e) => {
+                  onKeyDown={e => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       handleTabClick(item.key, item.disabled);
                     } else {
-                      handleKeyDown(e, item.key, processedItems.findIndex(tab => tab.key === item.key));
+                      handleKeyDown(
+                        e,
+                        item.key,
+                        processedItems.findIndex(tab => tab.key === item.key)
+                      );
                     }
                   }}
                 >
@@ -383,32 +396,68 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                     {item.icon && (
                       <span className={styles['tab-icon']}>{item.icon}</span>
                     )}
-                    
+
                     <Typography
-                      variant={size === 'lg' ? 'body1' : size === 'sm' ? 'caption' : 'body2'}
+                      variant={
+                        size === 'lg'
+                          ? 'body1'
+                          : size === 'sm'
+                            ? 'caption'
+                            : 'body2'
+                      }
                       weight="bold"
                       className={styles['tab-label']}
                     >
                       {item.label}
                     </Typography>
-                    
+
                     {item.badge && (
                       <span className={styles['tab-badge']}>{item.badge}</span>
                     )}
                   </div>
-                  
+
                   {showIndicator && type === 'brutalist' && (
                     <GeometricIndicator isActive={isActive} />
                   )}
-                  
+
                   {item.showPattern && (
                     <div className={styles['tab-pattern']}>
                       <svg viewBox="0 0 40 8" fill="none">
-                        <circle cx="4" cy="4" r="1" fill="currentColor" opacity="0.5" />
-                        <circle cx="12" cy="4" r="1" fill="currentColor" opacity="0.5" />
-                        <circle cx="20" cy="4" r="1" fill="currentColor" opacity="0.5" />
-                        <circle cx="28" cy="4" r="1" fill="currentColor" opacity="0.5" />
-                        <circle cx="36" cy="4" r="1" fill="currentColor" opacity="0.5" />
+                        <circle
+                          cx="4"
+                          cy="4"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.5"
+                        />
+                        <circle
+                          cx="12"
+                          cy="4"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.5"
+                        />
+                        <circle
+                          cx="20"
+                          cy="4"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.5"
+                        />
+                        <circle
+                          cx="28"
+                          cy="4"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.5"
+                        />
+                        <circle
+                          cx="36"
+                          cy="4"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.5"
+                        />
                       </svg>
                     </div>
                   )}
@@ -416,11 +465,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
               );
             })}
           </div>
-          
+
           {tabBarExtraContent && (
-            <div className={styles['tab-bar-extra']}>
-              {tabBarExtraContent}
-            </div>
+            <div className={styles['tab-bar-extra']}>{tabBarExtraContent}</div>
           )}
         </div>
       </div>
@@ -430,9 +477,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       <div ref={ref} className={containerClasses} {...props}>
         {position === 'top' && <TabBar />}
         {position === 'left' && <TabBar />}
-        
+
         <TabContent />
-        
+
         {position === 'bottom' && <TabBar />}
         {position === 'right' && <TabBar />}
       </div>

@@ -196,22 +196,22 @@ export const AllVariants: Story = {
         variant="default"
         checked
       />
-      <Radio 
-        label="Primary variant (Purple)" 
-        name="variants-demo2" 
-        variant="primary" 
+      <Radio
+        label="Primary variant (Purple)"
+        name="variants-demo2"
+        variant="primary"
         checked
       />
-      <Radio 
-        label="Secondary variant (Green)" 
-        name="variants-demo3" 
-        variant="secondary" 
+      <Radio
+        label="Secondary variant (Green)"
+        name="variants-demo3"
+        variant="secondary"
         checked
       />
-      <Radio 
-        label="Accent variant (Orange)" 
-        name="variants-demo4" 
-        variant="accent" 
+      <Radio
+        label="Accent variant (Orange)"
+        name="variants-demo4"
+        variant="accent"
         checked
       />
     </div>
@@ -219,7 +219,8 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All radio button variants with filled appearance showing distinct colors for each variant.',
+        story:
+          'All radio button variants with filled appearance showing distinct colors for each variant.',
       },
     },
   },
@@ -344,7 +345,8 @@ export const FilledVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Radio buttons showing all variants with filled appearance and brutalist design language including shadows and press effects.',
+        story:
+          'Radio buttons showing all variants with filled appearance and brutalist design language including shadows and press effects.',
       },
     },
   },

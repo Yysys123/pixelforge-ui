@@ -59,7 +59,7 @@ describe('Radio', () => {
       render(<Radio disabled />);
       const radio = screen.getByRole('radio');
       expect(radio).toBeDisabled();
-      
+
       const wrapper = radio.closest('div');
       expect(wrapper).toHaveClass('disabled');
     });
@@ -88,7 +88,7 @@ describe('Radio', () => {
       render(<Radio error="Error message" />);
       const radio = screen.getByRole('radio');
       const errorMessage = screen.getByRole('alert');
-      
+
       expect(radio).toHaveAttribute('aria-describedby', errorMessage.id);
     });
   });
@@ -96,42 +96,34 @@ describe('Radio', () => {
   describe('Helper text', () => {
     it('displays helper text', () => {
       render(<Radio helperText="Select this option to continue" />);
-      expect(screen.getByText('Select this option to continue')).toBeInTheDocument();
+      expect(
+        screen.getByText('Select this option to continue')
+      ).toBeInTheDocument();
     });
 
     it('associates helper text with radio', () => {
       render(<Radio helperText="Helper text" />);
       const radio = screen.getByRole('radio');
       const helperText = screen.getByText('Helper text');
-      
+
       expect(radio).toHaveAttribute('aria-describedby', helperText.id);
     });
 
     it('combines error and helper text in aria-describedby', () => {
-      render(
-        <Radio 
-          helperText="Helper text"
-          error="Error message"
-        />
-      );
-      
+      render(<Radio helperText="Helper text" error="Error message" />);
+
       const radio = screen.getByRole('radio');
       const helperText = screen.getByText('Helper text');
       const errorMessage = screen.getByRole('alert');
-      
+
       const describedBy = radio.getAttribute('aria-describedby');
       expect(describedBy).toContain(errorMessage.id);
       expect(describedBy).toContain(helperText.id);
     });
 
     it('hides helper text when error is present', () => {
-      render(
-        <Radio 
-          helperText="Helper text"
-          error="Error message"
-        />
-      );
-      
+      render(<Radio helperText="Helper text" error="Error message" />);
+
       expect(screen.getByRole('alert')).toBeInTheDocument();
       expect(screen.queryByText('Helper text')).not.toBeInTheDocument();
     });
@@ -212,9 +204,7 @@ describe('Radio', () => {
     });
 
     it('has no accessibility violations when disabled', async () => {
-      const { container } = render(
-        <Radio label="Test radio" disabled />
-      );
+      const { container } = render(<Radio label="Test radio" disabled />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
@@ -222,7 +212,7 @@ describe('Radio', () => {
     it('provides proper ARIA attributes', () => {
       render(<Radio label="Test radio" required />);
       const radio = screen.getByRole('radio');
-      
+
       expect(radio).toHaveAttribute('type', 'radio');
       expect(radio).toHaveAttribute('required');
       expect(radio).toHaveAttribute('aria-invalid', 'false');
@@ -236,7 +226,7 @@ describe('Radio', () => {
 
     it('maintains focus management', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <div>
           <button>Before Radio</button>
@@ -273,7 +263,7 @@ describe('Radio', () => {
 
     it('supports form validation', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <form>
           <Radio required label="Required radio" />
@@ -337,12 +327,16 @@ describe('RadioGroup', () => {
     });
 
     it('renders with group label', () => {
-      render(<RadioGroup name="test" label="Choose option" options={options} />);
+      render(
+        <RadioGroup name="test" label="Choose option" options={options} />
+      );
       expect(screen.getByText('Choose option')).toBeInTheDocument();
     });
 
     it('applies custom className', () => {
-      render(<RadioGroup name="test" options={options} className="custom-group" />);
+      render(
+        <RadioGroup name="test" options={options} className="custom-group" />
+      );
       expect(screen.getByRole('group')).toHaveClass('custom-group');
     });
   });
@@ -355,7 +349,9 @@ describe('RadioGroup', () => {
     });
 
     it('applies horizontal direction', () => {
-      render(<RadioGroup name="test" options={options} direction="horizontal" />);
+      render(
+        <RadioGroup name="test" options={options} direction="horizontal" />
+      );
       const group = screen.getByRole('group');
       expect(group).toHaveClass('direction-horizontal');
     });
@@ -389,7 +385,9 @@ describe('RadioGroup', () => {
     });
 
     it('handles default value', () => {
-      render(<RadioGroup name="test" options={options} defaultValue="option1" />);
+      render(
+        <RadioGroup name="test" options={options} defaultValue="option1" />
+      );
       const option1 = screen.getByLabelText('Option 1');
       expect(option1).toBeChecked();
     });
@@ -398,13 +396,7 @@ describe('RadioGroup', () => {
       const user = userEvent.setup();
       const onChange = jest.fn();
 
-      render(
-        <RadioGroup 
-          name="test" 
-          options={options} 
-          onChange={onChange}
-        />
-      );
+      render(<RadioGroup name="test" options={options} onChange={onChange} />);
 
       const option2 = screen.getByLabelText('Option 2');
       await user.click(option2);
@@ -433,11 +425,11 @@ describe('RadioGroup', () => {
   describe('Required state', () => {
     it('shows required indicator in legend', () => {
       render(
-        <RadioGroup 
-          name="test" 
-          options={options} 
-          label="Required group" 
-          required 
+        <RadioGroup
+          name="test"
+          options={options}
+          label="Required group"
+          required
         />
       );
       expect(screen.getByLabelText('required')).toBeInTheDocument();
@@ -456,9 +448,9 @@ describe('RadioGroup', () => {
   describe('Error handling', () => {
     it('displays group error message', () => {
       render(
-        <RadioGroup 
-          name="test" 
-          options={options} 
+        <RadioGroup
+          name="test"
+          options={options}
           error="Please select an option"
         />
       );
@@ -467,22 +459,20 @@ describe('RadioGroup', () => {
     });
 
     it('applies error styling to group', () => {
-      render(<RadioGroup name="test" options={options} error="Error message" />);
+      render(
+        <RadioGroup name="test" options={options} error="Error message" />
+      );
       const group = screen.getByRole('group');
       expect(group).toHaveClass('error');
     });
 
     it('associates error message with group', () => {
       render(
-        <RadioGroup 
-          name="test" 
-          options={options} 
-          error="Error message"
-        />
+        <RadioGroup name="test" options={options} error="Error message" />
       );
       const group = screen.getByRole('group');
       const errorMessage = screen.getByRole('alert');
-      
+
       expect(group).toHaveAttribute('aria-describedby', errorMessage.id);
     });
   });
@@ -490,9 +480,9 @@ describe('RadioGroup', () => {
   describe('Helper text', () => {
     it('displays group helper text', () => {
       render(
-        <RadioGroup 
-          name="test" 
-          options={options} 
+        <RadioGroup
+          name="test"
+          options={options}
           helperText="Choose one option"
         />
       );
@@ -501,14 +491,14 @@ describe('RadioGroup', () => {
 
     it('hides helper text when error is present', () => {
       render(
-        <RadioGroup 
-          name="test" 
-          options={options} 
+        <RadioGroup
+          name="test"
+          options={options}
           helperText="Helper text"
           error="Error message"
         />
       );
-      
+
       expect(screen.getByRole('alert')).toBeInTheDocument();
       expect(screen.queryByText('Helper text')).not.toBeInTheDocument();
     });
@@ -523,14 +513,18 @@ describe('RadioGroup', () => {
       ];
 
       render(<RadioGroup name="test" options={optionsWithDisabled} />);
-      
+
       const option2 = screen.getByLabelText('Option 2');
       expect(option2).toBeDisabled();
     });
 
     it('displays individual helper texts', () => {
       const optionsWithHelper = [
-        { value: 'option1', label: 'Option 1', helperText: 'Helper for option 1' },
+        {
+          value: 'option1',
+          label: 'Option 1',
+          helperText: 'Helper for option 1',
+        },
         { value: 'option2', label: 'Option 2' },
       ];
 
@@ -550,10 +544,10 @@ describe('RadioGroup', () => {
 
     it('has no accessibility violations with error', async () => {
       const { container } = render(
-        <RadioGroup 
-          name="test" 
-          label="Test group" 
-          options={options} 
+        <RadioGroup
+          name="test"
+          label="Test group"
+          options={options}
           error="Required field"
         />
       );
@@ -563,16 +557,12 @@ describe('RadioGroup', () => {
 
     it('uses proper fieldset/legend semantics', () => {
       render(
-        <RadioGroup 
-          name="test" 
-          label="Choose option" 
-          options={options}
-        />
+        <RadioGroup name="test" label="Choose option" options={options} />
       );
 
       const fieldset = screen.getByRole('group');
       expect(fieldset.tagName.toLowerCase()).toBe('fieldset');
-      
+
       const legend = screen.getByText('Choose option');
       expect(legend.closest('legend')).toBeInTheDocument();
     });
@@ -583,7 +573,7 @@ describe('RadioGroup', () => {
       render(<RadioGroup name="test" options={options} />);
 
       const radios = screen.getAllByRole('radio');
-      
+
       // Focus first radio
       radios[0].focus();
       expect(radios[0]).toHaveFocus();

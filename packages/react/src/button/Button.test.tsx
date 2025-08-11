@@ -257,7 +257,7 @@ describe('Button', () => {
 
     it('maintains proper focus management', async () => {
       const user = userEvent.setup();
-      
+
       render(
         <div>
           <button>Before Button</button>
@@ -310,7 +310,7 @@ describe('Button', () => {
 
       await user.keyboard('{Enter}');
       await user.keyboard(' ');
-      
+
       expect(onClick).not.toHaveBeenCalled();
     });
 
@@ -325,10 +325,10 @@ describe('Button', () => {
       );
 
       const button = screen.getByRole('button');
-      
+
       await user.keyboard('{Enter}');
       await user.keyboard(' ');
-      
+
       expect(onClick).not.toHaveBeenCalled();
     });
 
@@ -389,10 +389,10 @@ describe('Button', () => {
 
     it('provides clear visual focus indicators', () => {
       render(<Button>Focus me</Button>);
-      
+
       const button = screen.getByRole('button');
       button.focus();
-      
+
       expect(button).toHaveFocus();
       expect(button).toHaveStyle('outline: 2px solid var(--button-primary)');
     });
@@ -419,7 +419,7 @@ describe('Button', () => {
 
     it('supports custom ARIA attributes', () => {
       render(
-        <Button 
+        <Button
           aria-describedby="help-text"
           aria-expanded="false"
           aria-haspopup="menu"
@@ -463,7 +463,7 @@ describe('Button', () => {
 
     it('properly handles disabled state in forms', () => {
       const onSubmit = jest.fn();
-      
+
       render(
         <form onSubmit={onSubmit}>
           <Button type="submit" disabled>
@@ -474,19 +474,19 @@ describe('Button', () => {
 
       const form = screen.getByRole('button').closest('form');
       fireEvent.submit(form!);
-      
+
       // Form should not submit when button is disabled
       expect(onSubmit).not.toHaveBeenCalled();
     });
 
     it('supports internationalization with proper text direction', () => {
       document.dir = 'rtl';
-      
+
       const icon = <span aria-hidden="true">→</span>;
       render(<Button endIcon={icon}>العربية</Button>);
-      
+
       expect(screen.getByRole('button')).toBeInTheDocument();
-      
+
       document.dir = 'ltr'; // Reset
     });
   });

@@ -10,109 +10,110 @@ export interface TableColumn<T = any> {
    * Unique identifier for the column
    */
   key: string;
-  
+
   /**
    * Display title for the column header
    */
   title: string;
-  
+
   /**
    * Render function for custom cell content
    */
   render?: (value: any, record: T, index: number) => React.ReactNode;
-  
+
   /**
    * Whether this column is sortable
    */
   sortable?: boolean;
-  
+
   /**
    * Fixed width for the column
    */
   width?: string | number;
-  
+
   /**
    * Alignment for cell content
    */
   align?: 'left' | 'center' | 'right';
-  
+
   /**
    * Whether to show decorative pattern in header
    */
   showPattern?: boolean;
 }
 
-export interface TableProps<T = any> extends Omit<React.TableHTMLAttributes<HTMLTableElement>, 'children'> {
+export interface TableProps<T = any>
+  extends Omit<React.TableHTMLAttributes<HTMLTableElement>, 'children'> {
   /**
    * Column definitions
    */
   columns: TableColumn<T>[];
-  
+
   /**
    * Data source for table rows
    */
   dataSource: T[];
-  
+
   /**
    * Row key function to generate unique keys
    */
   rowKey?: (record: T, index: number) => string;
-  
+
   /**
    * Whether to show striped rows
    */
   striped?: boolean;
-  
+
   /**
    * Whether to show hover effects on rows
    */
   hoverable?: boolean;
-  
+
   /**
    * Whether to show borders
    */
   bordered?: boolean;
-  
+
   /**
    * Size variant for the table
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Whether to enable row selection
    */
   selectable?: boolean;
-  
+
   /**
    * Selected row keys
    */
   selectedRowKeys?: string[];
-  
+
   /**
    * Callback when row selection changes
    */
   onSelectionChange?: (selectedKeys: string[], selectedRows: T[]) => void;
-  
+
   /**
    * Callback when sort changes
    */
   onSortChange?: (key: string, direction: 'asc' | 'desc' | null) => void;
-  
+
   /**
    * Loading state
    */
   loading?: boolean;
-  
+
   /**
    * Empty state message
    */
   emptyText?: string;
-  
+
   /**
    * Whether to show decorative patterns
    */
   showPatterns?: boolean;
-  
+
   /**
    * Table variant
    */
@@ -151,11 +152,16 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
     },
     ref
   ) => {
-    const [sortState, setSortState] = useState<SortState>({ key: null, direction: null });
-    const [internalSelection, setInternalSelection] = useState<string[]>(selectedRowKeys);
+    const [sortState, setSortState] = useState<SortState>({
+      key: null,
+      direction: null,
+    });
+    const [internalSelection, setInternalSelection] =
+      useState<string[]>(selectedRowKeys);
 
     // Use controlled or internal selection state
-    const actualSelectedKeys = selectedRowKeys.length > 0 ? selectedRowKeys : internalSelection;
+    const actualSelectedKeys =
+      selectedRowKeys.length > 0 ? selectedRowKeys : internalSelection;
 
     // Sort data based on current sort state
     const sortedData = useMemo(() => {
@@ -169,13 +175,13 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       return [...dataSource].sort((a, b) => {
         const aValue = a[sortState.key!];
         const bValue = b[sortState.key!];
-        
+
         // Handle null/undefined values
         if (aValue === null || aValue === undefined) return 1;
         if (bValue === null || bValue === undefined) return -1;
-        
+
         let comparison = 0;
-        
+
         // Compare different types
         if (typeof aValue === 'string' && typeof bValue === 'string') {
           comparison = aValue.toLowerCase().localeCompare(bValue.toLowerCase());
@@ -185,9 +191,11 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
           comparison = aValue.getTime() - bValue.getTime();
         } else {
           // Fallback to string comparison
-          comparison = String(aValue).toLowerCase().localeCompare(String(bValue).toLowerCase());
+          comparison = String(aValue)
+            .toLowerCase()
+            .localeCompare(String(bValue).toLowerCase());
         }
-        
+
         return sortState.direction === 'asc' ? comparison : -comparison;
       });
     }, [dataSource, sortState, columns]);
@@ -210,7 +218,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       if (!column?.sortable) return;
 
       let newDirection: 'asc' | 'desc' | null = 'asc';
-      
+
       if (sortState.key === columnKey) {
         if (sortState.direction === 'asc') {
           newDirection = 'desc';
@@ -219,7 +227,10 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
         }
       }
 
-      const newSortState = { key: newDirection ? columnKey : null, direction: newDirection };
+      const newSortState = {
+        key: newDirection ? columnKey : null,
+        direction: newDirection,
+      };
       setSortState(newSortState);
       onSortChange?.(newSortState.key || '', newSortState.direction);
     };
@@ -228,45 +239,52 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       const newSelection = selected
         ? [...actualSelectedKeys, rowKey]
         : actualSelectedKeys.filter(key => key !== rowKey);
-      
+
       setInternalSelection(newSelection);
-      
-      const selectedRows = sortedData.filter((record, index) => 
+
+      const selectedRows = sortedData.filter((record, index) =>
         newSelection.includes(rowKey(record, index))
       );
-      
+
       onSelectionChange?.(newSelection, selectedRows);
     };
 
     const handleSelectAll = (selected: boolean) => {
       const allKeys = sortedData.map((record, index) => rowKey(record, index));
       const newSelection = selected ? allKeys : [];
-      
+
       setInternalSelection(newSelection);
-      
+
       const selectedRows = selected ? sortedData : [];
       onSelectionChange?.(newSelection, selectedRows);
     };
 
-    const isAllSelected = actualSelectedKeys.length === sortedData.length && sortedData.length > 0;
-    const isSomeSelected = actualSelectedKeys.length > 0 && actualSelectedKeys.length < sortedData.length;
+    const isAllSelected =
+      actualSelectedKeys.length === sortedData.length && sortedData.length > 0;
+    const isSomeSelected =
+      actualSelectedKeys.length > 0 &&
+      actualSelectedKeys.length < sortedData.length;
 
     const SortIcon = ({ columnKey }: { columnKey: string }) => {
       const isActive = sortState.key === columnKey;
       const direction = isActive ? sortState.direction : null;
-      
+
       return (
         <span className={styles['sort-icon']}>
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
             <path
               d="M7 1L10 6H4L7 1Z"
-              fill={direction === 'asc' ? 'currentColor' : 'rgba(255,255,255,0.4)'}
+              fill={
+                direction === 'asc' ? 'currentColor' : 'rgba(255,255,255,0.4)'
+              }
               stroke="currentColor"
               strokeWidth="1"
             />
             <path
               d="M7 15L4 10H10L7 15Z"
-              fill={direction === 'desc' ? 'currentColor' : 'rgba(255,255,255,0.4)'}
+              fill={
+                direction === 'desc' ? 'currentColor' : 'rgba(255,255,255,0.4)'
+              }
               stroke="currentColor"
               strokeWidth="1"
             />
@@ -298,17 +316,20 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
             <div className={styles['pattern-dots']} />
           </div>
         )}
-        
-        <table 
-          ref={ref} 
-          className={tableClasses} 
+
+        <table
+          ref={ref}
+          className={tableClasses}
           aria-busy={loading}
           {...props}
         >
           <thead className={styles.thead}>
             <tr>
               {selectable && (
-                <th className={clsx(styles.th, styles['selection-column'])} scope="col">
+                <th
+                  className={clsx(styles.th, styles['selection-column'])}
+                  scope="col"
+                >
                   <label className={styles.checkbox}>
                     <input
                       type="checkbox"
@@ -316,14 +337,14 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                       ref={input => {
                         if (input) input.indeterminate = isSomeSelected;
                       }}
-                      onChange={(e) => handleSelectAll(e.target.checked)}
+                      onChange={e => handleSelectAll(e.target.checked)}
                     />
                     <span className={styles['checkbox-mark']} />
                   </label>
                 </th>
               )}
-              
-              {columns.map((column) => (
+
+              {columns.map(column => (
                 <th
                   key={column.key}
                   className={clsx(
@@ -338,14 +359,14 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                   onClick={() => column.sortable && handleSort(column.key)}
                   scope="col"
                   aria-sort={
-                    sortState.key === column.key 
-                      ? sortState.direction === 'asc' 
-                        ? 'ascending' 
-                        : sortState.direction === 'desc' 
-                          ? 'descending' 
+                    sortState.key === column.key
+                      ? sortState.direction === 'asc'
+                        ? 'ascending'
+                        : sortState.direction === 'desc'
+                          ? 'descending'
                           : 'none'
-                      : column.sortable 
-                        ? 'none' 
+                      : column.sortable
+                        ? 'none'
                         : undefined
                   }
                 >
@@ -355,15 +376,45 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                     </Typography>
                     {column.sortable && <SortIcon columnKey={column.key} />}
                   </div>
-                  
+
                   {column.showPattern && (
                     <div className={styles['header-pattern']}>
                       <svg viewBox="0 0 20 4" fill="none">
-                        <circle cx="2" cy="2" r="1" fill="currentColor" opacity="0.3" />
-                        <circle cx="6" cy="2" r="1" fill="currentColor" opacity="0.3" />
-                        <circle cx="10" cy="2" r="1" fill="currentColor" opacity="0.3" />
-                        <circle cx="14" cy="2" r="1" fill="currentColor" opacity="0.3" />
-                        <circle cx="18" cy="2" r="1" fill="currentColor" opacity="0.3" />
+                        <circle
+                          cx="2"
+                          cy="2"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="6"
+                          cy="2"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="10"
+                          cy="2"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="14"
+                          cy="2"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="18"
+                          cy="2"
+                          r="1"
+                          fill="currentColor"
+                          opacity="0.3"
+                        />
                       </svg>
                     </div>
                   )}
@@ -371,12 +422,12 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
               ))}
             </tr>
           </thead>
-          
+
           <tbody className={styles.tbody}>
             {sortedData.length === 0 ? (
               <tr>
-                <td 
-                  colSpan={columns.length + (selectable ? 1 : 0)} 
+                <td
+                  colSpan={columns.length + (selectable ? 1 : 0)}
                   className={styles['empty-cell']}
                 >
                   <div className={styles['empty-state']}>
@@ -390,7 +441,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
               sortedData.map((record, index) => {
                 const recordKey = rowKey(record, index);
                 const isSelected = actualSelectedKeys.includes(recordKey);
-                
+
                 return (
                   <tr
                     key={recordKey}
@@ -399,19 +450,23 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                     })}
                   >
                     {selectable && (
-                      <td className={clsx(styles.td, styles['selection-column'])}>
+                      <td
+                        className={clsx(styles.td, styles['selection-column'])}
+                      >
                         <label className={styles.checkbox}>
                           <input
                             type="checkbox"
                             checked={isSelected}
-                            onChange={(e) => handleRowSelection(recordKey, e.target.checked)}
+                            onChange={e =>
+                              handleRowSelection(recordKey, e.target.checked)
+                            }
                           />
                           <span className={styles['checkbox-mark']} />
                         </label>
                       </td>
                     )}
-                    
-                    {columns.map((column) => (
+
+                    {columns.map(column => (
                       <td
                         key={column.key}
                         className={clsx(
@@ -421,8 +476,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                       >
                         {column.render
                           ? column.render(record[column.key], record, index)
-                          : record[column.key]
-                        }
+                          : record[column.key]}
                       </td>
                     ))}
                   </tr>
@@ -431,7 +485,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
             )}
           </tbody>
         </table>
-        
+
         {loading && <LoadingSpinner />}
       </div>
     );

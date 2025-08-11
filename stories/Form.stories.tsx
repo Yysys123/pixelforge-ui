@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Form, FormField, FormActions, Button, Input, Checkbox, CheckboxGroup, Radio } from '../packages/react/src';
+import {
+  Form,
+  FormField,
+  FormActions,
+  Button,
+  Input,
+  Checkbox,
+  CheckboxGroup,
+  Radio,
+} from '../packages/react/src';
 
 const meta: Meta<typeof Form> = {
   title: 'Form Components/Form',
@@ -8,7 +17,8 @@ const meta: Meta<typeof Form> = {
     layout: 'padded',
     docs: {
       description: {
-        component: 'A comprehensive form component with brutalist design elements. Provides proper form semantics and styling for all form elements.',
+        component:
+          'A comprehensive form component with brutalist design elements. Provides proper form semantics and styling for all form elements.',
       },
     },
   },
@@ -18,7 +28,7 @@ const meta: Meta<typeof Form> = {
       description: 'Form title',
     },
     description: {
-      control: 'text', 
+      control: 'text',
       description: 'Form description',
     },
     size: {
@@ -62,16 +72,20 @@ export const Default: Story = {
     showPatterns: false,
     loading: false,
   },
-  render: (args) => (
+  render: args => (
     <Form {...args}>
       <FormField label="Full Name" required>
         <Input type="text" placeholder="Enter your full name" required />
       </FormField>
-      
-      <FormField label="Email Address" required helperText="We'll never share your email">
+
+      <FormField
+        label="Email Address"
+        required
+        helperText="We'll never share your email"
+      >
         <Input type="email" placeholder="Enter your email" required />
       </FormField>
-      
+
       <FormField label="Message" required>
         <Input
           as="textarea"
@@ -80,7 +94,7 @@ export const Default: Story = {
           required
         />
       </FormField>
-      
+
       <FormActions>
         <Button variant="outline">Cancel</Button>
         <Button type="submit">Send Message</Button>
@@ -111,16 +125,24 @@ export const WithError: Story = {
     ...Default.args,
     error: 'Please correct the errors below and try again.',
   },
-  render: (args) => (
+  render: args => (
     <Form {...args}>
-      <FormField label="Email Address" required error="Please enter a valid email address">
+      <FormField
+        label="Email Address"
+        required
+        error="Please enter a valid email address"
+      >
         <Input type="email" placeholder="Enter your email" required />
       </FormField>
-      
-      <FormField label="Password" required error="Password must be at least 8 characters">
+
+      <FormField
+        label="Password"
+        required
+        error="Password must be at least 8 characters"
+      >
         <Input type="password" placeholder="Enter your password" required />
       </FormField>
-      
+
       <FormActions>
         <Button type="submit">Submit</Button>
       </FormActions>
@@ -131,7 +153,7 @@ export const WithError: Story = {
 export const WithSuccess: Story = {
   args: {
     ...Default.args,
-    success: 'Form submitted successfully! We\'ll get back to you soon.',
+    success: "Form submitted successfully! We'll get back to you soon.",
   },
   render: Default.render,
 };
@@ -147,7 +169,7 @@ export const Sizes: Story = {
           <Button size="sm">Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Medium Form" size="md">
         <FormField label="Name">
           <Input type="text" placeholder="Medium input" />
@@ -156,7 +178,7 @@ export const Sizes: Story = {
           <Button>Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Large Form" size="lg">
         <FormField label="Name">
           <Input type="text" placeholder="Large input" />
@@ -171,7 +193,13 @@ export const Sizes: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '2rem',
+      }}
+    >
       <Form title="Default Form" variant="default">
         <FormField label="Name">
           <Input type="text" placeholder="Enter name" />
@@ -180,7 +208,7 @@ export const Variants: Story = {
           <Button>Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Primary Form" variant="primary">
         <FormField label="Name">
           <Input type="text" placeholder="Enter name" />
@@ -189,7 +217,7 @@ export const Variants: Story = {
           <Button>Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Secondary Form" variant="secondary">
         <FormField label="Name">
           <Input type="text" placeholder="Enter name" />
@@ -198,7 +226,7 @@ export const Variants: Story = {
           <Button>Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Accent Form" variant="accent">
         <FormField label="Name">
           <Input type="text" placeholder="Enter name" />
@@ -220,25 +248,39 @@ export const CompleteExample: Story = {
       showPatterns={true}
     >
       <FormField label="Personal Information" />
-      
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+
+      <div
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}
+      >
         <FormField label="First Name" required>
           <Input type="text" placeholder="John" required />
         </FormField>
-        
+
         <FormField label="Last Name" required>
           <Input type="text" placeholder="Doe" required />
         </FormField>
       </div>
-      
-      <FormField label="Email Address" required helperText="We'll use this for account verification">
+
+      <FormField
+        label="Email Address"
+        required
+        helperText="We'll use this for account verification"
+      >
         <Input type="email" placeholder="john@example.com" required />
       </FormField>
-      
-      <FormField label="Password" required helperText="Must be at least 8 characters">
-        <Input type="password" placeholder="Create a strong password" required />
+
+      <FormField
+        label="Password"
+        required
+        helperText="Must be at least 8 characters"
+      >
+        <Input
+          type="password"
+          placeholder="Create a strong password"
+          required
+        />
       </FormField>
-      
+
       <CheckboxGroup
         label="Interests"
         helperText="Select all that apply"
@@ -249,7 +291,7 @@ export const CompleteExample: Story = {
           { value: 'testing', label: 'Testing' },
         ]}
       />
-      
+
       <FormField label="Account Type" required>
         <div style={{ display: 'flex', gap: '1rem' }}>
           <Radio name="accountType" value="personal" label="Personal" />
@@ -257,20 +299,18 @@ export const CompleteExample: Story = {
           <Radio name="accountType" value="enterprise" label="Enterprise" />
         </div>
       </FormField>
-      
+
       <FormField>
         <Checkbox
           label="I agree to the Terms of Service and Privacy Policy"
           required
         />
       </FormField>
-      
+
       <FormField>
-        <Checkbox
-          label="Send me updates about new features and releases"
-        />
+        <Checkbox label="Send me updates about new features and releases" />
       </FormField>
-      
+
       <FormActions>
         <Button variant="outline">Cancel</Button>
         <Button type="submit">Create Account</Button>
@@ -291,7 +331,7 @@ export const FormActionsLayout: Story = {
           <Button>Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Horizontal Actions (Center Aligned)">
         <FormField label="Name">
           <Input type="text" placeholder="Enter name" />
@@ -301,7 +341,7 @@ export const FormActionsLayout: Story = {
           <Button>Submit</Button>
         </FormActions>
       </Form>
-      
+
       <Form title="Vertical Actions">
         <FormField label="Name">
           <Input type="text" placeholder="Enter name" />
