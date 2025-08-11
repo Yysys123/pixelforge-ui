@@ -8,7 +8,7 @@ on:
       version:
         description: 'Version to publish (e.g., v0.1.0)'
         required: true
-        default: 'v0.3.9'
+        default: 'v0.4.0'
 
 env:
   NODE_VERSION: '18'
@@ -106,28 +106,34 @@ jobs:
           echo "Publishing @pixelforge-ui/react to npm with OIDC (with token fallback)..."
           npm publish --access public --provenance --registry https://registry.npmjs.org
 
-      # Setup GitHub Package Registry authentication
-      - name: Setup GitHub Package Registry
-        run: |
-          echo "Setting up GitHub Package Registry authentication..."
-          echo "@pixelforge-ui:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+      # Publish to GitHub Package Registry using Node.js setup
+      - name: Setup Node.js for GitHub Package Registry
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@pixelforge-ui'
 
-      # Publish to GitHub Package Registry
       - name: Publish core package to GitHub Package Registry
         working-directory: packages/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Publishing @pixelforge-ui/core to GitHub Package Registry..."
-          npm publish --access public --registry https://npm.pkg.github.com
+          npm publish --access public
 
       - name: Publish icons package to GitHub Package Registry
         working-directory: packages/icons
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Publishing @pixelforge-ui/icons to GitHub Package Registry..."
-          npm publish --access public --registry https://npm.pkg.github.com
+          npm publish --access public
 
       - name: Publish react package to GitHub Package Registry
         working-directory: packages/react
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Publishing @pixelforge-ui/react to GitHub Package Registry..."
-          npm publish --access public --registry https://npm.pkg.github.com
+          npm publish --access public
