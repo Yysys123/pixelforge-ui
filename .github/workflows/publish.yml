@@ -71,6 +71,16 @@ jobs:
           echo "Icons package info:"
           cat packages/icons/package.json | jq '.name, .version'
 
+      # Prepare react package by resolving workspace dependencies
+      - name: Prepare react package for publishing
+        working-directory: packages/react
+        run: |
+          echo "Resolving workspace dependencies for react package..."
+          # Replace workspace dependency with current version
+          CORE_VERSION=$(jq -r '.version' ../core/package.json)
+          jq ".dependencies[\"@pixelforge-ui/core\"] = \"^$CORE_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
+          echo "Updated @pixelforge-ui/core dependency to ^$CORE_VERSION"
+
       # Publish to npm using OIDC authentication with NPM_TOKEN fallback
       - name: Publish core package to npm
         working-directory: packages/core
