@@ -71,23 +71,29 @@ jobs:
           echo "Icons package info:"
           cat packages/icons/package.json | jq '.name, .version'
 
-      # Publish to npm using OIDC authentication (packages already at correct version)
+      # Publish to npm using OIDC authentication with NPM_TOKEN fallback
       - name: Publish core package to npm
         working-directory: packages/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "Publishing @pixelforge-ui/core to npm with OIDC..."
+          echo "Publishing @pixelforge-ui/core to npm with OIDC (with token fallback)..."
           npm publish --access public --provenance --registry https://registry.npmjs.org
 
       - name: Publish icons package to npm
         working-directory: packages/icons
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "Publishing @pixelforge-ui/icons to npm with OIDC..."
+          echo "Publishing @pixelforge-ui/icons to npm with OIDC (with token fallback)..."
           npm publish --access public --provenance --registry https://registry.npmjs.org
 
       - name: Publish react package to npm
         working-directory: packages/react
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "Publishing @pixelforge-ui/react to npm with OIDC..."
+          echo "Publishing @pixelforge-ui/react to npm with OIDC (with token fallback)..."
           npm publish --access public --provenance --registry https://registry.npmjs.org
 
       # Publish to GitHub Package Registry
