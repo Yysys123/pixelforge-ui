@@ -71,24 +71,36 @@ jobs:
           echo "Icons package info:"
           cat packages/icons/package.json | jq '.name, .version'
 
-      # Publish to npm using OIDC authentication
+      # Publish to npm using OIDC authentication (with NPM_TOKEN fallback)
       - name: Publish core package to npm
         working-directory: packages/core
         run: |
-          echo "Publishing @pixelforge-ui/core to npm with OIDC..."
+          echo "Publishing @pixelforge-ui/core to npm..."
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm publish --access public --provenance --registry https://registry.npmjs.org
+          rm .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish icons package to npm
         working-directory: packages/icons
         run: |
-          echo "Publishing @pixelforge-ui/icons to npm with OIDC..."
+          echo "Publishing @pixelforge-ui/icons to npm..."
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm publish --access public --provenance --registry https://registry.npmjs.org
+          rm .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish react package to npm
         working-directory: packages/react
         run: |
-          echo "Publishing @pixelforge-ui/react to npm with OIDC..."
+          echo "Publishing @pixelforge-ui/react to npm..."
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm publish --access public --provenance --registry https://registry.npmjs.org
+          rm .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # Publish to GitHub Package Registry
       - name: Publish core package to GitHub Package Registry
