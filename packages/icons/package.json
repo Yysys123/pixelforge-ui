@@ -1,7 +1,7 @@
 {
   "name": "@pixelforge-ui/icons",
   "version": "0.4.1",
-  "description": "Bold, brutalist icon set for PixelForge UI with clean stroke designs. See examples: https://mo-sharif.github.io/pixelforge-ui/",
+  "description": "Bold, brutalist icon set for PixelForge UI with clean stroke designs. See examples: https://pixelforge-ui.github.io/pixelforge-ui/",
   "keywords": [
     "icons",
     "react",

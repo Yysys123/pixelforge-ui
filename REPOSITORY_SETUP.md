@@ -44,7 +44,7 @@ After making the repository public, complete these configuration steps:
 **The Storybook deployment workflow is already configured and will:**
 - Build Storybook on every push to main
 - Deploy to GitHub Pages automatically
-- Be available at: `https://mo-sharif.github.io/pixelforge-ui/`
+- Be available at: `https://pixelforge-ui.github.io/pixelforge-ui/`
 
 ### 3. Actions and Secrets
 

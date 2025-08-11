@@ -141,7 +141,7 @@ pixelforge-ui/
 
 ## 📚 Documentation
 
-- **[Storybook](https://mo-sharif.github.io/pixelforge-ui/)** - Interactive component documentation
+- **[Storybook](https://pixelforge-ui.github.io/pixelforge-ui/)** - Interactive component documentation
 - **[Core Package](./packages/core/README.md)** - Design tokens and theming
 - **[React Package](./packages/react/README.md)** - Component library
 - **[Icons Package](./packages/icons/README.md)** - Icon components
