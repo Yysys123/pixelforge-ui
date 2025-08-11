@@ -1,7 +1,24 @@
 {
   "name": "@pixelforge-ui/icons",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Bold, brutalist icon set for PixelForge UI with clean stroke designs. See examples: https://mo-sharif.github.io/pixelforge-ui/",
+  "keywords": [
+    "icons",
+    "react",
+    "ui",
+    "design-system",
+    "brutalist",
+    "pixelforge"
+  ],
+  "homepage": "https://github.com/mo-sharif/pixelforge-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mo-sharif/pixelforge-ui.git",
+    "directory": "packages/icons"
+  },
+  "bugs": {
+    "url": "https://github.com/mo-sharif/pixelforge-ui/issues"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
