@@ -1,5 +1,7 @@
 # @pixelforge-ui/icons
 
+![PixelForge UI Cover](./pixelforge-ui.png)
+
 React icon components for PixelForge UI component library.
 
 ## Installation

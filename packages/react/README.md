@@ -1,5 +1,7 @@
 # @pixelforge-ui/react
 
+![PixelForge UI Cover](./pixelforge-ui.png)
+
 Modern React component library with design tokens, accessibility-first approach, and comprehensive theming support.
 
 ## Installation

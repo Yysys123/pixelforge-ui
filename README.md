@@ -1,5 +1,7 @@
 # PixelForge UI
 
+![PixelForge UI Cover](./pixelforge-ui.png)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react)
 [![CI](https://github.com/mo-sharif/pixelforge-ui/workflows/CI/badge.svg)](https://github.com/mo-sharif/pixelforge-ui/actions)
@@ -20,9 +22,9 @@ PixelForge UI brings together industrial-strength design tokens, brutal aestheti
 
 | Package | Description | Version | Size |
 |---------|-------------|---------|------|
-| [`@pixelforge-ui/core`](./packages/core) | Design tokens, theme provider, and utilities | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/core.svg)](https://www.npmjs.com/package/@pixelforge-ui/core) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge-ui/core) |
-| [`@pixelforge-ui/react`](./packages/react) | React components with brutalist design | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge-ui/react) |
-| [`@pixelforge-ui/icons`](./packages/icons) | Brutalist icon set with React components | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/icons.svg)](https://www.npmjs.com/package/@pixelforge-ui/icons) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge-ui/icons) |
+| [`@pixelforge-ui/core`](./packages/core) | Design tokens, theme provider, and utilities | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/core.svg)](https://www.npmjs.com/package/@pixelforge-ui/core) | [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40pixelforge-ui%2Fcore)](https://bundlephobia.com/package/@pixelforge-ui/core) |
+| [`@pixelforge-ui/react`](./packages/react) | React components with brutalist design | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react) | [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40pixelforge-ui%2Freact)](https://bundlephobia.com/package/@pixelforge-ui/react) |
+| [`@pixelforge-ui/icons`](./packages/icons) | Brutalist icon set with React components | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/icons.svg)](https://www.npmjs.com/package/@pixelforge-ui/icons) | [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40pixelforge-ui%2Ficons)](https://bundlephobia.com/package/@pixelforge-ui/icons) |
 
 ## ⚡ Quick Start
 

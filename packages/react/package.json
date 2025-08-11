@@ -25,7 +25,8 @@
   "module": "dist/index.mjs",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "pixelforge-ui.png"
   ],
   "license": "MIT",
   "bundlesize": [

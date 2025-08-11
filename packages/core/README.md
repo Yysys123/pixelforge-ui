@@ -1,5 +1,7 @@
 # @pixelforge-ui/core
 
+![PixelForge UI Cover](./pixelforge-ui.png)
+
 Design tokens and theming utilities for PixelForge UI component library.
 
 ## Installation
