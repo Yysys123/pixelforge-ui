@@ -13,10 +13,11 @@ on:
 env:
   NODE_VERSION: '18'
 
-# Add permissions for GitHub Package Registry
+# Add permissions for GitHub Package Registry and npm OIDC
 permissions:
   contents: read
   packages: write
+  id-token: write  # Required for npm OIDC authentication
 
 jobs:
   publish:
@@ -70,30 +71,24 @@ jobs:
           echo "Icons package info:"
           cat packages/icons/package.json | jq '.name, .version'
 
-      # Publish to npm
+      # Publish to npm using OIDC authentication
       - name: Publish core package to npm
         working-directory: packages/core
         run: |
-          echo "Publishing @pixelforge-ui/core to npm..."
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          npm publish --access public --registry https://registry.npmjs.org
-          rm .npmrc
+          echo "Publishing @pixelforge-ui/core to npm with OIDC..."
+          npm publish --access public --provenance --registry https://registry.npmjs.org
 
       - name: Publish icons package to npm
         working-directory: packages/icons
         run: |
-          echo "Publishing @pixelforge-ui/icons to npm..."
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          npm publish --access public --registry https://registry.npmjs.org
-          rm .npmrc
+          echo "Publishing @pixelforge-ui/icons to npm with OIDC..."
+          npm publish --access public --provenance --registry https://registry.npmjs.org
 
       - name: Publish react package to npm
         working-directory: packages/react
         run: |
-          echo "Publishing @pixelforge-ui/react to npm..."
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          npm publish --access public --registry https://registry.npmjs.org
-          rm .npmrc
+          echo "Publishing @pixelforge-ui/react to npm with OIDC..."
+          npm publish --access public --provenance --registry https://registry.npmjs.org
 
       # Publish to GitHub Package Registry
       - name: Publish core package to GitHub Package Registry
