@@ -1,6 +1,6 @@
 {
   "name": "@pixelforge-ui/react",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Modern React component library with brutalist design elements, accessibility-first approach, and comprehensive theming support. Live docs: https://mo-sharif.github.io/pixelforge-ui/",
   "keywords": [
     "react",
