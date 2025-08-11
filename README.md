@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react)
-[![CI](https://github.com/mosharif/pixelforge-ui/workflows/CI/badge.svg)](https://github.com/mosharif/pixelforge-ui/actions)
+[![CI](https://github.com/mo-sharif/pixelforge-ui/workflows/CI/badge.svg)](https://github.com/mo-sharif/pixelforge-ui/actions)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 **A bold, unapologetic React component library featuring brutalist design elements, aggressive accessibility, and uncompromising type safety.**
@@ -104,7 +104,7 @@ function App() {
 ### Setup
 ```bash
 # Clone the repository
-git clone https://github.com/mosharif/pixelforge-ui.git
+git clone https://github.com/mo-sharif/pixelforge-ui.git
 cd pixelforge-ui
 
 # Install dependencies

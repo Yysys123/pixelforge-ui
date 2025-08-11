@@ -44,7 +44,7 @@ After making the repository public, complete these configuration steps:
 **The Storybook deployment workflow is already configured and will:**
 - Build Storybook on every push to main
 - Deploy to GitHub Pages automatically
-- Be available at: `https://mosharif.github.io/pixelforge-ui/`
+- Be available at: `https://mo-sharif.github.io/pixelforge-ui/`
 
 ### 3. Actions and Secrets
 
@@ -75,7 +75,7 @@ The README.md contains badges with placeholder URLs. After making the repository
 
 - **License Badge**: ✅ Works (shields.io)
 - **npm Version**: ✅ Works (shields.io + npm)
-- **CI Badge**: Update URL to: `https://github.com/mosharif/pixelforge-ui/workflows/CI/badge.svg`
+- **CI Badge**: Update URL to: `https://github.com/mo-sharif/pixelforge-ui/workflows/CI/badge.svg`
 - **TypeScript Badge**: ✅ Works (shields.io)
 
 ## 🌐 External Integrations
