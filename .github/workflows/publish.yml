@@ -71,6 +71,31 @@ jobs:
           echo "Icons package info:"
           cat packages/icons/package.json | jq '.name, .version'
 
+      # Update package versions to match input
+      - name: Update package versions
+        run: |
+          VERSION="${{ github.event.inputs.version || github.event.release.tag_name }}"
+          VERSION_NO_V="${VERSION#v}"
+          echo "Updating all packages to version: $VERSION_NO_V"
+          
+          # Update core package version
+          cd packages/core
+          npm version "$VERSION_NO_V" --no-git-tag-version --allow-same-version
+          cd ../..
+          
+          # Update icons package version
+          cd packages/icons
+          npm version "$VERSION_NO_V" --no-git-tag-version --allow-same-version
+          cd ../..
+          
+          # Update react package version
+          cd packages/react
+          npm version "$VERSION_NO_V" --no-git-tag-version --allow-same-version
+          cd ../..
+          
+          # Update root package version
+          npm version "$VERSION_NO_V" --no-git-tag-version --allow-same-version
+
       # Publish to npm using OIDC authentication
       - name: Publish core package to npm
         working-directory: packages/core
