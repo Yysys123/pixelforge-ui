@@ -486,7 +486,7 @@ describe('Modal', () => {
       await user.tab();
       // Verify that focus stays within the modal
       const modal = screen.getByRole('dialog');
-      expect(modal).toContainElement(document.activeElement);
+      expect(modal).toContainElement(document.activeElement as HTMLElement);
       
       // Test that all elements are focusable by directly focusing them
       middleButton.focus();
@@ -500,12 +500,12 @@ describe('Modal', () => {
 
       // Test that focus cycling works - from last to first
       await user.tab();
-      expect(modal).toContainElement(document.activeElement);
+      expect(modal).toContainElement(document.activeElement as HTMLElement);
 
       // Test shift-tab backwards navigation from any element
       lastInput.focus();
       await user.tab({ shift: true });
-      expect(modal).toContainElement(document.activeElement);
+      expect(modal).toContainElement(document.activeElement as HTMLElement);
     });
 
     it('restores focus when modal closes', async () => {
