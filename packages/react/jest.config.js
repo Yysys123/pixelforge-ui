@@ -6,7 +6,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^@pixelforge/core$': '<rootDir>/../core/src/index.ts',
+    '^@pixelforge-ui/core$': '<rootDir>/../core/src/index.ts',
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
