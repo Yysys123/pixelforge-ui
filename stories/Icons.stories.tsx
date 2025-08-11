@@ -15,6 +15,78 @@ import {
   Search,
   Heart,
   Shield,
+  Home,
+  User,
+  Users,
+  Bell,
+  Mail,
+  Calendar,
+  Clock,
+  Image,
+  Video,
+  Music,
+  Download,
+  Upload,
+  File,
+  Folder,
+  FileText,
+  Archive,
+  Phone,
+  MessageCircle,
+  Send,
+  ShoppingCart,
+  CreditCard,
+  DollarSign,
+  Gift,
+  Share,
+  ExternalLink,
+  Link,
+  Copy,
+  Database,
+  Server,
+  Wifi,
+  Monitor,
+  Smartphone,
+  Tablet,
+  Sun,
+  Moon,
+  Cloud,
+  ArrowUp,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  HelpCircle,
+  Loader,
+  Grid,
+  Layout,
+  Columns,
+  Sidebar,
+  ToggleLeft,
+  ToggleRight,
+  Sliders,
+  Play,
+  Pause,
+  Stop,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  VolumeX,
+  Trash2,
+  Edit,
+  Lock,
+  Unlock,
+  Eye,
+  EyeOff,
+  Maximize,
+  Minimize,
+  MoreHorizontal,
+  MoreVertical,
   CloseIcon,
   SuccessIcon,
   WarningIcon,
@@ -89,207 +161,132 @@ export const StarIcon: Story = {
 };
 
 export const AllIcons: Story = {
-  render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-        gap: '2rem',
-        padding: '2rem',
-        background: '#f8f9fa',
-        border: '0.2em solid #000',
-        borderRadius: '0.5em',
-        boxShadow: '0.3em 0.3em 0 #000',
-      }}
-    >
+  render: () => {
+    const iconList = [
+      { icon: Check, name: 'CHECK' },
+      { icon: X, name: 'CLOSE' },
+      { icon: ChevronDown, name: 'CHEVRON DOWN' },
+      { icon: ChevronUp, name: 'CHEVRON UP' },
+      { icon: ChevronLeft, name: 'CHEVRON LEFT' },
+      { icon: ChevronRight, name: 'CHEVRON RIGHT' },
+      { icon: AlertCircle, name: 'ALERT' },
+      { icon: Info, name: 'INFO' },
+      { icon: Star, name: 'STAR' },
+      { icon: Arrow, name: 'ARROW' },
+      { icon: ArrowUp, name: 'ARROW UP' },
+      { icon: ArrowDown, name: 'ARROW DOWN' },
+      { icon: ArrowLeft, name: 'ARROW LEFT' },
+      { icon: ArrowRight, name: 'ARROW RIGHT' },
+      { icon: Plus, name: 'PLUS' },
+      { icon: Minus, name: 'MINUS' },
+      { icon: Menu, name: 'MENU' },
+      { icon: Settings, name: 'SETTINGS' },
+      { icon: Search, name: 'SEARCH' },
+      { icon: Heart, name: 'HEART' },
+      { icon: Shield, name: 'SHIELD' },
+      { icon: Home, name: 'HOME' },
+      { icon: User, name: 'USER' },
+      { icon: Users, name: 'USERS' },
+      { icon: Bell, name: 'BELL' },
+      { icon: Mail, name: 'MAIL' },
+      { icon: Calendar, name: 'CALENDAR' },
+      { icon: Clock, name: 'CLOCK' },
+      { icon: Image, name: 'IMAGE' },
+      { icon: Video, name: 'VIDEO' },
+      { icon: Music, name: 'MUSIC' },
+      { icon: Download, name: 'DOWNLOAD' },
+      { icon: Upload, name: 'UPLOAD' },
+      { icon: File, name: 'FILE' },
+      { icon: Folder, name: 'FOLDER' },
+      { icon: FileText, name: 'FILE TEXT' },
+      { icon: Archive, name: 'ARCHIVE' },
+      { icon: Phone, name: 'PHONE' },
+      { icon: MessageCircle, name: 'MESSAGE' },
+      { icon: Send, name: 'SEND' },
+      { icon: ShoppingCart, name: 'CART' },
+      { icon: CreditCard, name: 'CREDIT CARD' },
+      { icon: DollarSign, name: 'DOLLAR' },
+      { icon: Gift, name: 'GIFT' },
+      { icon: Share, name: 'SHARE' },
+      { icon: ExternalLink, name: 'EXTERNAL LINK' },
+      { icon: Link, name: 'LINK' },
+      { icon: Copy, name: 'COPY' },
+      { icon: Database, name: 'DATABASE' },
+      { icon: Server, name: 'SERVER' },
+      { icon: Wifi, name: 'WIFI' },
+      { icon: Monitor, name: 'MONITOR' },
+      { icon: Smartphone, name: 'SMARTPHONE' },
+      { icon: Tablet, name: 'TABLET' },
+      { icon: Sun, name: 'SUN' },
+      { icon: Moon, name: 'MOON' },
+      { icon: Cloud, name: 'CLOUD' },
+      { icon: CheckCircle, name: 'CHECK CIRCLE' },
+      { icon: XCircle, name: 'X CIRCLE' },
+      { icon: AlertTriangle, name: 'ALERT TRIANGLE' },
+      { icon: HelpCircle, name: 'HELP' },
+      { icon: Loader, name: 'LOADER' },
+      { icon: Grid, name: 'GRID' },
+      { icon: Layout, name: 'LAYOUT' },
+      { icon: Columns, name: 'COLUMNS' },
+      { icon: Sidebar, name: 'SIDEBAR' },
+      { icon: ToggleLeft, name: 'TOGGLE LEFT' },
+      { icon: ToggleRight, name: 'TOGGLE RIGHT' },
+      { icon: Sliders, name: 'SLIDERS' },
+      { icon: Play, name: 'PLAY' },
+      { icon: Pause, name: 'PAUSE' },
+      { icon: Stop, name: 'STOP' },
+      { icon: SkipBack, name: 'SKIP BACK' },
+      { icon: SkipForward, name: 'SKIP FORWARD' },
+      { icon: Volume2, name: 'VOLUME' },
+      { icon: VolumeX, name: 'MUTE' },
+      { icon: Trash2, name: 'TRASH' },
+      { icon: Edit, name: 'EDIT' },
+      { icon: Lock, name: 'LOCK' },
+      { icon: Unlock, name: 'UNLOCK' },
+      { icon: Eye, name: 'EYE' },
+      { icon: EyeOff, name: 'EYE OFF' },
+      { icon: Maximize, name: 'MAXIMIZE' },
+      { icon: Minimize, name: 'MINIMIZE' },
+      { icon: MoreHorizontal, name: 'MORE HORIZONTAL' },
+      { icon: MoreVertical, name: 'MORE VERTICAL' },
+    ];
+
+    return (
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gap: '1.5rem',
+          padding: '2rem',
+          background: '#f8f9fa',
+          border: '0.2em solid #000',
+          borderRadius: '0.5em',
+          boxShadow: '0.3em 0.3em 0 #000',
         }}
       >
-        <Check size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          CHECK
-        </Typography>
+        {iconList.map(({ icon: IconComponent, name }) => (
+          <div
+            key={name}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '0.75rem',
+            }}
+          >
+            <IconComponent size={32} />
+            <Typography variant="caption" weight="bold" align="center">
+              {name}
+            </Typography>
+          </div>
+        ))}
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <X size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          CLOSE
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <ChevronDown size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          CHEVRON
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <AlertCircle size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          ALERT
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Info size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          INFO
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Star size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          STAR
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Arrow size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          ARROW
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Plus size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          PLUS
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Minus size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          MINUS
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Menu size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          MENU
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Settings size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          SETTINGS
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Search size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          SEARCH
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Heart size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          HEART
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.75rem',
-        }}
-      >
-        <Shield size={36} />
-        <Typography variant="caption" weight="bold" align="center">
-          SHIELD
-        </Typography>
-      </div>
-    </div>
-  ),
+    );
+  },
   parameters: {
     docs: {
       description: {
-        story: 'All available icons in the PixelForge UI icon set.',
+        story: 'All available icons in the PixelForge UI icon set. Over 80 carefully crafted icons covering navigation, media, communication, files, and more.',
       },
     },
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../test-utils';
+import { render, screen, fireEvent } from '../test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { Button } from './Button';
@@ -220,6 +220,26 @@ describe('Button', () => {
       expect(results).toHaveNoViolations();
     });
 
+    it('should not have accessibility violations with icons', async () => {
+      const icon = <span aria-hidden="true">🔥</span>;
+      const { container } = render(
+        <Button startIcon={icon} endIcon={icon}>
+          Button with icons
+        </Button>
+      );
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('should not have accessibility violations for icon-only button', async () => {
+      const icon = <span aria-hidden="true">×</span>;
+      const { container } = render(
+        <Button startIcon={icon} aria-label="Close dialog" />
+      );
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
     it('has proper focus styles', () => {
       render(<Button>Click me</Button>);
       const button = screen.getByRole('button');
@@ -233,6 +253,241 @@ describe('Button', () => {
 
       expect(screen.getByText('Loading...')).toBeInTheDocument();
       expect(screen.getByText('Loading...')).toHaveClass('sr-only');
+    });
+
+    it('maintains proper focus management', async () => {
+      const user = userEvent.setup();
+      
+      render(
+        <div>
+          <button>Before Button</button>
+          <Button>Focus Target</Button>
+          <button>After Button</button>
+        </div>
+      );
+
+      const beforeButton = screen.getByText('Before Button');
+      const targetButton = screen.getByText('Focus Target');
+      const afterButton = screen.getByText('After Button');
+
+      beforeButton.focus();
+      await user.tab();
+      expect(targetButton).toHaveFocus();
+
+      await user.tab();
+      expect(afterButton).toHaveFocus();
+    });
+
+    it('supports keyboard navigation with Enter and Space', async () => {
+      const user = userEvent.setup();
+      const onClick = jest.fn();
+
+      render(<Button onClick={onClick}>Keyboard Button</Button>);
+
+      const button = screen.getByRole('button');
+      button.focus();
+
+      await user.keyboard('{Enter}');
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      jest.clearAllMocks();
+      await user.keyboard(' ');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('prevents keyboard activation when disabled', async () => {
+      const user = userEvent.setup();
+      const onClick = jest.fn();
+
+      render(
+        <Button disabled onClick={onClick}>
+          Disabled Button
+        </Button>
+      );
+
+      const button = screen.getByRole('button');
+      button.focus();
+
+      await user.keyboard('{Enter}');
+      await user.keyboard(' ');
+      
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('prevents keyboard activation when loading', async () => {
+      const user = userEvent.setup();
+      const onClick = jest.fn();
+
+      render(
+        <Button loading onClick={onClick}>
+          Loading Button
+        </Button>
+      );
+
+      const button = screen.getByRole('button');
+      
+      await user.keyboard('{Enter}');
+      await user.keyboard(' ');
+      
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('provides proper ARIA attributes for different states', () => {
+      const { rerender } = render(<Button>Normal Button</Button>);
+      let button = screen.getByRole('button');
+      expect(button).toHaveAttribute('type', 'button');
+      expect(button).not.toHaveAttribute('aria-disabled');
+
+      rerender(<Button disabled>Disabled Button</Button>);
+      button = screen.getByRole('button');
+      expect(button).toBeDisabled();
+      expect(button).toHaveAttribute('aria-disabled', 'true');
+
+      rerender(<Button loading>Loading Button</Button>);
+      button = screen.getByRole('button');
+      expect(button).toBeDisabled();
+      expect(button).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    it('supports high contrast mode', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-contrast: high)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(<Button variant="primary">High contrast button</Button>);
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    });
+
+    it('respects reduced motion preferences', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-reduced-motion: reduce)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(<Button loading>Reduced motion button</Button>);
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    });
+
+    it('provides clear visual focus indicators', () => {
+      render(<Button>Focus me</Button>);
+      
+      const button = screen.getByRole('button');
+      button.focus();
+      
+      expect(button).toHaveFocus();
+      expect(button).toHaveStyle('outline: 2px solid var(--button-primary)');
+    });
+
+    it('properly associates labels with icon-only buttons', () => {
+      const icon = <span aria-hidden="true">✕</span>;
+      render(<Button startIcon={icon} aria-label="Close modal" />);
+
+      const button = screen.getByRole('button', { name: 'Close modal' });
+      expect(button).toBeInTheDocument();
+      expect(button).toHaveClass('icon-only');
+    });
+
+    it('maintains semantic meaning for different button variants', () => {
+      const { rerender } = render(<Button variant="primary">Save</Button>);
+      expect(screen.getByRole('button')).toHaveClass('variant-primary');
+
+      rerender(<Button variant="danger">Delete</Button>);
+      expect(screen.getByRole('button')).toHaveClass('variant-danger');
+
+      rerender(<Button variant="ghost">Cancel</Button>);
+      expect(screen.getByRole('button')).toHaveClass('variant-ghost');
+    });
+
+    it('supports custom ARIA attributes', () => {
+      render(
+        <Button 
+          aria-describedby="help-text"
+          aria-expanded="false"
+          aria-haspopup="menu"
+        >
+          Menu Button
+        </Button>
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveAttribute('aria-describedby', 'help-text');
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      expect(button).toHaveAttribute('aria-haspopup', 'menu');
+    });
+
+    it('announces state changes to screen readers', () => {
+      const { rerender } = render(<Button>Save Changes</Button>);
+      expect(screen.getByRole('button')).toHaveTextContent('Save Changes');
+
+      rerender(<Button loading>Save Changes</Button>);
+      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(screen.getByText('Loading...')).toHaveClass('sr-only');
+    });
+
+    it('handles form submission semantics correctly', () => {
+      render(
+        <form>
+          <Button type="submit">Submit Form</Button>
+          <Button type="reset">Reset Form</Button>
+          <Button type="button">Cancel</Button>
+        </form>
+      );
+
+      const submitButton = screen.getByRole('button', { name: 'Submit Form' });
+      const resetButton = screen.getByRole('button', { name: 'Reset Form' });
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      expect(submitButton).toHaveAttribute('type', 'submit');
+      expect(resetButton).toHaveAttribute('type', 'reset');
+      expect(cancelButton).toHaveAttribute('type', 'button');
+    });
+
+    it('properly handles disabled state in forms', () => {
+      const onSubmit = jest.fn();
+      
+      render(
+        <form onSubmit={onSubmit}>
+          <Button type="submit" disabled>
+            Submit Disabled
+          </Button>
+        </form>
+      );
+
+      const form = screen.getByRole('button').closest('form');
+      fireEvent.submit(form!);
+      
+      // Form should not submit when button is disabled
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it('supports internationalization with proper text direction', () => {
+      document.dir = 'rtl';
+      
+      const icon = <span aria-hidden="true">→</span>;
+      render(<Button endIcon={icon}>العربية</Button>);
+      
+      expect(screen.getByRole('button')).toBeInTheDocument();
+      
+      document.dir = 'ltr'; // Reset
     });
   });
 

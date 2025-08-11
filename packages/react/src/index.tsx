@@ -22,3 +22,7 @@ export * from './card';
 export * from './modal';
 export * from './badge';
 export * from './alert';
+export * from './table';
+export * from './tabs';
+export * from './checkbox';
+export * from './radio';

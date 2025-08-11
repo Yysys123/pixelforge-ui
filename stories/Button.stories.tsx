@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 import { Button } from '../packages/react/src/button/Button';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Forms/Button',
   component: Button,
   parameters: {
     layout: 'centered',

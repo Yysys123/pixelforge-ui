@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../test-utils';
+import { render, screen, fireEvent } from '../test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { Badge } from './Badge';
@@ -361,6 +361,230 @@ describe('Badge', () => {
       const { container } = render(<Badge dot />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
+    });
+
+    it('should not have accessibility violations with icon badge', async () => {
+      const icon = <span aria-hidden="true">★</span>;
+      const { container } = render(<Badge icon={icon}>Premium</Badge>);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('provides proper semantic meaning for count badges', () => {
+      render(<Badge count={5} aria-label="5 unread messages" />);
+      const badge = screen.getByLabelText('5 unread messages');
+      expect(badge).toBeInTheDocument();
+      expect(badge).toHaveTextContent('5');
+    });
+
+    it('provides proper semantic meaning for status badges', () => {
+      render(
+        <Badge variant="success" aria-label="Online status">
+          Online
+        </Badge>
+      );
+      const badge = screen.getByLabelText('Online status');
+      expect(badge).toBeInTheDocument();
+      expect(badge).toHaveTextContent('Online');
+    });
+
+    it('maintains focus management for interactive badges', async () => {
+      const user = userEvent.setup();
+      
+      render(
+        <div>
+          <button>Before Badge</button>
+          <Badge interactive aria-label="Notification">5</Badge>
+          <button>After Badge</button>
+        </div>
+      );
+
+      const beforeButton = screen.getByText('Before Badge');
+      const badge = screen.getByRole('button', { name: 'Notification' });
+      const afterButton = screen.getByText('After Badge');
+
+      beforeButton.focus();
+      await user.tab();
+      expect(badge).toHaveFocus();
+
+      await user.tab();
+      expect(afterButton).toHaveFocus();
+    });
+
+    it('supports keyboard navigation for interactive badges', async () => {
+      const user = userEvent.setup();
+      const onClick = jest.fn();
+
+      render(
+        <Badge interactive onClick={onClick} aria-label="Delete item">
+          ×
+        </Badge>
+      );
+
+      const badge = screen.getByRole('button', { name: 'Delete item' });
+      badge.focus();
+
+      await user.keyboard('{Enter}');
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      jest.clearAllMocks();
+      await user.keyboard(' ');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('provides proper ARIA attributes for interactive badges', () => {
+      render(
+        <Badge interactive aria-label="Remove filter" aria-describedby="filter-help">
+          Active
+        </Badge>
+      );
+
+      const badge = screen.getByRole('button');
+      expect(badge).toHaveAttribute('aria-label', 'Remove filter');
+      expect(badge).toHaveAttribute('aria-describedby', 'filter-help');
+      expect(badge).toHaveAttribute('tabIndex', '0');
+    });
+
+    it('handles high contrast mode preferences', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-contrast: high)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(<Badge variant="primary">High contrast badge</Badge>);
+      expect(screen.getByText('High contrast badge')).toBeInTheDocument();
+    });
+
+    it('respects reduced motion preferences', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-reduced-motion: reduce)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(<Badge interactive rotation={15}>Reduced motion badge</Badge>);
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    });
+
+    it('provides clear visual focus indicators', () => {
+      render(<Badge interactive>Focus me</Badge>);
+      
+      const badge = screen.getByRole('button');
+      badge.focus();
+      
+      expect(badge).toHaveFocus();
+      expect(badge).toHaveStyle('outline: 2px solid var(--badge-primary)');
+    });
+
+    it('properly announces count changes to screen readers', () => {
+      const { rerender } = render(<Badge count={1} aria-label="1 notification" />);
+      expect(screen.getByLabelText('1 notification')).toBeInTheDocument();
+
+      rerender(<Badge count={5} aria-label="5 notifications" />);
+      expect(screen.getByLabelText('5 notifications')).toBeInTheDocument();
+      expect(screen.queryByLabelText('1 notification')).not.toBeInTheDocument();
+    });
+
+    it('handles dot badges with proper ARIA attributes', () => {
+      render(
+        <Badge 
+          dot 
+          variant="success" 
+          aria-label="Online status indicator"
+          role="status"
+        />
+      );
+
+      const badge = screen.getByRole('status');
+      expect(badge).toHaveAttribute('aria-label', 'Online status indicator');
+      expect(badge).toHaveClass('dot');
+    });
+
+    it('supports screen reader announcements for status changes', () => {
+      const { rerender } = render(
+        <Badge variant="danger" aria-label="Offline">
+          Offline
+        </Badge>
+      );
+      expect(screen.getByLabelText('Offline')).toBeInTheDocument();
+
+      rerender(
+        <Badge variant="success" aria-label="Online">
+          Online
+        </Badge>
+      );
+      expect(screen.getByLabelText('Online')).toBeInTheDocument();
+    });
+
+    it('maintains semantic structure with icons', () => {
+      const icon = <span aria-hidden="true" role="img">🔔</span>;
+      render(
+        <Badge icon={icon} aria-label="Notification with bell icon">
+          New
+        </Badge>
+      );
+
+      const badge = screen.getByLabelText('Notification with bell icon');
+      expect(badge).toBeInTheDocument();
+      expect(badge).toContainElement(screen.getByRole('img'));
+    });
+
+    it('provides proper context for overlay badges', () => {
+      render(
+        <div>
+          <div id="message-icon" aria-label="Messages">📧</div>
+          <Badge 
+            count={3} 
+            overlay 
+            aria-describedby="message-icon"
+            aria-label="3 unread messages"
+          />
+        </div>
+      );
+
+      const badge = screen.getByLabelText('3 unread messages');
+      expect(badge).toHaveAttribute('aria-describedby', 'message-icon');
+    });
+
+    it('handles empty states accessibly', () => {
+      const { container } = render(<Badge count={0} />);
+      expect(container.firstChild).toBeNull();
+      
+      // Should not create inaccessible empty elements
+      expect(container.querySelector('[role]')).not.toBeInTheDocument();
+    });
+
+    it('supports internationalization with proper text direction', () => {
+      document.dir = 'rtl';
+      
+      render(<Badge count={123}>العربية</Badge>);
+      expect(screen.getByText('123')).toBeInTheDocument();
+      
+      document.dir = 'ltr'; // Reset
+    });
+
+    it('announces max count overflow appropriately', () => {
+      render(<Badge count={150} max={99} aria-label="99+ notifications" />);
+      
+      const badge = screen.getByLabelText('99+ notifications');
+      expect(badge).toHaveTextContent('99+');
     });
   });
 

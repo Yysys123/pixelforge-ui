@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, screen, act } from '../test-utils';
+import { render, screen, act, waitFor, fireEvent } from '../test-utils';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 import { Alert } from './Alert';
 
 // Mock timers for auto-hide functionality
@@ -389,6 +390,29 @@ describe('Alert', () => {
   });
 
   describe('Accessibility', () => {
+    it('has no accessibility violations', async () => {
+      const { container } = render(<Alert>Test alert message</Alert>);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('has no accessibility violations with dismissible alert', async () => {
+      const { container } = render(<Alert dismissible>Test alert message</Alert>);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('has no accessibility violations with title and actions', async () => {
+      const actions = <button>Action</button>;
+      const { container } = render(
+        <Alert title="Alert Title" actions={actions} dismissible>
+          Test alert message
+        </Alert>
+      );
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
     it('dismiss button has proper accessibility attributes', () => {
       render(<Alert dismissible>Test</Alert>);
 
@@ -402,6 +426,185 @@ describe('Alert', () => {
     it('has alert role by default', () => {
       render(<Alert>Test message</Alert>);
       expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
+
+    it('supports custom role for different alert types', () => {
+      render(<Alert role="status">Status message</Alert>);
+      expect(screen.getByRole('status')).toBeInTheDocument();
+    });
+
+    it('announces variant-specific semantics to screen readers', () => {
+      const { rerender } = render(<Alert variant="success">Success message</Alert>);
+      expect(screen.getByRole('alert')).toHaveClass('variant-success');
+
+      rerender(<Alert variant="danger">Error message</Alert>);
+      expect(screen.getByRole('alert')).toHaveClass('variant-danger');
+
+      rerender(<Alert variant="warning">Warning message</Alert>);
+      expect(screen.getByRole('alert')).toHaveClass('variant-warning');
+    });
+
+    it('maintains focus management when dismissible', async () => {
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+      
+      render(
+        <div>
+          <button>Before Alert</button>
+          <Alert dismissible>Test alert</Alert>
+          <button>After Alert</button>
+        </div>
+      );
+
+      const beforeButton = screen.getByText('Before Alert');
+      const dismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+      const afterButton = screen.getByText('After Alert');
+
+      beforeButton.focus();
+      await user.tab();
+      expect(dismissButton).toHaveFocus();
+
+      await user.tab();
+      expect(afterButton).toHaveFocus();
+    });
+
+    it('provides keyboard navigation for dismiss button', async () => {
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+      const onDismiss = jest.fn();
+
+      render(<Alert dismissible onDismiss={onDismiss}>Test alert</Alert>);
+
+      const dismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+      dismissButton.focus();
+
+      await user.keyboard('{Enter}');
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+
+      jest.clearAllMocks();
+      
+      render(<Alert dismissible onDismiss={onDismiss}>Test alert</Alert>);
+      const newDismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+      newDismissButton.focus();
+
+      await user.keyboard(' ');
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+    });
+
+    it('supports high contrast mode', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-contrast: high)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(<Alert variant="warning">High contrast alert</Alert>);
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
+
+    it('respects reduced motion preferences', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-reduced-motion: reduce)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(<Alert dismissible>Reduced motion alert</Alert>);
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
+
+    it('properly associates title with content for screen readers', () => {
+      render(
+        <Alert title="Error Occurred" variant="danger">
+          Please check your input and try again.
+        </Alert>
+      );
+
+      const alert = screen.getByRole('alert');
+      const title = screen.getByText('Error Occurred');
+      const content = screen.getByText('Please check your input and try again.');
+
+      expect(alert).toContainElement(title);
+      expect(alert).toContainElement(content);
+    });
+
+    it('maintains semantic structure for complex alerts', () => {
+      const actions = (
+        <div>
+          <button>Retry</button>
+          <button>Cancel</button>
+        </div>
+      );
+
+      render(
+        <Alert 
+          title="Connection Failed" 
+          variant="danger" 
+          dismissible 
+          actions={actions}
+        >
+          Unable to connect to the server. Please check your internet connection.
+        </Alert>
+      );
+
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Dismiss alert' })).toBeInTheDocument();
+    });
+
+    it('handles focus when alert auto-dismisses', async () => {
+      const onDismiss = jest.fn();
+      
+      render(
+        <div>
+          <button>Focus Target</button>
+          <Alert autoHideDuration={100} onDismiss={onDismiss}>
+            Auto-dismiss alert
+          </Alert>
+        </div>
+      );
+
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+
+      act(() => {
+        jest.advanceTimersByTime(100);
+      });
+
+      expect(onDismiss).toHaveBeenCalled();
+    });
+
+    it('provides clear visual focus indicators', () => {
+      render(<Alert dismissible>Test alert</Alert>);
+      
+      const dismissButton = screen.getByRole('button', { name: 'Dismiss alert' });
+      dismissButton.focus();
+      
+      expect(dismissButton).toHaveFocus();
+      expect(dismissButton).toHaveStyle('outline: 2px solid var(--alert-primary)');
+    });
+
+    it('announces alert content changes to screen readers', async () => {
+      const { rerender } = render(<Alert>Initial message</Alert>);
+      expect(screen.getByText('Initial message')).toBeInTheDocument();
+
+      rerender(<Alert>Updated message</Alert>);
+      expect(screen.getByText('Updated message')).toBeInTheDocument();
+      expect(screen.queryByText('Initial message')).not.toBeInTheDocument();
     });
   });
 

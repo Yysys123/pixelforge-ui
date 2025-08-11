@@ -4,7 +4,7 @@ import { Input } from '../packages/react/src/input/Input';
 import { Typography } from '../packages/react/src/typography/Typography';
 
 const meta = {
-  title: 'Components/Input',
+  title: 'Forms/Input',
   component: Input,
   parameters: {
     layout: 'centered',

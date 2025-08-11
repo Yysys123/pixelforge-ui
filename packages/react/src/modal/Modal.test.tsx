@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../test-utils';
+import { render, screen, fireEvent, waitFor } from '../test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { Modal } from './Modal';
@@ -404,6 +404,282 @@ describe('Modal', () => {
       const closeButton = screen.getByRole('button', { name: 'Close modal' });
       expect(closeButton).toHaveAttribute('type', 'button');
       expect(closeButton).toHaveAttribute('aria-label', 'Close modal');
+    });
+
+    it('should not have accessibility violations for different sizes', async () => {
+      const sizes = ['sm', 'md', 'lg', 'xl', 'fullscreen'] as const;
+      
+      for (const size of sizes) {
+        const { container, unmount } = render(
+          <Modal {...defaultProps} size={size} title="Size Test Modal">
+            <p>Testing {size} size accessibility</p>
+          </Modal>
+        );
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+        unmount();
+      }
+    });
+
+    it('manages focus correctly when modal opens', async () => {
+      const { rerender } = render(
+        <div>
+          <button>Outside Button</button>
+          <Modal {...defaultProps} open={false} title="Focus Test">
+            <input placeholder="First input" />
+            <button>Modal Button</button>
+            <input placeholder="Last input" />
+          </Modal>
+        </div>
+      );
+
+      const outsideButton = screen.getByText('Outside Button');
+      outsideButton.focus();
+      expect(outsideButton).toHaveFocus();
+
+      // Open modal
+      rerender(
+        <div>
+          <button>Outside Button</button>
+          <Modal {...defaultProps} open={true} title="Focus Test">
+            <input placeholder="First input" />
+            <button>Modal Button</button>
+            <input placeholder="Last input" />
+          </Modal>
+        </div>
+      );
+
+      // Focus should move to modal
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toHaveFocus();
+      });
+    });
+
+    it('traps focus within modal', async () => {
+      const user = userEvent.setup();
+      
+      render(
+        <Modal {...defaultProps} title="Focus Trap Test">
+          <input data-testid="first-input" placeholder="First input" />
+          <button data-testid="middle-button">Middle Button</button>
+          <input data-testid="last-input" placeholder="Last input" />
+        </Modal>
+      );
+
+      const firstInput = screen.getByTestId('first-input');
+      const middleButton = screen.getByTestId('middle-button');
+      const lastInput = screen.getByTestId('last-input');
+      const closeButton = screen.getByRole('button', { name: 'Close modal' });
+
+      // Start at first focusable element
+      firstInput.focus();
+      expect(firstInput).toHaveFocus();
+
+      // Tab through focusable elements
+      await user.tab();
+      expect(middleButton).toHaveFocus();
+
+      await user.tab();
+      expect(lastInput).toHaveFocus();
+
+      await user.tab();
+      expect(closeButton).toHaveFocus();
+
+      // Tab should cycle back to first element
+      await user.tab();
+      expect(firstInput).toHaveFocus();
+
+      // Shift+Tab should go backwards
+      await user.tab({ shift: true });
+      expect(closeButton).toHaveFocus();
+    });
+
+    it('restores focus when modal closes', async () => {
+      const user = userEvent.setup();
+      
+      const TestComponent = () => {
+        const [open, setOpen] = React.useState(false);
+        return (
+          <div>
+            <button onClick={() => setOpen(true)}>Open Modal</button>
+            <Modal open={open} onClose={() => setOpen(false)} title="Focus Restore Test">
+              <p>Modal content</p>
+            </Modal>
+          </div>
+        );
+      };
+
+      render(<TestComponent />);
+
+      const openButton = screen.getByText('Open Modal');
+      
+      // Click to open modal
+      await user.click(openButton);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      // Close modal
+      const closeButton = screen.getByRole('button', { name: 'Close modal' });
+      await user.click(closeButton);
+
+      // Focus should return to trigger button
+      await waitFor(() => {
+        expect(openButton).toHaveFocus();
+      });
+    });
+
+    it('supports keyboard navigation for closing', async () => {
+      const user = userEvent.setup();
+      const onClose = jest.fn();
+
+      render(
+        <Modal {...defaultProps} onClose={onClose} title="Keyboard Test">
+          <p>Press Escape to close</p>
+        </Modal>
+      );
+
+      await user.keyboard('{Escape}');
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('prevents body scroll when modal is open', () => {
+      const { rerender } = render(
+        <Modal {...defaultProps} open={false}>
+          Modal content
+        </Modal>
+      );
+
+      // Body should have normal overflow
+      expect(document.body.style.overflow).toBe('');
+
+      rerender(
+        <Modal {...defaultProps} open={true}>
+          Modal content
+        </Modal>
+      );
+
+      // Body overflow should be hidden when modal opens
+      expect(document.body.style.overflow).toBe('hidden');
+
+      rerender(
+        <Modal {...defaultProps} open={false}>
+          Modal content
+        </Modal>
+      );
+
+      // Body overflow should be restored when modal closes
+      expect(document.body.style.overflow).toBe('');
+    });
+
+    it('provides proper ARIA attributes for different modal types', () => {
+      const { rerender } = render(
+        <Modal {...defaultProps} title="Alert Modal" role="alertdialog">
+          <p>This is an important message</p>
+        </Modal>
+      );
+
+      let modal = screen.getByRole('alertdialog');
+      expect(modal).toHaveAttribute('aria-modal', 'true');
+      expect(modal).toHaveAttribute('aria-labelledby', 'modal-title');
+
+      rerender(
+        <Modal {...defaultProps} title="Regular Modal">
+          <p>This is a regular modal</p>
+        </Modal>
+      );
+
+      modal = screen.getByRole('dialog');
+      expect(modal).toHaveAttribute('aria-modal', 'true');
+      expect(modal).toHaveAttribute('aria-labelledby', 'modal-title');
+    });
+
+    it('handles high contrast mode preferences', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-contrast: high)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(
+        <Modal {...defaultProps} title="High Contrast Modal">
+          High contrast modal content
+        </Modal>
+      );
+      
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('respects reduced motion preferences', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation(query => ({
+          matches: query === '(prefers-reduced-motion: reduce)',
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      render(
+        <Modal {...defaultProps} title="Reduced Motion Modal">
+          Reduced motion modal content
+        </Modal>
+      );
+      
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('provides proper semantic structure with header, content, and footer', () => {
+      const footer = (
+        <div>
+          <button type="button">Cancel</button>
+          <button type="button">Confirm</button>
+        </div>
+      );
+
+      render(
+        <Modal {...defaultProps} title="Structured Modal" footer={footer}>
+          <p>Main modal content goes here</p>
+        </Modal>
+      );
+
+      const modal = screen.getByRole('dialog');
+      const title = screen.getByRole('heading', { name: 'Structured Modal' });
+      const content = screen.getByText('Main modal content goes here');
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+      const confirmButton = screen.getByRole('button', { name: 'Confirm' });
+
+      expect(modal).toContainElement(title);
+      expect(modal).toContainElement(content);
+      expect(modal).toContainElement(cancelButton);
+      expect(modal).toContainElement(confirmButton);
+    });
+
+    it('supports internationalization with proper text direction', () => {
+      document.dir = 'rtl';
+      
+      render(
+        <Modal {...defaultProps} title="مودال عربي">
+          محتوى المودال باللغة العربية
+        </Modal>
+      );
+
+      const modal = screen.getByRole('dialog');
+      expect(modal).toBeInTheDocument();
+      expect(screen.getByText('مودال عربي')).toBeInTheDocument();
+      
+      document.dir = 'ltr'; // Reset
     });
   });
 

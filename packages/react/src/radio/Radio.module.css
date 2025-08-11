@@ -1,0 +1,293 @@
+/* PixelForge UI - Radio Component */
+.wrapper {
+  --radio-primary: var(--pf-color-primary);
+  --radio-bg: var(--pf-bg);
+  --radio-text: var(--pf-text);
+  --radio-border: var(--pf-text);
+  --radio-shadow: rgba(0, 0, 0, 0.2);
+  --radio-danger: #ef4444; /* Ensure danger color is available */
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-1);
+  font-family: var(--pf-font-base);
+}
+
+/* Size variants */
+.wrapper.size-sm {
+  --radio-size: 16px;
+  --radio-font-size: 0.875rem;
+}
+
+.wrapper.size-md {
+  --radio-size: 20px;
+  --radio-font-size: 1rem;
+}
+
+.wrapper.size-lg {
+  --radio-size: 24px;
+  --radio-font-size: 1.125rem;
+}
+
+/* Color variants */
+.wrapper.variant-default {
+  --radio-primary: #3b82f6; /* Blue */
+}
+
+.wrapper.variant-primary {
+  --radio-primary: #8b5cf6; /* Purple */
+}
+
+.wrapper.variant-secondary {
+  --radio-primary: #22c55e; /* Green */
+}
+
+.wrapper.variant-accent {
+  --radio-primary: #f59e0b; /* Orange/Amber */
+}
+
+/* Radio container */
+.radio-container {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pf-spacing-2);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  line-height: 1.5;
+}
+
+.wrapper.disabled .radio-container {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Hidden input */
+.radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Custom radio mark */
+.radio-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  min-width: var(--radio-size);
+  border: 3px solid var(--radio-border);
+  border-radius: 50%;
+  background: var(--radio-bg);
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    3px 3px 0 var(--radio-shadow),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  margin-top: 2px; /* Align with text baseline */
+}
+
+/* Hover state */
+.radio-container:hover .radio-mark {
+  transform: translateY(-1px);
+  box-shadow: 
+    4px 5px 0 var(--radio-shadow),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-color: var(--radio-primary);
+}
+
+/* Focus state */
+.radio:focus-visible + .radio-mark {
+  outline: 2px solid var(--radio-primary);
+  outline-offset: 2px;
+  transform: translateY(-1px);
+}
+
+/* Checked state - filled with variant color */
+.radio:checked + .radio-mark {
+  background: var(--radio-primary);
+  border-color: var(--radio-primary);
+  transform: rotate(3deg) translateY(-1px);
+  box-shadow: 
+    4px 5px 0 var(--radio-shadow),
+    inset 0 0 0 3px var(--radio-bg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.radio:checked + .radio-mark::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--radio-size) * 0.4);
+  height: calc(var(--radio-size) * 0.4);
+  border-radius: 50%;
+  background: var(--radio-primary);
+  box-shadow: 
+    0 0 0 2px var(--radio-bg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Active/pressed state */
+.radio-container:active .radio-mark {
+  transform: translateY(1px) scale(0.95);
+  box-shadow: 
+    2px 2px 0 var(--radio-shadow),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.radio-container:active .radio:checked + .radio-mark {
+  transform: rotate(1deg) translateY(1px) scale(0.95);
+  box-shadow: 
+    2px 2px 0 var(--radio-shadow),
+    inset 0 0 0 3px var(--radio-bg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Label styles */
+.label {
+  color: var(--radio-text);
+  font-size: var(--radio-font-size);
+  margin: 0;
+  flex: 1;
+}
+
+.label.disabled {
+  color: rgba(var(--pf-text-rgb), 0.5);
+}
+
+.required-mark {
+  color: var(--pf-color-danger);
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+/* Error state */
+.wrapper.error .radio-mark {
+  border-color: var(--radio-danger);
+}
+
+.wrapper.error .radio:checked + .radio-mark {
+  background: var(--radio-danger);
+  border-color: var(--radio-danger);
+}
+
+.error-message {
+  color: var(--radio-danger);
+  margin-top: var(--pf-spacing-1);
+  font-weight: 600;
+}
+
+/* Helper text */
+.helper-text {
+  color: var(--pf-color-muted);
+  margin-top: var(--pf-spacing-1);
+}
+
+/* Disabled state */
+.wrapper.disabled .radio-mark {
+  background: var(--pf-surface);
+  border-color: var(--pf-border);
+  box-shadow: 
+    2px 2px 0 rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.wrapper.disabled .radio:checked + .radio-mark {
+  background: var(--pf-border);
+  border-color: var(--pf-border);
+}
+
+.wrapper.disabled .radio:checked + .radio-mark::after {
+  background: var(--pf-text-muted);
+  opacity: 0.7;
+}
+
+/* Radio Group Styles */
+.radio-group {
+  border: 2px solid var(--pf-border);
+  border-radius: var(--pf-radius-md);
+  padding: var(--pf-spacing-3);
+  background: var(--pf-bg);
+  font-family: var(--pf-font-base);
+}
+
+.radio-group.error {
+  border-color: var(--radio-danger);
+}
+
+.group-legend {
+  margin-bottom: var(--pf-spacing-3);
+  padding: 0;
+  border: none;
+  color: var(--pf-text);
+}
+
+.radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-3);
+}
+
+.radio-group.direction-horizontal .radio-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--pf-spacing-4);
+}
+
+.group-error-message {
+  color: var(--radio-danger);
+  margin-top: var(--pf-spacing-2);
+  font-weight: 600;
+}
+
+.group-helper-text {
+  color: var(--pf-color-muted);
+  margin-top: var(--pf-spacing-2);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .radio-mark {
+    border-width: 2px;
+    box-shadow: none;
+  }
+  
+  .radio:checked + .radio-mark {
+    border-width: 2px;
+    box-shadow: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .radio-mark {
+    transition: none;
+  }
+  
+  .radio-container:hover .radio-mark,
+  .radio:focus-visible + .radio-mark,
+  .radio:checked + .radio-mark {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .radio-mark {
+    border: 2px solid #000;
+    box-shadow: none;
+    background: #fff;
+  }
+  
+  .radio:checked + .radio-mark {
+    background: #000;
+  }
+  
+  .radio:checked + .radio-mark::after {
+    background: #fff;
+  }
+}
