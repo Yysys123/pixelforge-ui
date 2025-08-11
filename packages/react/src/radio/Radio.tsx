@@ -302,7 +302,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
             label={option.label}
             checked={value === option.value}
             disabled={option.disabled}
-            helperText={option.helperText}
+            {...(option.helperText && { helperText: option.helperText })}
             size={size}
             variant={variant}
             required={required}

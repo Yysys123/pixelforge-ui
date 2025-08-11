@@ -324,8 +324,6 @@ describe('Button', () => {
         </Button>
       );
 
-      const button = screen.getByRole('button');
-
       await user.keyboard('{Enter}');
       await user.keyboard(' ');
 

@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useState,
-  Children,
-  isValidElement,
-  cloneElement,
-} from 'react';
+import React, { forwardRef, useState, Children, isValidElement } from 'react';
 import { clsx } from 'clsx';
 import { Typography } from '../typography/Typography';
 import styles from './Tabs.module.css';
@@ -152,6 +146,11 @@ export interface TabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
   badge?: React.ReactNode;
 
   /**
+   * Whether to show decorative pattern
+   */
+  showPattern?: boolean;
+
+  /**
    * Children content
    */
   children?: React.ReactNode;
@@ -210,6 +209,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
             disabled: child.props.disabled,
             icon: child.props.icon,
             badge: child.props.badge,
+            showPattern: child.props.showPattern,
           };
         }
         return null;
@@ -234,11 +234,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       onChange?.(key);
     };
 
-    const handleKeyDown = (
-      event: React.KeyboardEvent,
-      tabKey: string,
-      tabIndex: number
-    ) => {
+    const handleKeyDown = (event: React.KeyboardEvent, tabKey: string) => {
       const { key } = event;
       const enabledTabs = processedItems.filter(item => !item.disabled);
       const currentIndex = enabledTabs.findIndex(tab => tab.key === tabKey);
@@ -384,11 +380,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                       e.preventDefault();
                       handleTabClick(item.key, item.disabled);
                     } else {
-                      handleKeyDown(
-                        e,
-                        item.key,
-                        processedItems.findIndex(tab => tab.key === item.key)
-                      );
+                      handleKeyDown(e, item.key);
                     }
                   }}
                 >

@@ -152,7 +152,7 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
 /**
  * Section component for organizing page content into semantic blocks.
  */
-export const Section = forwardRef<HTMLElement, SectionProps>(
+export const Section = forwardRef<HTMLDivElement, SectionProps>(
   (
     {
       as: Component = 'section',

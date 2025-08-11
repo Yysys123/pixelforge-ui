@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { Form, FormField, FormActions } from './Form';
@@ -202,7 +201,13 @@ describe('FormField', () => {
         helperText="We'll never share your email"
         required
       >
-        <Input type="email" id="email" name="email" required aria-label="Email Address" />
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          required
+          aria-label="Email Address"
+        />
       </FormField>
     );
 

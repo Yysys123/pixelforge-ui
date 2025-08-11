@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useMemo } from 'react';
 import { clsx } from 'clsx';
-import { Button } from '../button/Button';
 import { Typography } from '../typography/Typography';
 import styles from './Table.module.css';
 import '../styles/utilities.css';
@@ -191,9 +190,9 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
           comparison = aValue.getTime() - bValue.getTime();
         } else {
           // Fallback to string comparison
-          comparison = String(aValue)
+          comparison = (aValue?.toString() || '')
             .toLowerCase()
-            .localeCompare(String(bValue).toLowerCase());
+            .localeCompare((bValue?.toString() || '').toLowerCase());
         }
 
         return sortState.direction === 'asc' ? comparison : -comparison;
@@ -235,10 +234,10 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       onSortChange?.(newSortState.key || '', newSortState.direction);
     };
 
-    const handleRowSelection = (rowKey: string, selected: boolean) => {
+    const handleRowSelection = (selectedRowKey: string, selected: boolean) => {
       const newSelection = selected
-        ? [...actualSelectedKeys, rowKey]
-        : actualSelectedKeys.filter(key => key !== rowKey);
+        ? [...actualSelectedKeys, selectedRowKey]
+        : actualSelectedKeys.filter(key => key !== selectedRowKey);
 
       setInternalSelection(newSelection);
 

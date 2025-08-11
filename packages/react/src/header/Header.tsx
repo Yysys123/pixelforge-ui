@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { Typography } from '../typography/Typography';
-import { Button } from '../button/Button';
 import styles from './Header.module.css';
 import '../styles/utilities.css';
 

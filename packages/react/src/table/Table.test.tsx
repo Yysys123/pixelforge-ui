@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { Table, TableColumn } from './Table';
@@ -481,7 +480,7 @@ describe('Table', () => {
       render(<Table columns={mockColumns} dataSource={mockData} />);
 
       const headers = screen.getAllByRole('columnheader');
-      headers.forEach((header, index) => {
+      headers.forEach(header => {
         expect(header).toHaveAttribute('scope', 'col');
       });
     });
@@ -638,11 +637,10 @@ describe('Table', () => {
     });
 
     it('handles undefined render function gracefully', () => {
-      const columnsWithUndefinedRender = [
+      const columnsWithUndefinedRender: TableColumn<any>[] = [
         {
           key: 'test',
           title: 'Test',
-          render: undefined,
         },
       ];
 
@@ -655,7 +653,7 @@ describe('Table', () => {
     });
 
     it('handles circular references in data', () => {
-      const circularData = { name: 'Test' };
+      const circularData: any = { name: 'Test' };
       circularData.self = circularData;
 
       render(

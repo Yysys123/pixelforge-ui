@@ -654,12 +654,10 @@ describe('Tabs', () => {
 
     it('handles malformed tab items', () => {
       const malformedItems = [
-        null,
-        undefined,
         { key: 'valid', label: 'Valid', content: 'Content' },
         { label: 'No Key', content: 'Content' }, // Missing key
         { key: 'no-label', content: 'Content' }, // Missing label
-      ].filter(Boolean);
+      ] as any[];
 
       render(<Tabs items={malformedItems} />);
       expect(screen.getByRole('tablist')).toBeInTheDocument();
