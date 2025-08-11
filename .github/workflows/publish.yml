@@ -8,20 +8,25 @@ on:
       version:
         description: 'Version to publish (e.g., v0.1.0)'
         required: true
-        default: 'v0.3.2'
+        default: 'v0.3.3'
 
 env:
   NODE_VERSION: '18'
 
+# Add permissions for GitHub Package Registry
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   publish:
-    name: Publish to NPM
+    name: Publish to NPM and GitHub Package Registry
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js for npm
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -65,26 +70,59 @@ jobs:
           echo "Icons package info:"
           cat packages/icons/package.json | jq '.name, .version'
 
-      - name: Publish core package
+      # Publish to npm
+      - name: Publish core package to npm
         working-directory: packages/core
         run: |
-          echo "Publishing @pixelforge-ui/core..."
+          echo "Publishing @pixelforge-ui/core to npm..."
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish icons package
+      - name: Publish icons package to npm
         working-directory: packages/icons
         run: |
-          echo "Publishing @pixelforge-ui/icons..."
+          echo "Publishing @pixelforge-ui/icons to npm..."
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish react package
+      - name: Publish react package to npm
         working-directory: packages/react
         run: |
-          echo "Publishing @pixelforge-ui/react..."
+          echo "Publishing @pixelforge-ui/react to npm..."
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Setup for GitHub Package Registry
+      - name: Setup Node.js for GitHub Package Registry
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+
+      # Publish to GitHub Package Registry
+      - name: Publish core package to GitHub Package Registry
+        working-directory: packages/core
+        run: |
+          echo "Publishing @pixelforge-ui/core to GitHub Package Registry..."
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish icons package to GitHub Package Registry
+        working-directory: packages/icons
+        run: |
+          echo "Publishing @pixelforge-ui/icons to GitHub Package Registry..."
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish react package to GitHub Package Registry
+        working-directory: packages/react
+        run: |
+          echo "Publishing @pixelforge-ui/react to GitHub Package Registry..."
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

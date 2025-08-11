@@ -1,6 +1,6 @@
 {
   "name": "@pixelforge-ui/react",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Modern React component library with brutalist design elements, accessibility-first approach, and comprehensive theming support. Live docs: https://mo-sharif.github.io/pixelforge-ui/",
   "keywords": [
     "react",
@@ -82,6 +82,7 @@
     "typescript": "^5.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "@pixelforge-ui:registry": "https://npm.pkg.github.com"
   }
 }

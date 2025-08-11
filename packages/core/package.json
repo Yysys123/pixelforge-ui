@@ -1,6 +1,6 @@
 {
   "name": "@pixelforge-ui/core",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Design tokens and theming utilities for PixelForge UI component library. A bold, brutalist design system with comprehensive tokens for colors, typography, spacing, and themes. Documentation: https://mo-sharif.github.io/pixelforge-ui/",
   "keywords": [
     "design-tokens",
@@ -51,6 +51,7 @@
     "typescript": "^5.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "@pixelforge-ui:registry": "https://npm.pkg.github.com"
   }
 }

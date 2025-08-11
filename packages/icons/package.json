@@ -1,6 +1,6 @@
 {
   "name": "@pixelforge-ui/icons",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Bold, brutalist icon set for PixelForge UI with clean stroke designs. See examples: https://mo-sharif.github.io/pixelforge-ui/",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -30,6 +30,7 @@
     "typescript": "^5.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "@pixelforge-ui:registry": "https://npm.pkg.github.com"
   }
 }

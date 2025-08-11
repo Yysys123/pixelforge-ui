@@ -5,6 +5,17 @@ import '../packages/react/dist/index.css';
 
 const preview: Preview = {
   parameters: {
+    // Set default view mode to docs
+    viewMode: 'docs',
+    
+    // Set initial story to Overview
+    options: {
+      storySort: {
+        order: ['Overview', 'Components', 'Tokens', '*'],
+        method: 'alphabetical',
+      },
+    },
+    
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
