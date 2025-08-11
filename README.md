@@ -1,7 +1,7 @@
 # PixelForge UI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm version](https://img.shields.io/npm/v/@pixelforge/react.svg)](https://www.npmjs.com/package/@pixelforge/react)
+[![npm version](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react)
 [![CI](https://github.com/mosharif/pixelforge-ui/workflows/CI/badge.svg)](https://github.com/mosharif/pixelforge-ui/actions)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
@@ -20,22 +20,22 @@ PixelForge UI brings together industrial-strength design tokens, brutal aestheti
 
 | Package | Description | Version | Size |
 |---------|-------------|---------|------|
-| [`@pixelforge/core`](./packages/core) | Design tokens, theme provider, and utilities | [![npm](https://img.shields.io/npm/v/@pixelforge/core.svg)](https://www.npmjs.com/package/@pixelforge/core) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge/core) |
-| [`@pixelforge/react`](./packages/react) | React components with brutalist design | [![npm](https://img.shields.io/npm/v/@pixelforge/react.svg)](https://www.npmjs.com/package/@pixelforge/react) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge/react) |
-| [`@pixelforge/icons`](./packages/icons) | Brutalist icon set with React components | [![npm](https://img.shields.io/npm/v/@pixelforge/icons.svg)](https://www.npmjs.com/package/@pixelforge/icons) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge/icons) |
+| [`@pixelforge-ui/core`](./packages/core) | Design tokens, theme provider, and utilities | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/core.svg)](https://www.npmjs.com/package/@pixelforge-ui/core) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge-ui/core) |
+| [`@pixelforge-ui/react`](./packages/react) | React components with brutalist design | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge-ui/react) |
+| [`@pixelforge-ui/icons`](./packages/icons) | Brutalist icon set with React components | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/icons.svg)](https://www.npmjs.com/package/@pixelforge-ui/icons) | ![Bundle Size](https://img.shields.io/bundlephobia/minzip/@pixelforge-ui/icons) |
 
 ## ⚡ Quick Start
 
 ```bash
 # Install the React components package
-npm install @pixelforge/react @pixelforge/core
+npm install @pixelforge-ui/react @pixelforge-ui/core
 
 # Or with pnpm
-pnpm add @pixelforge/react @pixelforge/core
+pnpm add @pixelforge-ui/react @pixelforge-ui/core
 ```
 
 ```tsx
-import { Button, Input, Typography, ThemeProvider } from '@pixelforge/react';
+import { Button, Input, Typography, ThemeProvider } from '@pixelforge-ui/react';
 
 function App() {
   return (

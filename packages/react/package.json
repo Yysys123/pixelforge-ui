@@ -12,14 +12,14 @@
     "theme",
     "css-variables"
   ],
-  "homepage": "https://github.com/pixelforge/pixelforge-ui#readme",
+  "homepage": "https://github.com/mo-sharif/pixelforge-ui#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pixelforge/pixelforge-ui.git",
+    "url": "https://github.com/mo-sharif/pixelforge-ui.git",
     "directory": "packages/react"
   },
   "bugs": {
-    "url": "https://github.com/pixelforge/pixelforge-ui/issues"
+    "url": "https://github.com/mo-sharif/pixelforge-ui/issues"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
