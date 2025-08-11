@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "echo 'Use: pnpm --filter @pixelforge/react dev for component development'",
+    "dev": "npx storybook dev -p 6006",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "test:a11y": "pnpm -r test:a11y",
@@ -19,10 +19,21 @@
     "type-check": "tsc --build",
     "bundle-size": "pnpm -r bundle-size",
     "clean": "pnpm -r clean",
+    "storybook": "npx storybook dev -p 6006",
+    "build-storybook": "npx storybook build",
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/test": "^8.6.14",
     "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
@@ -33,6 +44,9 @@
     "husky": "^8.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "storybook": "^8.6.14",
     "typescript": "^5.0.0"
   },
   "engines": {
