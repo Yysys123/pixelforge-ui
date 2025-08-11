@@ -34,7 +34,7 @@ Pull requests are the best way to propose changes to the codebase. We actively w
 ### Getting Started
 ```bash
 # Fork and clone the repository
-git clone https://github.com/mo-sharif/pixelforge-ui.git
+git clone https://github.com/pixelforge-ui/pixelforge-ui.git
 cd pixelforge-ui
 
 # Install dependencies

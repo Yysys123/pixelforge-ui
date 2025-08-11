@@ -30,7 +30,7 @@ addons.setConfig({
   
   // Theme and branding
   brandTitle: 'PixelForge UI',
-  brandUrl: 'https://github.com/mo-sharif/pixelforge-ui',
+  brandUrl: 'https://github.com/pixelforge-ui/pixelforge-ui',
   
   // Toolbar configuration
   toolbar: {

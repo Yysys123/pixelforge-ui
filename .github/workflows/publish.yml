@@ -8,19 +8,20 @@ on:
       version:
         description: 'Version to publish (e.g., v0.1.0)'
         required: true
-        default: 'v0.4.0'
+        default: 'v0.4.1'
 
 env:
   NODE_VERSION: '18'
 
-# Add permissions for npm OIDC authentication
+# Add permissions for npm OIDC and GitHub Package Registry
 permissions:
   contents: read
+  packages: write  # Required for GitHub Package Registry
   id-token: write  # Required for npm OIDC authentication
 
 jobs:
   publish:
-    name: Publish to NPM Registry
+    name: Publish to NPM and GitHub Package Registry
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -105,8 +106,39 @@ jobs:
           echo "Publishing @pixelforge-ui/react to npm with OIDC (with token fallback)..."
           npm publish --access public --provenance --registry https://registry.npmjs.org
 
-      # GitHub Package Registry publishing skipped 
-      # (requires scope to match username @mo-sharif or organization @pixelforge-ui)
+      # Publish to GitHub Package Registry using Node.js setup
+      - name: Setup Node.js for GitHub Package Registry
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@pixelforge-ui'
+
+      - name: Publish core package to GitHub Package Registry
+        working-directory: packages/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Publishing @pixelforge-ui/core to GitHub Package Registry..."
+          npm publish --access public
+
+      - name: Publish icons package to GitHub Package Registry
+        working-directory: packages/icons
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Publishing @pixelforge-ui/icons to GitHub Package Registry..."
+          npm publish --access public
+
+      - name: Publish react package to GitHub Package Registry
+        working-directory: packages/react
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Publishing @pixelforge-ui/react to GitHub Package Registry..."
+          npm publish --access public
+
+      # Publishing summary
       - name: Publishing summary
         run: |
           echo "✅ Successfully published to npm registry:"
@@ -114,5 +146,5 @@ jobs:
           echo "  - @pixelforge-ui/icons@$(jq -r '.version' packages/icons/package.json)" 
           echo "  - @pixelforge-ui/react@$(jq -r '.version' packages/react/package.json)"
           echo ""
-          echo "ℹ️  GitHub Package Registry skipped (scope mismatch)"
-          echo "   To enable: create @pixelforge-ui organization or use @mo-sharif scope"
+          echo "✅ Successfully published to GitHub Package Registry:"
+          echo "  - View packages: https://github.com/orgs/pixelforge-ui/packages"

@@ -75,7 +75,7 @@ The README.md contains badges with placeholder URLs. After making the repository
 
 - **License Badge**: ✅ Works (shields.io)
 - **npm Version**: ✅ Works (shields.io + npm)
-- **CI Badge**: Update URL to: `https://github.com/mo-sharif/pixelforge-ui/workflows/CI/badge.svg`
+- **CI Badge**: Update URL to: `https://github.com/pixelforge-ui/pixelforge-ui/workflows/CI/badge.svg`
 - **TypeScript Badge**: ✅ Works (shields.io)
 
 ## 🌐 External Integrations
