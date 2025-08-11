@@ -1,0 +1,323 @@
+/* PixelForge UI - Form Component */
+.form-container {
+  --form-primary: #3b82f6;
+  --form-bg: var(--pf-bg);
+  --form-text: var(--pf-text);
+  --form-border: var(--pf-text);
+  --form-shadow: rgba(0, 0, 0, 0.2);
+  --form-danger: #ef4444;
+  --form-success: #22c55e;
+  
+  position: relative;
+  background: var(--form-bg);
+  border: 3px solid var(--form-border);
+  border-radius: var(--pf-radius-lg);
+  box-shadow: 
+    6px 6px 0 var(--form-shadow),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  font-family: var(--pf-font-base);
+}
+
+/* Size variants */
+.form-container.size-sm {
+  padding: var(--pf-spacing-4);
+  border-radius: var(--pf-radius-md);
+}
+
+.form-container.size-md {
+  padding: var(--pf-spacing-6);
+  border-radius: var(--pf-radius-lg);
+}
+
+.form-container.size-lg {
+  padding: var(--pf-spacing-8);
+  border-radius: var(--pf-radius-xl);
+}
+
+/* Color variants */
+.form-container.variant-default {
+  --form-primary: #3b82f6; /* Blue */
+  border-color: var(--form-border);
+}
+
+.form-container.variant-primary {
+  --form-primary: #8b5cf6; /* Purple */
+  border-color: var(--form-primary);
+  box-shadow: 
+    6px 6px 0 var(--form-shadow),
+    inset 0 0 0 2px rgba(139, 92, 246, 0.1);
+}
+
+.form-container.variant-secondary {
+  --form-primary: #22c55e; /* Green */
+  border-color: var(--form-primary);
+  box-shadow: 
+    6px 6px 0 var(--form-shadow),
+    inset 0 0 0 2px rgba(34, 197, 94, 0.1);
+}
+
+.form-container.variant-accent {
+  --form-primary: #f59e0b; /* Orange */
+  border-color: var(--form-primary);
+  box-shadow: 
+    6px 6px 0 var(--form-shadow),
+    inset 0 0 0 2px rgba(245, 158, 11, 0.1);
+}
+
+/* Form patterns */
+.form-patterns {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pattern-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 12px 12px;
+  opacity: 0.5;
+}
+
+.pattern-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: 8px 8px;
+  opacity: 0.3;
+}
+
+/* Form structure */
+.form {
+  position: relative;
+  z-index: 2;
+}
+
+.form-header {
+  margin-bottom: var(--pf-spacing-6);
+  padding-bottom: var(--pf-spacing-4);
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.form-header::after {
+  content: "✂";
+  position: absolute;
+  bottom: -0.8em;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  background: var(--form-bg);
+  padding: 0 0.5em;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.form-title {
+  margin: 0 0 var(--pf-spacing-2) 0;
+  color: var(--form-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-description {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-5);
+}
+
+/* Form messages */
+.form-message {
+  margin-top: var(--pf-spacing-4);
+  padding: var(--pf-spacing-3);
+  border-radius: var(--pf-radius-md);
+  border: 2px solid currentColor;
+  background: rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.form-message::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: currentColor;
+  border-radius: var(--pf-radius-md);
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.error-message {
+  color: var(--form-danger);
+}
+
+.success-message {
+  color: var(--form-success);
+}
+
+/* Form fields */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-2);
+  position: relative;
+}
+
+.form-field.error {
+  --field-border-color: var(--form-danger);
+}
+
+.field-label {
+  margin: 0;
+  color: var(--form-text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+}
+
+.required-mark {
+  color: var(--form-danger);
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+.field-content {
+  position: relative;
+}
+
+.field-error {
+  color: var(--form-danger);
+  font-weight: 600;
+  margin-top: var(--pf-spacing-1);
+}
+
+.field-helper {
+  color: var(--pf-color-muted);
+  margin-top: var(--pf-spacing-1);
+}
+
+/* Form actions */
+.form-actions {
+  margin-top: var(--pf-spacing-6);
+  padding-top: var(--pf-spacing-4);
+  border-top: 2px dashed rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.form-actions::before {
+  content: "✂";
+  position: absolute;
+  top: -0.8em;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  background: var(--form-bg);
+  padding: 0 0.5em;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.form-actions.direction-horizontal {
+  display: flex;
+  gap: var(--pf-spacing-3);
+  flex-wrap: wrap;
+}
+
+.form-actions.direction-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-3);
+}
+
+.form-actions.align-left {
+  justify-content: flex-start;
+}
+
+.form-actions.align-center {
+  justify-content: center;
+}
+
+.form-actions.align-right {
+  justify-content: flex-end;
+}
+
+/* Loading state */
+.form-container.loading {
+  pointer-events: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pf-spacing-3);
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  color: var(--form-primary);
+}
+
+.loading-text {
+  color: var(--form-text);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-actions.direction-horizontal {
+    flex-direction: column;
+  }
+  
+  .form-container.size-lg {
+    padding: var(--pf-spacing-6);
+  }
+  
+  .form-container.size-md {
+    padding: var(--pf-spacing-4);
+  }
+}
+
+/* Print styles */
+@media print {
+  .form-container {
+    border: 2px solid #000;
+    box-shadow: none;
+  }
+  
+  .form-patterns {
+    display: none;
+  }
+  
+  .loading-overlay {
+    display: none;
+  }
+}

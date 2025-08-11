@@ -5,9 +5,14 @@ import { Card } from '../packages/react/src/card/Card';
 import { Typography } from '../packages/react/src/typography/Typography';
 import { Alert } from '../packages/react/src/alert/Alert';
 import { Badge } from '../packages/react/src/badge/Badge';
-import { Container } from '../packages/react/src/layout/Container';
+import { Container, Page, Section } from '../packages/react/src/layout';
 import { Stack } from '../packages/react/src/layout/Stack';
 import { Grid } from '../packages/react/src/layout/Grid';
+import { Form, FormField, FormActions } from '../packages/react/src/form';
+import { Checkbox, CheckboxGroup } from '../packages/react/src/checkbox';
+import { Radio } from '../packages/react/src/radio';
+import { Header, NavItem, NavList } from '../packages/react/src/header';
+import { Footer } from '../packages/react/src/footer';
 
 const meta = {
   title: 'Overview/PixelForge UI',
@@ -126,28 +131,63 @@ export const Introduction: Story = {
 
           {/* Form Example */}
           <Stack spacing={2}>
-            <Typography variant="h3">Form Components</Typography>
-            <Grid cols={2} gap={4}>
-              <Input
-                label="First Name"
-                placeholder="Enter your first name"
-                required
+            <Typography variant="h3">Form System</Typography>
+            <Form
+              title="Contact Form"
+              description="Complete form system with validation and styling"
+              variant="primary"
+              showPatterns={true}
+              style={{ maxWidth: '600px', margin: '0 auto' }}
+            >
+              <Grid cols={2} gap={4}>
+                <FormField label="First Name" required>
+                  <Input
+                    placeholder="Enter your first name"
+                    required
+                  />
+                </FormField>
+                <FormField label="Last Name" required>
+                  <Input
+                    placeholder="Enter your last name"
+                    required
+                  />
+                </FormField>
+              </Grid>
+              
+              <FormField label="Email" required helperText="We'll never share your email">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </FormField>
+
+              <CheckboxGroup
+                label="Interests"
+                options={[
+                  { value: 'design', label: 'Design Systems' },
+                  { value: 'frontend', label: 'Frontend Development' },
+                  { value: 'accessibility', label: 'Accessibility' },
+                ]}
+                direction="horizontal"
               />
-              <Input
-                label="Last Name"
-                placeholder="Enter your last name"
-                required
-              />
-              <Input
-                label="Email"
-                type="email"
-                placeholder="Enter your email"
-                helperText="We'll never share your email"
-                state="success"
-                fullWidth
-                style={{ gridColumn: 'span 2' }}
-              />
-            </Grid>
+
+              <FormField label="Account Type" required>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Radio name="accountType" value="personal" label="Personal" />
+                  <Radio name="accountType" value="business" label="Business" />
+                </div>
+              </FormField>
+
+              <FormField>
+                <Checkbox label="I agree to the Terms of Service" required />
+              </FormField>
+
+              <FormActions>
+                <Button variant="outline">Cancel</Button>
+                <Button type="submit">Send Message</Button>
+              </FormActions>
+            </Form>
           </Stack>
 
           {/* Cards */}
@@ -181,6 +221,56 @@ export const Introduction: Story = {
                 stamp="Recommended"
               />
             </Grid>
+          </Stack>
+
+          {/* Layout Components */}
+          <Stack spacing={2}>
+            <Typography variant="h3">Layout Components</Typography>
+            <Typography variant="body2" color="muted" style={{ marginBottom: '1rem' }}>
+              Comprehensive layout system with Page, Container, Section, Grid, and Stack components
+            </Typography>
+            
+            <Section variant="primary" spacing="md" bordered>
+              <Typography variant="h5" weight="bold" style={{ marginBottom: '0.5rem' }}>
+                Primary Section
+              </Typography>
+              <Typography variant="body2" color="muted">
+                Semantic sections with color variants and spacing options
+              </Typography>
+            </Section>
+
+            <Grid cols={3} gap={4}>
+              <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
+                <Typography variant="body2" weight="bold">Grid Item 1</Typography>
+              </div>
+              <div style={{ backgroundColor: 'rgba(34, 197, 94, 0.1)', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
+                <Typography variant="body2" weight="bold">Grid Item 2</Typography>
+              </div>
+              <div style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
+                <Typography variant="body2" weight="bold">Grid Item 3</Typography>
+              </div>
+            </Grid>
+          </Stack>
+
+          {/* Navigation Components */}
+          <Stack spacing={2}>
+            <Typography variant="h3">Navigation</Typography>
+            <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
+              <Header
+                brand="PixelForge UI"
+                variant="primary"
+                navigation={
+                  <NavList>
+                    <NavItem href="/" active>Home</NavItem>
+                    <NavItem href="/components">Components</NavItem>
+                    <NavItem href="/docs">Documentation</NavItem>
+                  </NavList>
+                }
+                actions={
+                  <Button size="sm">Get Started</Button>
+                }
+              />
+            </div>
           </Stack>
         </Stack>
 

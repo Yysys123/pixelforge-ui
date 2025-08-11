@@ -5,6 +5,7 @@
   --checkbox-text: var(--pf-text);
   --checkbox-border: var(--pf-text);
   --checkbox-shadow: rgba(0, 0, 0, 0.2);
+  --checkbox-danger: #ef4444; /* Ensure danger color is available */
   
   display: flex;
   flex-direction: column;
@@ -237,6 +238,49 @@
   .checkbox:indeterminate + .checkbox-mark {
     transform: none;
   }
+}
+
+/* Checkbox Group Styles */
+.checkbox-group {
+  border: 2px solid var(--pf-border);
+  border-radius: var(--pf-radius-md);
+  padding: var(--pf-spacing-3);
+  background: var(--pf-bg);
+  font-family: var(--pf-font-base);
+}
+
+.checkbox-group.error {
+  border-color: var(--checkbox-danger);
+}
+
+.group-legend {
+  margin-bottom: var(--pf-spacing-3);
+  padding: 0;
+  border: none;
+  color: var(--pf-text);
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-3);
+}
+
+.checkbox-group.direction-horizontal .checkbox-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--pf-spacing-4);
+}
+
+.group-error-message {
+  color: var(--checkbox-danger);
+  margin-top: var(--pf-spacing-2);
+  font-weight: 600;
+}
+
+.group-helper-text {
+  color: var(--pf-color-muted);
+  margin-top: var(--pf-spacing-2);
 }
 
 /* Print styles */

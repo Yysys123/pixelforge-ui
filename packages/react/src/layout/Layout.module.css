@@ -1,0 +1,444 @@
+/* PixelForge UI - Layout Components */
+
+/* CSS Variables */
+:root {
+  --layout-primary: var(--pf-color-primary);
+  --layout-secondary: var(--pf-color-secondary);
+  --layout-accent: var(--pf-color-accent);
+  --layout-bg: var(--pf-bg);
+  --layout-surface: var(--pf-surface);
+  --layout-text: var(--pf-text);
+  --layout-border: var(--pf-border);
+  --layout-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Page Component */
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: var(--layout-bg);
+  font-family: var(--pf-font-base);
+}
+
+.page-patterns {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pattern-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.5;
+}
+
+.pattern-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+  opacity: 0.3;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page size variants */
+.page.size-sm {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--pf-spacing-4);
+}
+
+.page.size-md {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: var(--pf-spacing-6);
+}
+
+.page.size-lg {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: var(--pf-spacing-6);
+}
+
+.page.size-xl {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--pf-spacing-8);
+}
+
+.page.size-full {
+  width: 100%;
+  padding: var(--pf-spacing-6);
+}
+
+/* Page variants */
+.page.variant-default {
+  background: transparent;
+}
+
+.page.variant-contained {
+  background: var(--layout-surface);
+  border: 3px solid var(--layout-border);
+  border-radius: var(--pf-radius-lg);
+  box-shadow: 6px 6px 0 var(--layout-shadow);
+  margin: var(--pf-spacing-4);
+}
+
+.page.variant-padded {
+  background: var(--layout-surface);
+  padding: var(--pf-spacing-8);
+}
+
+.page.variant-bordered {
+  border-left: 6px solid var(--layout-primary);
+  border-right: 6px solid var(--layout-primary);
+}
+
+/* Container Component */
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.container.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Container sizes */
+.container.container-sm {
+  max-width: 640px;
+}
+
+.container.container-md {
+  max-width: 768px;
+}
+
+.container.container-lg {
+  max-width: 1024px;
+}
+
+.container.container-xl {
+  max-width: 1280px;
+}
+
+.container.container-full {
+  max-width: none;
+}
+
+/* Container padding */
+.container.padding-none {
+  padding: 0;
+}
+
+.container.padding-sm {
+  padding: var(--pf-spacing-3);
+}
+
+.container.padding-md {
+  padding: var(--pf-spacing-6);
+}
+
+.container.padding-lg {
+  padding: var(--pf-spacing-8);
+}
+
+/* Section Component */
+.section {
+  position: relative;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Section spacing */
+.section.spacing-none {
+  padding: 0;
+}
+
+.section.spacing-sm {
+  padding: var(--pf-spacing-4) 0;
+}
+
+.section.spacing-md {
+  padding: var(--pf-spacing-6) 0;
+}
+
+.section.spacing-lg {
+  padding: var(--pf-spacing-8) 0;
+}
+
+.section.spacing-xl {
+  padding: var(--pf-spacing-12) 0;
+}
+
+/* Section variants */
+.section.variant-default {
+  background: transparent;
+}
+
+.section.variant-primary {
+  background: rgba(var(--pf-color-primary-rgb), 0.05);
+  border-left: 4px solid var(--layout-primary);
+}
+
+.section.variant-secondary {
+  background: rgba(var(--pf-color-secondary-rgb), 0.05);
+  border-left: 4px solid var(--layout-secondary);
+}
+
+.section.variant-accent {
+  background: rgba(var(--pf-color-accent-rgb), 0.05);
+  border-left: 4px solid var(--layout-accent);
+}
+
+.section.variant-muted {
+  background: var(--layout-surface);
+  border: 1px solid var(--layout-border);
+}
+
+/* Section bordered */
+.section.bordered {
+  border: 2px solid var(--layout-border);
+  border-radius: var(--pf-radius-md);
+  padding: var(--pf-spacing-6);
+  margin: var(--pf-spacing-4) 0;
+  box-shadow: 3px 3px 0 var(--layout-shadow);
+}
+
+/* Section patterns */
+.section.with-patterns {
+  overflow: hidden;
+}
+
+.section-patterns {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pattern-lines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.02) 10px,
+    rgba(0, 0, 0, 0.02) 20px
+  );
+  opacity: 0.3;
+}
+
+/* Grid Component */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 1), 1fr);
+  width: 100%;
+}
+
+/* Grid gaps */
+.grid.gap-none {
+  gap: 0;
+}
+
+.grid.gap-sm {
+  gap: var(--pf-spacing-2);
+}
+
+.grid.gap-md {
+  gap: var(--pf-spacing-4);
+}
+
+.grid.gap-lg {
+  gap: var(--pf-spacing-6);
+}
+
+.grid.gap-xl {
+  gap: var(--pf-spacing-8);
+}
+
+/* Grid responsive */
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(var(--grid-cols-sm, var(--grid-cols, 1)), 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(var(--grid-cols-md, var(--grid-cols-sm, var(--grid-cols, 1))), 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(var(--grid-cols-lg, var(--grid-cols-md, var(--grid-cols-sm, var(--grid-cols, 1)))), 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(var(--grid-cols-xl, var(--grid-cols-lg, var(--grid-cols-md, var(--grid-cols-sm, var(--grid-cols, 1))))), 1fr);
+  }
+}
+
+/* Stack Component */
+.stack {
+  display: flex;
+}
+
+/* Stack direction */
+.stack.direction-vertical {
+  flex-direction: column;
+}
+
+.stack.direction-horizontal {
+  flex-direction: row;
+}
+
+/* Stack gaps */
+.stack.gap-none {
+  gap: 0;
+}
+
+.stack.gap-sm {
+  gap: var(--pf-spacing-2);
+}
+
+.stack.gap-md {
+  gap: var(--pf-spacing-4);
+}
+
+.stack.gap-lg {
+  gap: var(--pf-spacing-6);
+}
+
+.stack.gap-xl {
+  gap: var(--pf-spacing-8);
+}
+
+/* Stack alignment */
+.stack.align-start {
+  align-items: flex-start;
+}
+
+.stack.align-center {
+  align-items: center;
+}
+
+.stack.align-end {
+  align-items: flex-end;
+}
+
+.stack.align-stretch {
+  align-items: stretch;
+}
+
+/* Stack justification */
+.stack.justify-start {
+  justify-content: flex-start;
+}
+
+.stack.justify-center {
+  justify-content: center;
+}
+
+.stack.justify-end {
+  justify-content: flex-end;
+}
+
+.stack.justify-between {
+  justify-content: space-between;
+}
+
+.stack.justify-around {
+  justify-content: space-around;
+}
+
+.stack.justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* Stack wrap */
+.stack.wrap {
+  flex-wrap: wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page.size-lg,
+  .page.size-xl {
+    padding: var(--pf-spacing-4);
+  }
+  
+  .container.padding-lg {
+    padding: var(--pf-spacing-4);
+  }
+  
+  .section.spacing-lg,
+  .section.spacing-xl {
+    padding: var(--pf-spacing-4) 0;
+  }
+  
+  .stack.direction-horizontal {
+    flex-direction: column;
+  }
+}
+
+/* Print styles */
+@media print {
+  .page-patterns,
+  .section-patterns {
+    display: none;
+  }
+  
+  .section.bordered,
+  .page.variant-contained {
+    border: 2px solid #000;
+    box-shadow: none;
+  }
+  
+  .section.variant-primary,
+  .section.variant-secondary,
+  .section.variant-accent {
+    background: transparent;
+    border-left: 2px solid #000;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .section.bordered,
+  .page.variant-contained {
+    border-width: 2px;
+    box-shadow: none;
+  }
+  
+  .section.variant-primary,
+  .section.variant-secondary,
+  .section.variant-accent,
+  .page.variant-bordered {
+    border-width: 4px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    transition: none;
+  }
+}

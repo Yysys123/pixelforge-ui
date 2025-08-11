@@ -184,3 +184,178 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 );
 
 Checkbox.displayName = 'Checkbox';
+
+export interface CheckboxGroupProps {
+  /**
+   * Checkbox group name
+   */
+  name: string;
+  
+  /**
+   * Currently selected values
+   */
+  value?: string[];
+  
+  /**
+   * Default selected values
+   */
+  defaultValue?: string[];
+  
+  /**
+   * Callback when selection changes
+   */
+  onChange?: (value: string[]) => void;
+  
+  /**
+   * Checkbox options
+   */
+  options: Array<{
+    value: string;
+    label: string;
+    disabled?: boolean;
+    helperText?: string;
+  }>;
+  
+  /**
+   * Group label
+   */
+  label?: string;
+  
+  /**
+   * Size variant for all checkboxes
+   */
+  size?: 'sm' | 'md' | 'lg';
+  
+  /**
+   * Visual variant for all checkboxes
+   */
+  variant?: 'default' | 'primary' | 'secondary' | 'accent';
+  
+  /**
+   * Layout direction
+   */
+  direction?: 'vertical' | 'horizontal';
+  
+  /**
+   * Whether the group is required
+   */
+  required?: boolean;
+  
+  /**
+   * Error message for the group
+   */
+  error?: string;
+  
+  /**
+   * Helper text for the group
+   */
+  helperText?: string;
+  
+  /**
+   * Custom className for the group wrapper
+   */
+  className?: string;
+}
+
+/**
+ * Checkbox group component that manages a collection of checkboxes.
+ * Provides proper group semantics and allows multiple selections.
+ */
+export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
+  name,
+  value: controlledValue,
+  defaultValue,
+  onChange,
+  options,
+  label,
+  size = 'md',
+  variant = 'default',
+  direction = 'vertical',
+  required = false,
+  error,
+  helperText,
+  className,
+}) => {
+  const [internalValue, setInternalValue] = React.useState<string[]>(defaultValue || []);
+  const value = controlledValue !== undefined ? controlledValue : internalValue;
+  
+  const groupId = `checkbox-group-${Math.random().toString(36).substr(2, 9)}`;
+  const errorId = error ? `${groupId}-error` : undefined;
+  const helperId = helperText ? `${groupId}-helper` : undefined;
+  
+  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+
+  const handleChange = (optionValue: string, checked: boolean) => {
+    const newValue = checked
+      ? [...value, optionValue]
+      : value.filter(v => v !== optionValue);
+    
+    if (controlledValue === undefined) {
+      setInternalValue(newValue);
+    }
+    onChange?.(newValue);
+  };
+
+  const groupClasses = clsx(
+    styles['checkbox-group'],
+    styles[`direction-${direction}`],
+    {
+      [styles.error]: error,
+    },
+    className
+  );
+
+  return (
+    <fieldset className={groupClasses} aria-describedby={describedBy}>
+      {label && (
+        <legend className={styles['group-legend']}>
+          <Typography variant="body2" weight="bold">
+            {label}
+            {required && <span className={styles['required-mark']} aria-label="required">*</span>}
+          </Typography>
+        </legend>
+      )}
+      
+      <div className={styles['checkbox-list']}>
+        {options.map((option) => (
+          <Checkbox
+            key={option.value}
+            name={name}
+            value={option.value}
+            label={option.label}
+            checked={value.includes(option.value)}
+            disabled={option.disabled}
+            helperText={option.helperText}
+            size={size}
+            variant={variant}
+            required={required}
+            onChange={(e) => handleChange(option.value, e.target.checked)}
+          />
+        ))}
+      </div>
+      
+      {error && (
+        <Typography
+          variant="caption"
+          color="danger"
+          role="alert"
+          id={errorId}
+          className={styles['group-error-message']}
+        >
+          {error}
+        </Typography>
+      )}
+      
+      {helperText && !error && (
+        <Typography
+          variant="caption"
+          color="muted"
+          id={helperId}
+          className={styles['group-helper-text']}
+        >
+          {helperText}
+        </Typography>
+      )}
+    </fieldset>
+  );
+};
