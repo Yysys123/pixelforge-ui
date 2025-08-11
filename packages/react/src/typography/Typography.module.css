@@ -186,43 +186,54 @@
   text-decoration: line-through;
 }
 
-/* Special styles for semantic elements */
+/* Special styles for semantic elements with brutalist design */
 .variant-h1 {
-  font-size: var(--pf-font-size-4xl);
-  font-weight: var(--pf-font-weight-bold);
-  line-height: var(--pf-line-height-tight);
-  letter-spacing: var(--pf-letter-spacing-tight);
+  font-size: var(--pf-font-size-4xl, 2.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
+
 .variant-h2 {
-  font-size: var(--pf-font-size-3xl);
-  font-weight: var(--pf-font-weight-bold);
-  line-height: var(--pf-line-height-tight);
-  letter-spacing: var(--pf-letter-spacing-tight);
+  font-size: var(--pf-font-size-3xl, 2rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
 }
 
 .variant-h3 {
-  font-size: var(--pf-font-size-2xl);
-  font-weight: var(--pf-font-weight-semibold);
-  line-height: var(--pf-line-height-snug);
+  font-size: var(--pf-font-size-2xl, 1.5rem);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .variant-h4 {
-  font-size: var(--pf-font-size-xl);
-  font-weight: var(--pf-font-weight-semibold);
-  line-height: var(--pf-line-height-snug);
+  font-size: var(--pf-font-size-xl, 1.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .variant-h5 {
-  font-size: var(--pf-font-size-lg);
-  font-weight: var(--pf-font-weight-semibold);
-  line-height: var(--pf-line-height-normal);
+  font-size: var(--pf-font-size-lg, 1.125rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .variant-h6 {
-  font-size: var(--pf-font-size-base);
-  font-weight: var(--pf-font-weight-semibold);
-  line-height: var(--pf-line-height-normal);
+  font-size: var(--pf-font-size-base, 1rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .variant-body1 {
@@ -245,12 +256,25 @@
 }
 
 .variant-overline {
-  font-size: var(--pf-font-size-xs);
-  font-weight: var(--pf-font-weight-medium);
-  line-height: var(--pf-line-height-none);
+  font-size: var(--pf-font-size-xs, 0.75rem);
+  font-weight: 800;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: var(--pf-letter-spacing-wider);
+  letter-spacing: 0.2em;
   color: var(--pf-color-text-secondary);
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.variant-overline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1em;
+  height: 0.15em;
+  background: var(--pf-color-primary-500, #3b82f6);
+  transform: translateY(-50%) skew(-15deg);
 }
 
 .variant-subtitle1 {
@@ -293,4 +317,50 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Brutalist emphasis styles */
+.brutalist-emphasis {
+  position: relative;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2em 0.5em;
+  background: var(--pf-color-primary-500, #3b82f6);
+  color: var(--pf-color-surface, #fff);
+  border: 0.15em solid var(--pf-color-text, #000);
+  box-shadow: 0.2em 0.2em 0 var(--pf-color-text, #000);
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+
+.brutalist-highlight {
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    var(--pf-color-warning-300, #fcd34d) 0%,
+    var(--pf-color-warning-400, #fbbf24) 100%
+  );
+  padding: 0.1em 0.3em;
+  border: 0.1em solid var(--pf-color-text, #000);
+  box-shadow: 0.1em 0.1em 0 var(--pf-color-text, #000);
+  transform: skew(-5deg);
+  display: inline-block;
+}
+
+.brutalist-strike {
+  position: relative;
+  text-decoration: none;
+}
+
+.brutalist-strike::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -0.2em;
+  right: -0.2em;
+  height: 0.3em;
+  background: var(--pf-color-danger-500, #ef4444);
+  transform: translateY(-50%) rotate(-2deg);
+  z-index: 1;
 }

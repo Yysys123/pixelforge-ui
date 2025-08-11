@@ -15,7 +15,8 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'PixelForge UI - A modern React component library with brutalist design language, comprehensive accessibility features, and robust theming system.',
+        component:
+          'PixelForge UI - A modern React component library with brutalist design language, comprehensive accessibility features, and robust theming system.',
       },
     },
   },
@@ -34,11 +35,24 @@ export const Introduction: Story = {
           <Typography variant="h1" align="center" weight="black">
             PixelForge UI
           </Typography>
-          <Typography variant="subtitle1" color="muted" align="center" style={{ maxWidth: '600px' }}>
-            A modern React component library with brutalist design language, 
-            built for developers who appreciate bold aesthetics and robust functionality.
+          <Typography
+            variant="subtitle1"
+            color="muted"
+            align="center"
+            style={{ maxWidth: '600px' }}
+          >
+            A modern React component library with brutalist design language,
+            built for developers who appreciate bold aesthetics and robust
+            functionality.
           </Typography>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              gap: '1rem',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}
+          >
             <Badge variant="success">MIT Licensed</Badge>
             <Badge variant="primary">TypeScript</Badge>
             <Badge variant="warning">Accessible</Badge>
@@ -82,8 +96,10 @@ export const Introduction: Story = {
 
         {/* Component Showcase */}
         <Stack spacing={4} style={{ width: '100%', maxWidth: '800px' }}>
-          <Typography variant="h2" align="center">Component Showcase</Typography>
-          
+          <Typography variant="h2" align="center">
+            Component Showcase
+          </Typography>
+
           {/* Buttons */}
           <Stack spacing={2}>
             <Typography variant="h3">Buttons</Typography>
@@ -112,18 +128,18 @@ export const Introduction: Story = {
           <Stack spacing={2}>
             <Typography variant="h3">Form Components</Typography>
             <Grid cols={2} gap={4}>
-              <Input 
-                label="First Name" 
+              <Input
+                label="First Name"
                 placeholder="Enter your first name"
                 required
               />
-              <Input 
-                label="Last Name" 
+              <Input
+                label="Last Name"
                 placeholder="Enter your last name"
                 required
               />
-              <Input 
-                label="Email" 
+              <Input
+                label="Email"
                 type="email"
                 placeholder="Enter your email"
                 helperText="We'll never share your email"
@@ -169,27 +185,37 @@ export const Introduction: Story = {
         </Stack>
 
         {/* Installation */}
-        <Stack spacing={4} align="center" style={{ width: '100%', maxWidth: '600px' }}>
-          <Typography variant="h2" align="center">Quick Start</Typography>
-          <div style={{ 
-            background: '#f8f9fa', 
-            padding: '1.5rem', 
-            borderRadius: '8px', 
-            border: '2px solid #dee2e6',
-            width: '100%',
-            fontFamily: 'monospace'
-          }}>
+        <Stack
+          spacing={4}
+          align="center"
+          style={{ width: '100%', maxWidth: '600px' }}
+        >
+          <Typography variant="h2" align="center">
+            Quick Start
+          </Typography>
+          <div
+            style={{
+              background: '#f8f9fa',
+              padding: '1.5rem',
+              borderRadius: '8px',
+              border: '2px solid #dee2e6',
+              width: '100%',
+              fontFamily: 'monospace',
+            }}
+          >
             <Typography family="mono" size="sm">
               npm install @pixelforge-ui/react
             </Typography>
           </div>
-          <div style={{ 
-            background: '#f8f9fa', 
-            padding: '1.5rem', 
-            borderRadius: '8px', 
-            border: '2px solid #dee2e6',
-            width: '100%'
-          }}>
+          <div
+            style={{
+              background: '#f8f9fa',
+              padding: '1.5rem',
+              borderRadius: '8px',
+              border: '2px solid #dee2e6',
+              width: '100%',
+            }}
+          >
             <Typography family="mono" size="sm">
               {`import { Button, Input, Card } from '@pixelforge-ui/react';
 
@@ -213,7 +239,8 @@ function App() {
   parameters: {
     docs: {
       description: {
-        story: 'Complete overview of PixelForge UI showcasing the design system, features, and component examples.',
+        story:
+          'Complete overview of PixelForge UI showcasing the design system, features, and component examples.',
       },
     },
   },
@@ -223,7 +250,9 @@ export const DesignTokens: Story = {
   render: () => (
     <Container size="lg" style={{ padding: '2rem 0' }}>
       <Stack spacing={6}>
-        <Typography variant="h1" align="center">Design Tokens</Typography>
+        <Typography variant="h1" align="center">
+          Design Tokens
+        </Typography>
         <Typography variant="subtitle1" color="muted" align="center">
           Consistent design language through a comprehensive token system
         </Typography>
@@ -233,9 +262,25 @@ export const DesignTokens: Story = {
           <Stack spacing={3}>
             <Typography variant="h3">Colors</Typography>
             <div style={{ display: 'grid', gap: '0.5rem' }}>
-              {['primary', 'secondary', 'success', 'warning', 'danger', 'muted'].map(color => (
-                <div key={color} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Badge variant={color as any} size="sm">{color}</Badge>
+              {[
+                'primary',
+                'secondary',
+                'success',
+                'warning',
+                'danger',
+                'muted',
+              ].map(color => (
+                <div
+                  key={color}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
+                  <Badge variant={color as any} size="sm">
+                    {color}
+                  </Badge>
                   <Typography color={color as any} size="sm" weight="medium">
                     {color} color variant
                   </Typography>
@@ -248,9 +293,15 @@ export const DesignTokens: Story = {
           <Stack spacing={3}>
             <Typography variant="h3">Typography</Typography>
             <Stack spacing={1}>
-              <Typography variant="h1" size="lg">Heading 1</Typography>
-              <Typography variant="h2" size="md">Heading 2</Typography>
-              <Typography variant="h3" size="sm">Heading 3</Typography>
+              <Typography variant="h1" size="lg">
+                Heading 1
+              </Typography>
+              <Typography variant="h2" size="md">
+                Heading 2
+              </Typography>
+              <Typography variant="h3" size="sm">
+                Heading 3
+              </Typography>
               <Typography variant="body1">Body 1 - Regular text</Typography>
               <Typography variant="body2">Body 2 - Secondary text</Typography>
               <Typography variant="caption">Caption - Small text</Typography>
@@ -266,14 +317,26 @@ export const DesignTokens: Story = {
           </Typography>
           <div style={{ display: 'flex', alignItems: 'end', gap: '0.5rem' }}>
             {[1, 2, 3, 4, 6, 8, 12, 16, 24].map(size => (
-              <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                <div style={{
-                  width: '2rem',
-                  height: `${size * 0.25}rem`,
-                  background: 'var(--pf-color-primary-500, #3b82f6)',
-                  borderRadius: '2px'
-                }} />
-                <Typography variant="caption" size="xs">{size}</Typography>
+              <div
+                key={size}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: '2rem',
+                    height: `${size * 0.25}rem`,
+                    background: 'var(--pf-color-primary-500, #3b82f6)',
+                    borderRadius: '2px',
+                  }}
+                />
+                <Typography variant="caption" size="xs">
+                  {size}
+                </Typography>
               </div>
             ))}
           </div>
@@ -284,7 +347,8 @@ export const DesignTokens: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Overview of the design token system including colors, typography, and spacing.',
+        story:
+          'Overview of the design token system including colors, typography, and spacing.',
       },
     },
   },

@@ -9,7 +9,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Versatile button component with multiple variants, sizes, and states. Supports loading states, icons, and full accessibility.',
+        component:
+          'Brutalist button component with bold shadows, dramatic hover effects, and aggressive typography. Built for interfaces that demand attention and make a statement.',
       },
     },
   },
@@ -154,7 +155,14 @@ export const IconOnly: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: '1rem',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+      }}
+    >
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="outline">Outline</Button>
@@ -183,6 +191,63 @@ export const AllSizes: Story = {
     docs: {
       description: {
         story: 'All button sizes displayed together for comparison.',
+      },
+    },
+  },
+};
+
+export const BrutalistDesign: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '2rem',
+        padding: '2rem',
+        background: '#f5f5f5',
+      }}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <h4 style={{ marginBottom: '1rem' }}>Primary Actions</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <Button variant="primary">GET STARTED</Button>
+          <Button variant="primary" size="lg">
+            SUBSCRIBE NOW
+          </Button>
+          <Button variant="danger">DELETE ACCOUNT</Button>
+        </div>
+      </div>
+
+      <div style={{ textAlign: 'center' }}>
+        <h4 style={{ marginBottom: '1rem' }}>Secondary Actions</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <Button variant="secondary">VIEW DETAILS</Button>
+          <Button variant="outline">LEARN MORE</Button>
+          <Button variant="ghost">CANCEL</Button>
+        </div>
+      </div>
+
+      <div style={{ textAlign: 'center' }}>
+        <h4 style={{ marginBottom: '1rem' }}>Interactive Demo</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <Button variant="primary" loading>
+            PROCESSING...
+          </Button>
+          <Button variant="secondary" disabled>
+            DISABLED
+          </Button>
+          <Button variant="outline" fullWidth>
+            FULL WIDTH
+          </Button>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Showcase of the brutalist design language with bold shadows, dramatic hover effects, and aggressive typography. Try hovering over the buttons to see the shadow animations.',
       },
     },
   },

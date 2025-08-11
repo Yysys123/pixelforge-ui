@@ -9,7 +9,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Versatile badge component with multiple variants, shapes, and positioning options. Perfect for status indicators, notifications, and labels with brutalist design elements.',
+        component:
+          'Versatile badge component with multiple variants, shapes, and positioning options. Perfect for status indicators, notifications, and labels with brutalist design elements.',
       },
     },
   },
@@ -17,7 +18,15 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger', 'info'],
+      options: [
+        'default',
+        'primary',
+        'secondary',
+        'success',
+        'warning',
+        'danger',
+        'info',
+      ],
       description: 'Visual style variant of the badge',
     },
     size: {
@@ -190,31 +199,29 @@ export const Interactive: Story = {
 export const Overlay: Story = {
   render: () => (
     <div style={{ position: 'relative', display: 'inline-block' }}>
-      <div style={{
-        width: '60px',
-        height: '60px',
-        background: '#f0f0f0',
-        border: '2px solid #ddd',
-        borderRadius: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '24px'
-      }}>
+      <div
+        style={{
+          width: '60px',
+          height: '60px',
+          background: '#f0f0f0',
+          border: '2px solid #ddd',
+          borderRadius: '8px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '24px',
+        }}
+      >
         📧
       </div>
-      <Badge
-        count={3}
-        variant="danger"
-        overlay
-        position="top-right"
-      />
+      <Badge count={3} variant="danger" overlay position="top-right" />
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Badge positioned as an overlay on another element (like a notification count).',
+        story:
+          'Badge positioned as an overlay on another element (like a notification count).',
       },
     },
   },
@@ -222,7 +229,14 @@ export const Overlay: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: '1rem',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+      }}
+    >
       <Badge variant="default">Default</Badge>
       <Badge variant="primary">Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
@@ -244,9 +258,15 @@ export const AllVariants: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Badge size="sm" variant="primary">Small</Badge>
-      <Badge size="md" variant="primary">Medium</Badge>
-      <Badge size="lg" variant="primary">Large</Badge>
+      <Badge size="sm" variant="primary">
+        Small
+      </Badge>
+      <Badge size="md" variant="primary">
+        Medium
+      </Badge>
+      <Badge size="lg" variant="primary">
+        Large
+      </Badge>
     </div>
   ),
   parameters: {
@@ -261,9 +281,15 @@ export const AllSizes: Story = {
 export const AllShapes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Badge shape="rounded" variant="primary">Rounded</Badge>
-      <Badge shape="square" variant="primary">Square</Badge>
-      <Badge shape="circle" variant="primary">C</Badge>
+      <Badge shape="rounded" variant="primary">
+        Rounded
+      </Badge>
+      <Badge shape="square" variant="primary">
+        Square
+      </Badge>
+      <Badge shape="circle" variant="primary">
+        C
+      </Badge>
     </div>
   ),
   parameters: {
@@ -277,22 +303,37 @@ export const AllShapes: Story = {
 
 export const StatusIndicators: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'flex-start',
+      }}
+    >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <span>Server Status</span>
-        <Badge variant="success" size="sm">Online</Badge>
+        <Badge variant="success" size="sm">
+          Online
+        </Badge>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <span>Build Status</span>
-        <Badge variant="warning" size="sm">Building</Badge>
+        <Badge variant="warning" size="sm">
+          Building
+        </Badge>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <span>Connection</span>
-        <Badge variant="danger" size="sm">Offline</Badge>
+        <Badge variant="danger" size="sm">
+          Offline
+        </Badge>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <span>Updates</span>
-        <Badge variant="info" size="sm">Available</Badge>
+        <Badge variant="info" size="sm">
+          Available
+        </Badge>
       </div>
     </div>
   ),
@@ -309,21 +350,39 @@ export const NotificationBadges: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
       <div style={{ position: 'relative', display: 'inline-block' }}>
-        <div style={{ padding: '0.5rem', background: '#f0f0f0', borderRadius: '4px' }}>
+        <div
+          style={{
+            padding: '0.5rem',
+            background: '#f0f0f0',
+            borderRadius: '4px',
+          }}
+        >
           🔔 Notifications
         </div>
         <Badge count={12} variant="danger" overlay />
       </div>
-      
+
       <div style={{ position: 'relative', display: 'inline-block' }}>
-        <div style={{ padding: '0.5rem', background: '#f0f0f0', borderRadius: '4px' }}>
+        <div
+          style={{
+            padding: '0.5rem',
+            background: '#f0f0f0',
+            borderRadius: '4px',
+          }}
+        >
           💬 Messages
         </div>
         <Badge count={5} variant="primary" overlay />
       </div>
-      
+
       <div style={{ position: 'relative', display: 'inline-block' }}>
-        <div style={{ padding: '0.5rem', background: '#f0f0f0', borderRadius: '4px' }}>
+        <div
+          style={{
+            padding: '0.5rem',
+            background: '#f0f0f0',
+            borderRadius: '4px',
+          }}
+        >
           📋 Tasks
         </div>
         <Badge dot variant="warning" overlay />
@@ -333,7 +392,8 @@ export const NotificationBadges: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example of using badges for notification counts and indicators.',
+        story:
+          'Example of using badges for notification counts and indicators.',
       },
     },
   },
@@ -341,19 +401,27 @@ export const NotificationBadges: Story = {
 
 export const ProductLabels: Story = {
   render: () => (
-    <div style={{ 
-      display: 'grid', 
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-      gap: '1rem',
-      maxWidth: '600px'
-    }}>
-      <div style={{ 
-        padding: '1rem', 
-        border: '2px solid #ddd', 
-        borderRadius: '8px',
-        position: 'relative'
-      }}>
-        <Badge variant="success" size="sm" style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '1rem',
+        maxWidth: '600px',
+      }}
+    >
+      <div
+        style={{
+          padding: '1rem',
+          border: '2px solid #ddd',
+          borderRadius: '8px',
+          position: 'relative',
+        }}
+      >
+        <Badge
+          variant="success"
+          size="sm"
+          style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+        >
           New
         </Badge>
         <h4 style={{ margin: '0 0 0.5rem 0' }}>Premium Plan</h4>
@@ -361,14 +429,20 @@ export const ProductLabels: Story = {
           Advanced features for growing teams
         </p>
       </div>
-      
-      <div style={{ 
-        padding: '1rem', 
-        border: '2px solid #ddd', 
-        borderRadius: '8px',
-        position: 'relative'
-      }}>
-        <Badge variant="warning" size="sm" style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}>
+
+      <div
+        style={{
+          padding: '1rem',
+          border: '2px solid #ddd',
+          borderRadius: '8px',
+          position: 'relative',
+        }}
+      >
+        <Badge
+          variant="warning"
+          size="sm"
+          style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+        >
           Popular
         </Badge>
         <h4 style={{ margin: '0 0 0.5rem 0' }}>Pro Plan</h4>
@@ -376,14 +450,20 @@ export const ProductLabels: Story = {
           Perfect for most businesses
         </p>
       </div>
-      
-      <div style={{ 
-        padding: '1rem', 
-        border: '2px solid #ddd', 
-        borderRadius: '8px',
-        position: 'relative'
-      }}>
-        <Badge variant="danger" size="sm" style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}>
+
+      <div
+        style={{
+          padding: '1rem',
+          border: '2px solid #ddd',
+          borderRadius: '8px',
+          position: 'relative',
+        }}
+      >
+        <Badge
+          variant="danger"
+          size="sm"
+          style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+        >
           Limited
         </Badge>
         <h4 style={{ margin: '0 0 0.5rem 0' }}>Enterprise</h4>
@@ -396,7 +476,8 @@ export const ProductLabels: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example of using badges as product labels and promotional tags.',
+        story:
+          'Example of using badges as product labels and promotional tags.',
       },
     },
   },

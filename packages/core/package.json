@@ -1,7 +1,7 @@
 {
   "name": "@pixelforge-ui/core",
   "version": "0.1.0",
-  "description": "Design tokens and theming utilities for PixelForge UI component library",
+  "description": "Design tokens and theming utilities for PixelForge UI component library. A bold, brutalist design system with comprehensive tokens for colors, typography, spacing, and themes. Repository: https://github.com/mosharif/pixelforge-ui",
   "keywords": [
     "design-tokens",
     "theme",
@@ -9,16 +9,18 @@
     "design-system",
     "typescript",
     "react",
-    "ui"
+    "ui",
+    "brutalist",
+    "pixelforge"
   ],
-  "homepage": "https://github.com/pixelforge/pixelforge-ui#readme",
+  "homepage": "https://github.com/mosharif/pixelforge-ui#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pixelforge/pixelforge-ui.git",
+    "url": "https://github.com/mosharif/pixelforge-ui.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/pixelforge/pixelforge-ui/issues"
+    "url": "https://github.com/mosharif/pixelforge-ui/issues"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",

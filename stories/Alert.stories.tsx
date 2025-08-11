@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Alert } from '../packages/react/src/alert/Alert';
 import { Button } from '../packages/react/src/button/Button';
+import { Typography } from '../packages/react/src/typography/Typography';
 
 const meta = {
   title: 'Components/Alert',
@@ -10,7 +11,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Accessible alert component with multiple variants, auto-hide functionality, and brutalist design elements. Perfect for notifications, status messages, and user feedback.',
+        component:
+          'Accessible alert component with multiple variants, auto-hide functionality, and brutalist design elements. Perfect for notifications, status messages, and user feedback.',
       },
     },
   },
@@ -94,7 +96,7 @@ export const Info: Story = {
   args: {
     variant: 'info',
     title: 'Information',
-    children: 'Here\'s some helpful information for you.',
+    children: "Here's some helpful information for you.",
   },
 };
 
@@ -111,7 +113,7 @@ export const WithoutIcon: Story = {
   args: {
     variant: 'success',
     title: 'No Icon',
-    children: 'This alert doesn\'t show an icon.',
+    children: "This alert doesn't show an icon.",
     showIcon: false,
   },
 };
@@ -149,8 +151,12 @@ export const WithActions: Story = {
     children: 'Your session will expire soon. Would you like to extend it?',
     actions: (
       <div style={{ display: 'flex', gap: '0.5rem' }}>
-        <Button size="sm" variant="ghost">Dismiss</Button>
-        <Button size="sm" variant="primary">Extend Session</Button>
+        <Button size="sm" variant="ghost">
+          Dismiss
+        </Button>
+        <Button size="sm" variant="primary">
+          Extend Session
+        </Button>
       </div>
     ),
   },
@@ -180,12 +186,29 @@ export const AutoHide: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '500px' }}>
-      <Alert variant="default" title="Default">Default alert variant</Alert>
-      <Alert variant="success" title="Success">Success alert variant</Alert>
-      <Alert variant="warning" title="Warning">Warning alert variant</Alert>
-      <Alert variant="danger" title="Error">Danger alert variant</Alert>
-      <Alert variant="info" title="Info">Info alert variant</Alert>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '500px',
+      }}
+    >
+      <Alert variant="default" title="Default">
+        Default alert variant
+      </Alert>
+      <Alert variant="success" title="Success">
+        Success alert variant
+      </Alert>
+      <Alert variant="warning" title="Warning">
+        Warning alert variant
+      </Alert>
+      <Alert variant="danger" title="Error">
+        Danger alert variant
+      </Alert>
+      <Alert variant="info" title="Info">
+        Info alert variant
+      </Alert>
     </div>
   ),
   parameters: {
@@ -199,10 +222,23 @@ export const AllVariants: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '500px' }}>
-      <Alert variant="info" size="sm" title="Small">Small size alert</Alert>
-      <Alert variant="info" size="md" title="Medium">Medium size alert (default)</Alert>
-      <Alert variant="info" size="lg" title="Large">Large size alert</Alert>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '500px',
+      }}
+    >
+      <Alert variant="info" size="sm" title="Small">
+        Small size alert
+      </Alert>
+      <Alert variant="info" size="md" title="Medium">
+        Medium size alert (default)
+      </Alert>
+      <Alert variant="info" size="lg" title="Large">
+        Large size alert
+      </Alert>
     </div>
   ),
   parameters: {
@@ -216,13 +252,28 @@ export const AllSizes: Story = {
 
 export const FormValidation: Story = {
   render: () => (
-    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <h3 style={{ margin: '0 0 1rem 0' }}>Form Validation Example</h3>
-      
+    <div
+      style={{
+        width: '400px',
+        padding: '1.5rem',
+        margin: '1rem auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+      }}
+    >
+      <Typography variant="h3" style={{ margin: '0 0 1rem 0' }}>
+        Form Validation Example
+      </Typography>
+
       <div>
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
+        <Typography
+          as="label"
+          variant="overline"
+          style={{ display: 'block', marginBottom: '0.5rem' }}
+        >
           Email
-        </label>
+        </Typography>
         <input
           type="email"
           placeholder="Enter your email"
@@ -235,9 +286,9 @@ export const FormValidation: Story = {
           }}
           defaultValue="invalid-email"
         />
-        <Alert 
-          variant="danger" 
-          size="sm" 
+        <Alert
+          variant="danger"
+          size="sm"
           style={{ marginTop: '0.5rem' }}
           showDecorations={false}
         >
@@ -246,9 +297,13 @@ export const FormValidation: Story = {
       </div>
 
       <div>
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
+        <Typography
+          as="label"
+          variant="overline"
+          style={{ display: 'block', marginBottom: '0.5rem' }}
+        >
           Password
-        </label>
+        </Typography>
         <input
           type="password"
           placeholder="Enter your password"
@@ -261,9 +316,9 @@ export const FormValidation: Story = {
           }}
           defaultValue="securepassword123"
         />
-        <Alert 
-          variant="success" 
-          size="sm" 
+        <Alert
+          variant="success"
+          size="sm"
           style={{ marginTop: '0.5rem' }}
           showDecorations={false}
         >

@@ -9,7 +9,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Brutalist design card component with decorative patterns, pricing display, and interactive features. Perfect for showcasing products, services, or content.',
+        component:
+          'Brutalist design card component with decorative patterns, pricing display, and interactive features. Perfect for showcasing products, services, or content.',
       },
     },
   },
@@ -61,7 +62,8 @@ export const Default: Story = {
   args: {
     title: 'Creative Studio',
     tag: 'Premium',
-    description: 'Award-winning design studio crafting bold brands and cutting-edge digital experiences.',
+    description:
+      'Award-winning design studio crafting bold brands and cutting-edge digital experiences.',
     actionText: 'Get Started',
   },
 };
@@ -140,7 +142,8 @@ export const NonInteractive: Story = {
 export const WithoutPatterns: Story = {
   args: {
     title: 'Clean Design',
-    description: 'Card without decorative background patterns for a cleaner look.',
+    description:
+      'Card without decorative background patterns for a cleaner look.',
     showPatterns: false,
     actionText: 'Explore',
   },
@@ -154,7 +157,14 @@ export const CustomContent: Story = {
       description="You can add any custom content inside the card."
       actionText="Try It"
     >
-      <div style={{ margin: '1rem 0', padding: '1rem', background: '#f0f0f0', borderRadius: '8px' }}>
+      <div
+        style={{
+          margin: '1rem 0',
+          padding: '1rem',
+          background: '#f0f0f0',
+          borderRadius: '8px',
+        }}
+      >
         <h4 style={{ margin: '0 0 0.5rem 0' }}>Custom Section</h4>
         <p style={{ margin: 0, fontSize: '0.9rem' }}>
           This is custom content that can include any React elements.
@@ -165,7 +175,8 @@ export const CustomContent: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Card with custom children content in addition to the standard props.',
+        story:
+          'Card with custom children content in addition to the standard props.',
       },
     },
   },
@@ -173,12 +184,14 @@ export const CustomContent: Story = {
 
 export const CardGrid: Story = {
   render: () => (
-    <div style={{ 
-      display: 'grid', 
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-      gap: '2rem',
-      maxWidth: '1200px' 
-    }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '2rem',
+        maxWidth: '1200px',
+      }}
+    >
       <Card
         title="Starter"
         tag="Free"
@@ -223,7 +236,8 @@ export const CardGrid: Story = {
     layout: 'padded',
     docs: {
       description: {
-        story: 'Multiple cards in a responsive grid layout showing different pricing tiers.',
+        story:
+          'Multiple cards in a responsive grid layout showing different pricing tiers.',
       },
     },
   },

@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
+import { Button } from '../button/Button';
 import styles from './Card.module.css';
 import '../styles/utilities.css';
 
@@ -168,13 +169,18 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
               )}
 
               {actionText && (
-                <button
-                  className={styles['action-button']}
+                <Button
+                  variant="secondary"
+                  size="md"
                   onClick={onAction}
-                  type="button"
+                  style={{
+                    fontSize: '0.9em',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                  }}
                 >
                   {actionText}
-                </button>
+                </Button>
               )}
             </div>
           )}

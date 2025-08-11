@@ -29,10 +29,7 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
  * Provides responsive padding and max-width constraints.
  */
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  (
-    { size = 'xl', as = 'div', className, children, ...props },
-    ref
-  ) => {
+  ({ size = 'xl', as = 'div', className, children, ...props }, ref) => {
     const classes = clsx(styles.container, styles[`size-${size}`], className);
     const Component = as as React.ElementType;
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Input } from '../packages/react/src/input/Input';
+import { Typography } from '../packages/react/src/typography/Typography';
 
 const meta = {
   title: 'Components/Input',
@@ -9,7 +10,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Accessible input component with validation states, helper text, and icon support. Fully compatible with forms and validation libraries.',
+        component:
+          'Brutalist input component with bold borders, dramatic shadows, and aggressive validation states. Built for forms that command attention and ensure data integrity.',
       },
     },
   },
@@ -159,7 +161,14 @@ export const WithEndIcon: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '300px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '300px',
+      }}
+    >
       <Input label="Small" size="sm" placeholder="Small input" />
       <Input label="Medium" size="md" placeholder="Medium input" />
       <Input label="Large" size="lg" placeholder="Large input" />
@@ -176,10 +185,26 @@ export const AllSizes: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '300px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '300px',
+      }}
+    >
       <Input label="Default" placeholder="Default state" />
-      <Input label="Success" value="Valid input" state="success" helperText="Looks good!" />
-      <Input label="Error" value="Invalid input" error="This field is required" />
+      <Input
+        label="Success"
+        value="Valid input"
+        state="success"
+        helperText="Looks good!"
+      />
+      <Input
+        label="Error"
+        value="Invalid input"
+        error="This field is required"
+      />
       <Input label="Disabled" placeholder="Disabled state" disabled />
     </div>
   ),
@@ -187,6 +212,144 @@ export const AllStates: Story = {
     docs: {
       description: {
         story: 'All input states displayed together for comparison.',
+      },
+    },
+  },
+};
+
+export const BrutalistForm: Story = {
+  render: () => (
+    <div
+      style={{
+        maxWidth: '500px',
+        padding: '2.5rem',
+        margin: '1rem auto',
+        background: '#f8f9fa',
+        border: '0.2em solid #000',
+        borderRadius: '0.5em',
+        boxShadow: '0.3em 0.3em 0 #000',
+      }}
+    >
+      <Typography
+        variant="h2"
+        style={{
+          margin: '0 0 2rem 0',
+          borderBottom: '0.2em solid #000',
+          paddingBottom: '0.5rem',
+        }}
+      >
+        BRUTALIST CONTACT FORM
+      </Typography>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <Input
+          label="Full Name"
+          placeholder="Enter your full name"
+          required
+          size="lg"
+        />
+
+        <Input
+          label="Email Address"
+          type="email"
+          placeholder="your.email@domain.com"
+          required
+          size="lg"
+          value="user@example.com"
+          state="success"
+          helperText="✓ Email format is valid"
+        />
+
+        <Input
+          label="Phone Number"
+          type="tel"
+          placeholder="+1 (555) 123-4567"
+          size="lg"
+          value="123-invalid"
+          error="Please enter a valid phone number"
+        />
+
+        <Input
+          label="Company"
+          placeholder="Your company name"
+          size="lg"
+          helperText="Optional - helps us understand your needs"
+        />
+
+        <Input
+          label="Budget Range"
+          placeholder="Select your budget"
+          size="lg"
+          disabled
+          helperText="This field is currently unavailable"
+        />
+
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+          <button
+            style={{
+              flex: 1,
+              padding: '0.8em 1.5em',
+              background: '#6b21a8',
+              color: '#fff',
+              border: '0.15em solid #000',
+              borderRadius: '0.3em',
+              boxShadow: '0.2em 0.2em 0 #000',
+              fontWeight: '700',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.transform = 'translate(-0.1em, -0.1em)';
+              e.currentTarget.style.boxShadow = '0.3em 0.3em 0 #000';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.boxShadow = '0.2em 0.2em 0 #000';
+            }}
+          >
+            SUBMIT
+          </button>
+
+          <button
+            style={{
+              flex: 1,
+              padding: '0.8em 1.5em',
+              background: 'transparent',
+              color: '#000',
+              border: '0.15em solid #000',
+              borderRadius: '0.3em',
+              boxShadow: '0.2em 0.2em 0 #000',
+              fontWeight: '700',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.transform = 'translate(-0.1em, -0.1em)';
+              e.currentTarget.style.boxShadow = '0.3em 0.3em 0 #000';
+              e.currentTarget.style.background = '#f0f0f0';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.boxShadow = '0.2em 0.2em 0 #000';
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        story:
+          'Complete brutalist form example showcasing bold borders, dramatic shadows, uppercase labels, and aggressive validation states. Demonstrates the full form experience with various input states.',
       },
     },
   },

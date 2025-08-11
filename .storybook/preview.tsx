@@ -14,7 +14,8 @@ const preview: Preview = {
     },
     docs: {
       description: {
-        component: 'PixelForge UI Components - Modern React component library with brutalist design',
+        component:
+          'PixelForge UI Components - Modern React component library with brutalist design',
       },
     },
     backgrounds: {
@@ -61,7 +62,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
+    Story => (
       <ThemeProvider defaultMode="light">
         <div style={{ padding: '1rem' }}>
           <Story />
