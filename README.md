@@ -22,9 +22,10 @@ PixelForge UI brings together industrial-strength design tokens, brutal aestheti
 
 | Package | Description | Version | Size |
 |---------|-------------|---------|------|
-| [`@pixelforge-ui/core`](./packages/core) | Design tokens, theme provider, and utilities | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/core.svg)](https://www.npmjs.com/package/@pixelforge-ui/core) | [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40pixelforge-ui%2Fcore)](https://bundlephobia.com/package/@pixelforge-ui/core) |
-| [`@pixelforge-ui/react`](./packages/react) | React components with brutalist design | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react) | [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40pixelforge-ui%2Freact)](https://bundlephobia.com/package/@pixelforge-ui/react) |
-| [`@pixelforge-ui/icons`](./packages/icons) | Brutalist icon set with React components | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/icons.svg)](https://www.npmjs.com/package/@pixelforge-ui/icons) | [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40pixelforge-ui%2Ficons)](https://bundlephobia.com/package/@pixelforge-ui/icons) |
+| [`@pixelforge-ui/core`](./packages/core) | Design tokens, theme provider, and utilities | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/core.svg)](https://www.npmjs.com/package/@pixelforge-ui/core) | ![Unpacked Size](https://img.shields.io/npm/unpacked-size/%40pixelforge-ui%2Fcore) |
+| [`@pixelforge-ui/react`](./packages/react) | React components with brutalist design | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/react.svg)](https://www.npmjs.com/package/@pixelforge-ui/react) | ![Unpacked Size](https://img.shields.io/npm/unpacked-size/%40pixelforge-ui%2Freact) |
+| [`@pixelforge-ui/icons`](./packages/icons) | Brutalist icon set with React components | [![npm](https://img.shields.io/npm/v/@pixelforge-ui/icons.svg)](https://www.npmjs.com/package/@pixelforge-ui/icons) | ![Unpacked Size](https://img.shields.io/npm/unpacked-size/%40pixelforge-ui%2Ficons)
+ |
 
 ## ⚡ Quick Start
 
