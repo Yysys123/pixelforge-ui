@@ -3,6 +3,7 @@ import { fn } from '@storybook/test';
 import { useState } from 'react';
 import { Modal } from '../packages/react/src/modal/Modal';
 import { Button } from '../packages/react/src/button/Button';
+import { Typography } from '../packages/react/src/typography/Typography';
 
 const meta = {
   title: 'Components/Modal',
@@ -231,15 +232,17 @@ export const FormModal: Story = {
               style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
             >
               <div>
-                <label
+                <Typography
+                  as="label"
+                  variant="caption"
+                  weight="bold"
                   style={{
                     display: 'block',
                     marginBottom: '0.5rem',
-                    fontWeight: '600',
                   }}
                 >
                   Name
-                </label>
+                </Typography>
                 <input
                   type="text"
                   placeholder="Your name"
@@ -253,15 +256,17 @@ export const FormModal: Story = {
                 />
               </div>
               <div>
-                <label
+                <Typography
+                  as="label"
+                  variant="caption"
+                  weight="bold"
                   style={{
                     display: 'block',
                     marginBottom: '0.5rem',
-                    fontWeight: '600',
                   }}
                 >
                   Email
-                </label>
+                </Typography>
                 <input
                   type="email"
                   placeholder="your@email.com"
@@ -275,15 +280,17 @@ export const FormModal: Story = {
                 />
               </div>
               <div>
-                <label
+                <Typography
+                  as="label"
+                  variant="caption"
+                  weight="bold"
                   style={{
                     display: 'block',
                     marginBottom: '0.5rem',
-                    fontWeight: '600',
                   }}
                 >
                   Message
-                </label>
+                </Typography>
                 <textarea
                   placeholder="Your message..."
                   rows={4}

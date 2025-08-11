@@ -1,5 +1,6 @@
 import React, { forwardRef, useId } from 'react';
 import { clsx } from 'clsx';
+import { Typography } from '../typography/Typography';
 import styles from './Input.module.css';
 import '../styles/utilities.css';
 
@@ -120,9 +121,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={wrapperClasses}>
         {label && (
-          <label htmlFor={id} className={labelClasses}>
+          <Typography
+            as="label"
+            htmlFor={id}
+            className={labelClasses}
+            variant="caption"
+            weight="bold"
+          >
             {label}
-          </label>
+          </Typography>
         )}
 
         <div className={inputClasses}>

@@ -3,6 +3,7 @@ import { render, screen } from '../test-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { Modal } from './Modal';
+import { Typography } from '../typography/Typography';
 
 // Mock createPortal to render in current document
 jest.mock('react-dom', () => ({
@@ -376,7 +377,7 @@ describe('Modal', () => {
 
       const { container } = render(
         <Modal {...defaultProps} title="Interactive Modal" footer={footer}>
-          <label htmlFor="email">Email:</label>
+          <Typography as="label" htmlFor="email" variant="caption" weight="bold">Email:</Typography>
           <input id="email" type="email" />
         </Modal>
       );
