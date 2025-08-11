@@ -74,7 +74,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     const helperId = helperText ? `${radioId}-helper` : undefined;
 
     const describedBy =
-      [errorId, helperId].filter(Boolean).join(' ') || undefined;
+      [errorId, !error && helperId].filter(Boolean).join(' ') || undefined;
 
     const wrapperClasses = clsx(
       styles.wrapper,
@@ -260,7 +260,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   const helperId = helperText ? `${groupId}-helper` : undefined;
 
   const describedBy =
-    [errorId, helperId].filter(Boolean).join(' ') || undefined;
+    [errorId, !error && helperId].filter(Boolean).join(' ') || undefined;
 
   const handleChange = (optionValue: string) => {
     if (controlledValue === undefined) {

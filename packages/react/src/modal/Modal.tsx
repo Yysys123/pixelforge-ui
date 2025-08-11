@@ -99,17 +99,25 @@ const useFocusTrap = (
       }
     };
 
-    // Focus first element
-    const focusableElements = getFocusableElements();
-    if (focusableElements.length > 0) {
-      focusableElements[0].focus();
-    }
+    // Focus the modal container first, then first focusable element
+    container.focus();
+    
+    // Set timeout to ensure DOM is ready
+    const timer = setTimeout(() => {
+      const focusableElements = getFocusableElements();
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      } else {
+        container.focus();
+      }
+    }, 0);
 
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      clearTimeout(timer);
       document.removeEventListener('keydown', handleKeyDown);
-      if (previousFocusRef.current) {
+      if (previousFocusRef.current && previousFocusRef.current !== document.body) {
         previousFocusRef.current.focus();
       }
     };
@@ -168,7 +176,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     useEffect(() => {
       if (!open) return;
 
-      const originalStyle = window.getComputedStyle(document.body).overflow;
+      const originalStyle = document.body.style.overflow || '';
       document.body.style.overflow = 'hidden';
 
       return () => {
@@ -205,6 +213,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           role="dialog"
           aria-modal="true"
           aria-labelledby={title ? 'modal-title' : undefined}
+          tabIndex={-1}
           {...props}
         >
           {/* Decorative patterns */}

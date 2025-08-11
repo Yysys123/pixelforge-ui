@@ -109,16 +109,18 @@ describe('Radio', () => {
       expect(radio).toHaveAttribute('aria-describedby', helperText.id);
     });
 
-    it('combines error and helper text in aria-describedby', () => {
+    it('shows only error in aria-describedby when both error and helper text are provided', () => {
       render(<Radio helperText="Helper text" error="Error message" />);
 
       const radio = screen.getByRole('radio');
-      const helperText = screen.getByText('Helper text');
       const errorMessage = screen.getByRole('alert');
 
+      // Helper text should not be visible when there's an error
+      expect(screen.queryByText('Helper text')).not.toBeInTheDocument();
+
+      // Only error should be in aria-describedby
       const describedBy = radio.getAttribute('aria-describedby');
-      expect(describedBy).toContain(errorMessage.id);
-      expect(describedBy).toContain(helperText.id);
+      expect(describedBy).toBe(errorMessage.id);
     });
 
     it('hides helper text when error is present', () => {
@@ -432,8 +434,9 @@ describe('RadioGroup', () => {
           required
         />
       );
-      expect(screen.getByLabelText('required')).toBeInTheDocument();
-      expect(screen.getByText('*')).toBeInTheDocument();
+      // Should show required indicators (there will be multiple: one for legend and one for each radio)
+      expect(screen.getAllByLabelText('required')).toHaveLength(4); // 1 for legend + 3 for options
+      expect(screen.getAllByText('*')).toHaveLength(4); // 1 for legend + 3 for options
     });
 
     it('passes required to all radios', () => {
@@ -598,15 +601,21 @@ describe('RadioGroup', () => {
     it('generates unique IDs for groups', () => {
       render(
         <>
-          <RadioGroup name="group1" options={options} />
-          <RadioGroup name="group2" options={options} />
+          <RadioGroup name="group1" options={options} helperText="Helper 1" />
+          <RadioGroup name="group2" options={options} helperText="Helper 2" />
         </>
       );
 
       const groups = screen.getAllByRole('group');
-      expect(groups[0].getAttribute('aria-describedby')).not.toBe(
-        groups[1].getAttribute('aria-describedby')
-      );
+      const describedBy1 = groups[0].getAttribute('aria-describedby');
+      const describedBy2 = groups[1].getAttribute('aria-describedby');
+      
+      // Both should have aria-describedby values
+      expect(describedBy1).toBeTruthy();
+      expect(describedBy2).toBeTruthy();
+      
+      // And they should be different
+      expect(describedBy1).not.toBe(describedBy2);
     });
   });
 });

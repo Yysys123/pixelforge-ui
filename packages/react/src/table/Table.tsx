@@ -329,10 +329,12 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                   className={clsx(styles.th, styles['selection-column'])}
                   scope="col"
                 >
+                  <span className="sr-only">Select all rows</span>
                   <label className={styles.checkbox}>
                     <input
                       type="checkbox"
                       checked={isAllSelected}
+                      aria-label="Select all rows"
                       ref={input => {
                         if (input) input.indeterminate = isSomeSelected;
                       }}
@@ -456,6 +458,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
                           <input
                             type="checkbox"
                             checked={isSelected}
+                            aria-label={`Select row ${index + 1}`}
                             onChange={e =>
                               handleRowSelection(recordKey, e.target.checked)
                             }

@@ -59,6 +59,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       rotation,
       className,
       style,
+      onClick,
       ...props
     },
     ref
@@ -101,6 +102,13 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       ...(rotation && { transform: `rotate(${rotation}deg)` }),
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      if (interactive && onClick && (event.key === 'Enter' || event.key === ' ')) {
+        event.preventDefault();
+        onClick(event as any);
+      }
+    };
+
     return (
       <span
         ref={ref}
@@ -108,6 +116,8 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         style={badgeStyle}
         role={interactive ? 'button' : undefined}
         tabIndex={interactive ? 0 : undefined}
+        onClick={interactive ? onClick : undefined}
+        onKeyDown={interactive ? handleKeyDown : undefined}
         {...props}
       >
         {/* Decorative pattern overlay */}

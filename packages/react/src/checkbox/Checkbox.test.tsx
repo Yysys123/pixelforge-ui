@@ -115,16 +115,18 @@ describe('Checkbox', () => {
       expect(checkbox).toHaveAttribute('aria-describedby', helperText.id);
     });
 
-    it('combines error and helper text in aria-describedby', () => {
+    it('shows only error in aria-describedby when both error and helper text are provided', () => {
       render(<Checkbox helperText="Helper text" error="Error message" />);
 
       const checkbox = screen.getByRole('checkbox');
-      const helperText = screen.getByText('Helper text');
       const errorMessage = screen.getByRole('alert');
 
+      // Helper text should not be visible when there's an error
+      expect(screen.queryByText('Helper text')).not.toBeInTheDocument();
+
+      // Only error should be in aria-describedby
       const describedBy = checkbox.getAttribute('aria-describedby');
-      expect(describedBy).toContain(errorMessage.id);
-      expect(describedBy).toContain(helperText.id);
+      expect(describedBy).toBe(errorMessage.id);
     });
 
     it('hides helper text when error is present', () => {

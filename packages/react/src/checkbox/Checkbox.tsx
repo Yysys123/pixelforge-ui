@@ -87,7 +87,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const helperId = helperText ? `${checkboxId}-helper` : undefined;
 
     const describedBy =
-      [errorId, helperId].filter(Boolean).join(' ') || undefined;
+      [errorId, !error && helperId].filter(Boolean).join(' ') || undefined;
 
     const wrapperClasses = clsx(
       styles.wrapper,
@@ -114,18 +114,24 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       [styles.required]: required,
     });
 
+    // Internal ref to handle indeterminate state
+    const internalRef = React.useRef<HTMLInputElement>(null);
+    
+    // Merge refs
+    React.useImperativeHandle(ref, () => internalRef.current!, []);
+
     // Handle indeterminate state
     React.useEffect(() => {
-      if (ref && typeof ref === 'object' && ref.current) {
-        ref.current.indeterminate = indeterminate;
+      if (internalRef.current) {
+        internalRef.current.indeterminate = indeterminate;
       }
-    }, [indeterminate, ref]);
+    }, [indeterminate]);
 
     return (
       <div className={wrapperClasses}>
         <label className={styles['checkbox-container']} htmlFor={checkboxId}>
           <input
-            ref={ref}
+            ref={internalRef}
             type="checkbox"
             id={checkboxId}
             className={checkboxClasses}
@@ -292,7 +298,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   const helperId = helperText ? `${groupId}-helper` : undefined;
 
   const describedBy =
-    [errorId, helperId].filter(Boolean).join(' ') || undefined;
+    [errorId, !error && helperId].filter(Boolean).join(' ') || undefined;
 
   const handleChange = (optionValue: string, checked: boolean) => {
     const newValue = checked

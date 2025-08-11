@@ -145,6 +145,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className={styles['input-field']}
             disabled={disabled}
             required={required}
+            aria-required={required}
             aria-invalid={finalState === 'error'}
             aria-describedby={finalHelperText ? helperTextId : undefined}
             {...props}
