@@ -8,7 +8,7 @@ on:
       version:
         description: 'Version to publish (e.g., v0.1.0)'
         required: true
-        default: 'v0.3.3'
+        default: 'v0.3.4'
 
 env:
   NODE_VERSION: '18'
