@@ -199,22 +199,26 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
   ) => {
     // Process children to extract tab items if items prop is not provided
     const processedItems =
-      items ||
-      Children.map(children, (child, index) => {
-        if (isValidElement<TabPaneProps>(child) && child.type === TabPane) {
-          return {
-            key: child.key?.toString() || index.toString(),
-            label: child.props.tab as string,
-            content: child.props.children,
-            disabled: child.props.disabled,
-            icon: child.props.icon,
-            badge: child.props.badge,
-            showPattern: child.props.showPattern,
-          };
-        }
-        return null;
-      })?.filter(Boolean) ||
-      [];
+      items
+        ? items.map((item, index) => ({
+            ...item,
+            key: item.key || index.toString(),
+          }))
+        : Children.map(children, (child, index) => {
+            if (isValidElement<TabPaneProps>(child) && child.type === TabPane) {
+              return {
+                key: child.key?.toString() || index.toString(),
+                label: child.props.tab as string,
+                content: child.props.children,
+                disabled: child.props.disabled,
+                icon: child.props.icon,
+                badge: child.props.badge,
+                showPattern: child.props.showPattern,
+              };
+            }
+            return null;
+          })?.filter(Boolean) ||
+          [];
 
     const [internalActiveKey, setInternalActiveKey] = useState(
       defaultActiveKey || processedItems[0]?.key || ''
