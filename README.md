@@ -138,7 +138,7 @@ pixelforge-ui/
 
 ## 📚 Documentation
 
-- **[Storybook](https://pixelforge-ui-storybook.vercel.app)** - Interactive component documentation
+- **[Storybook](https://mo-sharif.github.io/pixelforge-ui/)** - Interactive component documentation
 - **[Core Package](./packages/core/README.md)** - Design tokens and theming
 - **[React Package](./packages/react/README.md)** - Component library
 - **[Icons Package](./packages/icons/README.md)** - Icon components
@@ -176,4 +176,4 @@ MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-**Made with ⚡ by developers who believe in bold design and uncompromising quality.**
+**Made with ❤️ and countless late nights by a developer passionate about bold design and beautiful user experiences.**
