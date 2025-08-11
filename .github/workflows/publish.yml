@@ -75,54 +75,50 @@ jobs:
         working-directory: packages/core
         run: |
           echo "Publishing @pixelforge-ui/core to npm..."
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm publish --access public --registry https://registry.npmjs.org
+          rm .npmrc
 
       - name: Publish icons package to npm
         working-directory: packages/icons
         run: |
           echo "Publishing @pixelforge-ui/icons to npm..."
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm publish --access public --registry https://registry.npmjs.org
+          rm .npmrc
 
       - name: Publish react package to npm
         working-directory: packages/react
         run: |
           echo "Publishing @pixelforge-ui/react to npm..."
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # Setup for GitHub Package Registry
-      - name: Setup Node.js for GitHub Package Registry
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://npm.pkg.github.com'
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm publish --access public --registry https://registry.npmjs.org
+          rm .npmrc
 
       # Publish to GitHub Package Registry
       - name: Publish core package to GitHub Package Registry
         working-directory: packages/core
         run: |
           echo "Publishing @pixelforge-ui/core to GitHub Package Registry..."
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "@pixelforge-ui:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          npm publish --access public --registry https://npm.pkg.github.com
+          rm .npmrc
 
       - name: Publish icons package to GitHub Package Registry
         working-directory: packages/icons
         run: |
           echo "Publishing @pixelforge-ui/icons to GitHub Package Registry..."
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "@pixelforge-ui:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          npm publish --access public --registry https://npm.pkg.github.com
+          rm .npmrc
 
       - name: Publish react package to GitHub Package Registry
         working-directory: packages/react
         run: |
           echo "Publishing @pixelforge-ui/react to GitHub Package Registry..."
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "@pixelforge-ui:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          npm publish --access public --registry https://npm.pkg.github.com
+          rm .npmrc
