@@ -206,7 +206,9 @@
 .footer-link {
   color: var(--footer-text-muted);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: var(--pf-font-weight-medium, 500);
+  font-size: var(--pf-font-size-sm, 0.875rem);
+  font-family: var(--pf-font-family-sans);
   padding: var(--pf-spacing-1) 0;
   border-bottom: 2px solid transparent;
   transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -233,7 +235,7 @@
 }
 
 .footer-link.link-variant-bold {
-  font-weight: 700;
+  font-weight: var(--pf-font-weight-bold, 700);
   color: var(--footer-text);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -241,7 +243,7 @@
 
 .footer-link.link-variant-muted {
   opacity: 0.7;
-  font-size: 0.875rem;
+  font-size: var(--pf-font-size-xs, 0.75rem);
 }
 
 .external-icon {
@@ -319,6 +321,20 @@
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.social-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
 .social-text {
   font-size: 0.75rem;
 }
@@ -340,7 +356,7 @@
 }
 
 .footer-bottom::before {
-  content: "✂";
+  content: var(--footer-separator-icon, "✂");
   position: absolute;
   top: -0.8em;
   left: 50%;
@@ -406,6 +422,10 @@
   .social-link {
     width: 36px;
     height: 36px;
+  }
+  
+  .social-icon {
+    font-size: 0.9rem;
   }
   
   .social-text {

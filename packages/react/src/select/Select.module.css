@@ -1,0 +1,345 @@
+/* PixelForge UI - Select Component */
+.select {
+  --select-primary: var(--pf-color-primary);
+  --select-secondary: var(--pf-color-secondary);
+  --select-accent: var(--pf-color-accent);
+  --select-bg: var(--pf-bg);
+  --select-text: var(--pf-text);
+  --select-border: var(--pf-border);
+  --select-shadow: rgba(0, 0, 0, 0.2);
+  --select-danger: var(--pf-color-danger);
+  
+  position: relative;
+  width: 100%;
+  font-family: var(--pf-font-base);
+}
+
+/* Size variants */
+.select.size-sm {
+  --select-padding: var(--pf-spacing-2) var(--pf-spacing-3);
+  --select-font-size: var(--pf-font-size-sm);
+  --select-height: 2.5rem;
+}
+
+.select.size-md {
+  --select-padding: var(--pf-spacing-3) var(--pf-spacing-4);
+  --select-font-size: var(--pf-font-size-base);
+  --select-height: 3rem;
+}
+
+.select.size-lg {
+  --select-padding: var(--pf-spacing-4) var(--pf-spacing-5);
+  --select-font-size: var(--pf-font-size-lg);
+  --select-height: 3.5rem;
+}
+
+/* Color variants */
+.select.variant-default {
+  --select-primary: var(--pf-color-primary);
+}
+
+.select.variant-primary {
+  --select-primary: var(--pf-color-primary);
+  --select-border: var(--pf-color-primary);
+}
+
+.select.variant-secondary {
+  --select-primary: var(--pf-color-secondary);
+  --select-border: var(--pf-color-secondary);
+}
+
+.select.variant-accent {
+  --select-primary: var(--pf-color-accent);
+  --select-border: var(--pf-color-accent);
+}
+
+/* Select trigger */
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--select-height);
+  padding: var(--select-padding);
+  background: var(--select-bg);
+  border: 3px solid var(--select-border);
+  border-radius: var(--pf-radius-md);
+  cursor: pointer;
+  font-size: var(--select-font-size);
+  font-weight: var(--pf-font-weight-medium);
+  color: var(--select-text);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 3px 3px 0 var(--select-shadow);
+  user-select: none;
+}
+
+.select-trigger:hover:not(.disabled) {
+  border-color: var(--select-primary);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--select-shadow);
+}
+
+.select.open .select-trigger {
+  border-color: var(--select-primary);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 
+    3px 0 0 var(--select-shadow),
+    -3px 0 0 var(--select-shadow);
+}
+
+.select.error .select-trigger {
+  border-color: var(--select-danger);
+}
+
+.select.disabled .select-trigger {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--pf-color-muted);
+}
+
+/* Select value */
+.select-value {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--pf-font-weight-semibold);
+}
+
+.select.multiple .select-value {
+  text-transform: none;
+}
+
+/* Select actions */
+.select-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-spacing-2);
+  margin-left: var(--pf-spacing-2);
+}
+
+.clear-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--pf-color-muted);
+  font-weight: bold;
+  border-radius: var(--pf-radius-sm);
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background: var(--select-danger);
+  color: var(--select-bg);
+  transform: scale(1.1);
+}
+
+/* Select arrow */
+.select-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--select-text);
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.select-arrow .rotated {
+  transform: rotate(180deg);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Dropdown */
+.select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--select-bg);
+  border: 3px solid var(--select-primary);
+  border-top: none;
+  border-radius: 0 0 var(--pf-radius-md) var(--pf-radius-md);
+  box-shadow: 3px 3px 0 var(--select-shadow);
+  max-height: 300px;
+  overflow: hidden;
+  animation: slideDown 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search container */
+.search-container {
+  padding: var(--pf-spacing-3);
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--pf-spacing-2) var(--pf-spacing-3);
+  border: 2px solid var(--select-border);
+  border-radius: var(--pf-radius-sm);
+  background: var(--select-bg);
+  color: var(--select-text);
+  font-size: var(--pf-font-size-sm);
+  font-family: var(--pf-font-base);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--pf-font-weight-medium);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--select-primary);
+  box-shadow: 0 0 0 2px rgba(var(--pf-color-primary-rgb), 0.2);
+}
+
+/* Options container */
+.options-container {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Options */
+.option {
+  display: flex;
+  align-items: center;
+  padding: var(--pf-spacing-3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.option:hover:not(.disabled) {
+  background: rgba(var(--pf-color-primary-rgb), 0.1);
+  transform: translateX(3px);
+}
+
+.option.selected {
+  background: var(--select-primary);
+  color: var(--select-bg);
+  font-weight: var(--pf-font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.option.selected::after {
+  content: "";
+  position: absolute;
+  right: var(--pf-spacing-3);
+  font-weight: bold;
+}
+
+.option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--pf-color-muted);
+}
+
+/* Checkbox for multiple select */
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid var(--select-border);
+  border-radius: var(--pf-radius-sm);
+  margin-right: var(--pf-spacing-2);
+  background: var(--select-bg);
+  color: var(--select-primary);
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.option.selected .checkbox {
+  background: var(--select-bg);
+  border-color: var(--select-bg);
+  color: var(--select-primary);
+}
+
+/* Option content */
+.option-content {
+  flex: 1;
+  font-weight: var(--pf-font-weight-medium);
+}
+
+/* No options */
+.no-options {
+  padding: var(--pf-spacing-4);
+  text-align: center;
+  color: var(--pf-color-muted);
+  font-weight: var(--pf-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .select.size-lg {
+    --select-height: 3rem;
+    --select-padding: var(--pf-spacing-3) var(--pf-spacing-4);
+  }
+  
+  .select-dropdown {
+    max-height: 200px;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .select-trigger {
+    border-width: 4px;
+  }
+  
+  .option.selected {
+    box-shadow: inset 0 0 0 2px var(--select-bg);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .select-trigger,
+  .option,
+  .clear-button,
+  .select-arrow {
+    transition: none;
+  }
+  
+  .select-dropdown {
+    animation: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+}

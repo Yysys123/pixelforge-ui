@@ -36,6 +36,8 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   footer?: React.ReactNode;
   /** Portal container */
   container?: Element | null;
+  /** Custom separator icon for the footer */
+  separatorIcon?: string;
 }
 
 // Focus trap utility
@@ -143,6 +145,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       header,
       footer,
       container,
+      separatorIcon = '✂',
       className,
       children,
       ...props
@@ -214,6 +217,10 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           aria-modal="true"
           aria-labelledby={title ? 'modal-title' : undefined}
           tabIndex={-1}
+          style={{
+            '--modal-separator-icon': `"${separatorIcon}"`,
+            ...props.style
+          } as React.CSSProperties}
           {...props}
         >
           {/* Decorative patterns */}

@@ -5,7 +5,7 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: false, // Disable DTS for now due to project references issue
   minify: true,
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', '@pixelforge-ui/icons'],
   esbuildOptions(options) {
     // Ignore CSS imports during build
     options.loader = {

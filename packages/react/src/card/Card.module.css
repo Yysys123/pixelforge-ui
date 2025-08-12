@@ -246,7 +246,7 @@
 }
 
 .actions::before {
-  content: "✂";
+  content: var(--card-separator-icon, "✂");
   position: absolute;
   top: -0.8em;
   left: 50%;

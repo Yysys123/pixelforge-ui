@@ -66,6 +66,11 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
    * Whether the card is interactive (hover effects)
    */
   interactive?: boolean;
+
+  /**
+   * Custom separator icon for the actions section
+   */
+  separatorIcon?: string;
 }
 
 /**
@@ -86,6 +91,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = 'default',
       showPatterns = true,
       interactive = true,
+      separatorIcon = '✂',
       className,
       children,
       ...props
@@ -102,7 +108,14 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     );
 
     return (
-      <div ref={ref} className={cardClasses} {...props}>
+      <div 
+        ref={ref} 
+        className={cardClasses} 
+        style={{
+          '--card-separator-icon': `"${separatorIcon}"`,
+          ...props.style
+        } as React.CSSProperties}
+        {...props}>
         {/* Decorative patterns */}
         {showPatterns && (
           <>

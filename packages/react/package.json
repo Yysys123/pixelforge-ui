@@ -44,7 +44,7 @@
     }
   ],
   "scripts": {
-    "build": "tsup src/index.tsx --format cjs,esm --external react,react-dom --minify",
+    "build": "tsup",
     "dev": "tsup src/index.tsx --format cjs,esm --external react,react-dom --watch",
     "test": "jest",
     "test:a11y": "jest",
@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@pixelforge-ui/core": "workspace:*",
+    "@pixelforge-ui/icons": "workspace:*",
     "clsx": "^2.0.0"
   },
   "devDependencies": {

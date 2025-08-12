@@ -107,7 +107,7 @@
 }
 
 .form-header::after {
-  content: "✂";
+  content: var(--form-header-separator-icon, "✂");
   position: absolute;
   bottom: -0.8em;
   left: 50%;
@@ -218,7 +218,7 @@
 }
 
 .form-actions::before {
-  content: "✂";
+  content: var(--form-actions-separator-icon, "✂");
   position: absolute;
   top: -0.8em;
   left: 50%;

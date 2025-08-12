@@ -1,0 +1,331 @@
+/* PixelForge UI - Menu Component */
+.menu-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--pf-font-base);
+}
+
+.menu {
+  --menu-primary: var(--pf-color-primary);
+  --menu-secondary: var(--pf-color-secondary);
+  --menu-accent: var(--pf-color-accent);
+  --menu-bg: var(--pf-bg);
+  --menu-text: var(--pf-text);
+  --menu-border: var(--pf-border);
+  --menu-shadow: rgba(0, 0, 0, 0.2);
+  --menu-hover: rgba(var(--pf-color-primary-rgb), 0.1);
+  
+  position: absolute;
+  z-index: 1000;
+  min-width: 200px;
+  background: var(--menu-bg);
+  border: 3px solid var(--menu-border);
+  border-radius: var(--pf-radius-md);
+  box-shadow: 
+    6px 6px 0 var(--menu-shadow),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  font-family: var(--pf-font-base);
+  animation: menuSlideIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Size variants */
+.menu.size-sm {
+  --menu-font-size: var(--pf-font-size-xs);
+  --menu-padding: var(--pf-spacing-2) var(--pf-spacing-3);
+  min-width: 150px;
+}
+
+.menu.size-md {
+  --menu-font-size: var(--pf-font-size-sm);
+  --menu-padding: var(--pf-spacing-3) var(--pf-spacing-4);
+  min-width: 200px;
+}
+
+.menu.size-lg {
+  --menu-font-size: var(--pf-font-size-base);
+  --menu-padding: var(--pf-spacing-4) var(--pf-spacing-5);
+  min-width: 250px;
+}
+
+/* Color variants */
+.menu.variant-default {
+  --menu-active-color: var(--menu-primary);
+}
+
+.menu.variant-primary {
+  --menu-active-color: var(--menu-primary);
+  border-color: var(--menu-primary);
+}
+
+.menu.variant-secondary {
+  --menu-active-color: var(--menu-secondary);
+  border-color: var(--menu-secondary);
+}
+
+.menu.variant-accent {
+  --menu-active-color: var(--menu-accent);
+  border-color: var(--menu-accent);
+}
+
+/* Placement variants */
+.menu.placement-bottom-start {
+  top: 100%;
+  left: 0;
+  margin-top: var(--pf-spacing-1);
+}
+
+.menu.placement-bottom-end {
+  top: 100%;
+  right: 0;
+  margin-top: var(--pf-spacing-1);
+}
+
+.menu.placement-top-start {
+  bottom: 100%;
+  left: 0;
+  margin-bottom: var(--pf-spacing-1);
+}
+
+.menu.placement-top-end {
+  bottom: 100%;
+  right: 0;
+  margin-bottom: var(--pf-spacing-1);
+}
+
+.menu.placement-right-start {
+  top: 0;
+  left: 100%;
+  margin-left: var(--pf-spacing-1);
+}
+
+.menu.placement-left-start {
+  top: 0;
+  right: 100%;
+  margin-right: var(--pf-spacing-1);
+}
+
+/* Menu content */
+.menu-content {
+  padding: var(--pf-spacing-2);
+}
+
+/* Menu item container */
+.menu-item-container {
+  margin-bottom: var(--pf-spacing-1);
+}
+
+.menu-item-container:last-child {
+  margin-bottom: 0;
+}
+
+/* Menu item */
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--menu-padding);
+  font-size: var(--menu-font-size);
+  font-weight: var(--pf-font-weight-medium);
+  color: var(--menu-text);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: var(--pf-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.menu-item:hover:not(.disabled) {
+  background: var(--menu-hover);
+  border-color: var(--menu-active-color);
+  transform: translateX(2px);
+  color: var(--menu-active-color);
+}
+
+.menu-item:active:not(.disabled) {
+  transform: translateX(0);
+  background: var(--menu-active-color);
+  color: var(--menu-bg);
+}
+
+.menu-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--pf-color-muted);
+}
+
+.menu-item.has-submenu {
+  justify-content: space-between;
+}
+
+.menu-item.submenu-open {
+  background: var(--menu-active-color);
+  color: var(--menu-bg);
+  border-color: var(--menu-active-color);
+}
+
+/* Item icon */
+.item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--pf-spacing-2);
+  font-size: 1em;
+  line-height: 1;
+}
+
+.item-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+/* Item label */
+.item-label {
+  flex: 1;
+  font-weight: var(--pf-font-weight-semibold);
+}
+
+/* Submenu arrow */
+.submenu-arrow {
+  margin-left: var(--pf-spacing-2);
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+/* Submenu */
+.submenu {
+  margin-top: var(--pf-spacing-1);
+  margin-left: var(--pf-spacing-4);
+  padding-left: var(--pf-spacing-3);
+  border-left: 2px dashed var(--menu-active-color);
+  position: relative;
+}
+
+.submenu::before {
+  content: "↳";
+  position: absolute;
+  left: -0.6em;
+  top: 0;
+  color: var(--menu-active-color);
+  font-weight: bold;
+  background: var(--menu-bg);
+  padding: 0 0.2em;
+}
+
+.submenu .menu-item {
+  font-size: calc(var(--menu-font-size) * 0.9);
+  padding: calc(var(--menu-padding) * 0.8);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Divider */
+.divider {
+  height: 3px;
+  background: var(--menu-border);
+  margin: var(--pf-spacing-2) var(--pf-spacing-3);
+  position: relative;
+  border: none;
+  outline: none;
+  opacity: 0.6;
+}
+
+.divider::after {
+  content: var(--menu-divider-icon, "✂");
+  position: absolute;
+  top: -0.6em;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  background: var(--menu-bg);
+  padding: 0 0.3em;
+  font-size: 0.8em;
+  color: var(--menu-border);
+  font-weight: bold;
+}
+
+/* Focus styles */
+.menu-item:focus-visible {
+  outline: 2px solid var(--menu-active-color);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu {
+    max-width: 90vw;
+  }
+  
+  .menu.size-lg {
+    --menu-font-size: var(--pf-font-size-sm);
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    min-width: 150px;
+    max-width: 80vw;
+  }
+  
+  .menu-content {
+    padding: var(--pf-spacing-1);
+  }
+  
+  .submenu {
+    margin-left: var(--pf-spacing-2);
+    padding-left: var(--pf-spacing-2);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .menu {
+    border-width: 4px;
+  }
+  
+  .menu-item {
+    border-width: 2px;
+  }
+  
+  .menu-item.submenu-open {
+    box-shadow: inset 0 0 0 2px var(--menu-bg);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    animation: none;
+  }
+  
+  .menu-item,
+  .submenu-arrow {
+    transition: none;
+  }
+}

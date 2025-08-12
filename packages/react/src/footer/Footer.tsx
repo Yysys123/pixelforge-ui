@@ -44,6 +44,11 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
    * Layout variant
    */
   layout?: 'stacked' | 'columns' | 'inline';
+
+  /**
+   * Custom separator icon for the bottom section
+   */
+  separatorIcon?: string;
 }
 
 export interface FooterSection {
@@ -112,6 +117,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
       variant = 'default',
       showPatterns = false,
       layout = 'columns',
+      separatorIcon = '✂',
       className,
       children,
       ...props
@@ -201,10 +207,12 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
                 title={socialLink.label || socialLink.platform}
               >
                 {socialLink.icon ? (
-                  socialLink.icon
+                  <span className={styles['social-icon']}>
+                    {socialLink.icon}
+                  </span>
                 ) : (
                   <span className={styles['social-text']}>
-                    {socialLink.platform}
+                    {socialLink.platform.slice(0, 2).toUpperCase()}
                   </span>
                 )}
               </a>
@@ -215,7 +223,15 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
     };
 
     return (
-      <footer ref={ref} id={footerId} className={footerClasses} {...props}>
+      <footer 
+        ref={ref} 
+        id={footerId} 
+        className={footerClasses} 
+        style={{
+          '--footer-separator-icon': `"${separatorIcon}"`,
+          ...props.style
+        } as React.CSSProperties}
+        {...props}>
         {showPatterns && (
           <div className={styles['footer-patterns']}>
             <div className={styles['pattern-grid']} />

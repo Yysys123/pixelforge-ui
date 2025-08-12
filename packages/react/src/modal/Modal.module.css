@@ -263,7 +263,7 @@
 }
 
 .footer::before {
-  content: "✂";
+  content: var(--modal-separator-icon, "✂");
   position: absolute;
   top: -0.6em;
   left: 50%;

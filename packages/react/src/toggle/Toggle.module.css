@@ -1,0 +1,356 @@
+/* PixelForge UI - Toggle Component */
+.toggle {
+  --toggle-primary: var(--pf-color-primary);
+  --toggle-secondary: var(--pf-color-secondary);
+  --toggle-accent: var(--pf-color-accent);
+  --toggle-bg: var(--pf-bg);
+  --toggle-text: var(--pf-text);
+  --toggle-border: var(--pf-border);
+  --toggle-shadow: rgba(0, 0, 0, 0.2);
+  --toggle-danger: var(--pf-color-danger);
+  --toggle-success: var(--pf-color-success);
+  
+  display: flex;
+  align-items: center;
+  font-family: var(--pf-font-base);
+  gap: var(--pf-spacing-3);
+}
+
+/* Size variants */
+.toggle.size-sm {
+  --toggle-track-width: 3rem;
+  --toggle-track-height: 1.5rem;
+  --toggle-thumb-size: 1rem;
+  --toggle-font-size: var(--pf-font-size-xs);
+}
+
+.toggle.size-md {
+  --toggle-track-width: 4rem;
+  --toggle-track-height: 2rem;
+  --toggle-thumb-size: 1.5rem;
+  --toggle-font-size: var(--pf-font-size-sm);
+}
+
+.toggle.size-lg {
+  --toggle-track-width: 5rem;
+  --toggle-track-height: 2.5rem;
+  --toggle-thumb-size: 2rem;
+  --toggle-font-size: var(--pf-font-size-base);
+}
+
+/* Color variants */
+.toggle.variant-default {
+  --toggle-active-color: var(--toggle-primary);
+}
+
+.toggle.variant-primary {
+  --toggle-active-color: var(--toggle-primary);
+}
+
+.toggle.variant-secondary {
+  --toggle-active-color: var(--toggle-secondary);
+}
+
+.toggle.variant-accent {
+  --toggle-active-color: var(--toggle-accent);
+}
+
+/* Label positioning */
+.toggle.label-left {
+  flex-direction: row;
+}
+
+.toggle.label-right {
+  flex-direction: row;
+}
+
+/* Error state */
+.toggle.error {
+  --toggle-active-color: var(--toggle-danger);
+}
+
+.toggle.error .toggle-track {
+  border-color: var(--toggle-danger);
+}
+
+/* Disabled state */
+.toggle.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Toggle wrapper */
+.toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Hidden input */
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Toggle track */
+.toggle-track {
+  position: relative;
+  display: block;
+  width: var(--toggle-track-width);
+  height: var(--toggle-track-height);
+  background: var(--pf-color-muted);
+  border: 3px solid var(--toggle-border);
+  border-radius: var(--toggle-track-height);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    inset 3px 3px 0 rgba(0, 0, 0, 0.1),
+    3px 3px 0 var(--toggle-shadow);
+  overflow: hidden;
+}
+
+.toggle-track:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 
+    inset 3px 3px 0 rgba(0, 0, 0, 0.1),
+    4px 4px 0 var(--toggle-shadow);
+}
+
+.toggle.checked .toggle-track {
+  background: var(--toggle-active-color);
+  border-color: var(--toggle-active-color);
+}
+
+.toggle.loading .toggle-track {
+  background: var(--pf-color-muted);
+  border-color: var(--pf-color-muted);
+}
+
+/* Toggle thumb */
+.toggle-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0.25rem;
+  width: var(--toggle-thumb-size);
+  height: var(--toggle-thumb-size);
+  background: var(--toggle-bg);
+  border: 2px solid var(--toggle-border);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    2px 2px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  font-size: calc(var(--toggle-font-size) * 0.8);
+  font-weight: var(--pf-font-weight-bold);
+  color: var(--toggle-text);
+}
+
+.toggle.checked .toggle-thumb {
+  left: calc(var(--toggle-track-width) - var(--toggle-thumb-size) - 0.25rem);
+  background: var(--toggle-bg);
+  border-color: var(--toggle-bg);
+  color: var(--toggle-active-color);
+  box-shadow: 
+    -2px 2px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.toggle.loading .toggle-thumb {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Toggle background */
+.toggle-background {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Background labels */
+.bg-label-on,
+.bg-label-off {
+  font-size: var(--toggle-font-size);
+  font-weight: var(--pf-font-weight-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease;
+}
+
+.bg-label-on {
+  color: var(--toggle-bg);
+  opacity: 0;
+}
+
+.bg-label-off {
+  color: var(--toggle-text);
+  opacity: 1;
+}
+
+.toggle.checked .bg-label-on {
+  opacity: 1;
+}
+
+.toggle.checked .bg-label-off {
+  opacity: 0;
+}
+
+/* Icon container */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon-container svg {
+  width: 70%;
+  height: 70%;
+  fill: currentColor;
+}
+
+/* Label container (for thumb labels) */
+.label-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--toggle-font-size) * 0.7);
+  font-weight: var(--pf-font-weight-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.label-on,
+.label-off {
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+
+.label-on {
+  opacity: 0;
+}
+
+.label-off {
+  opacity: 1;
+}
+
+.toggle.checked .label-on {
+  opacity: 1;
+}
+
+.toggle.checked .label-off {
+  opacity: 0;
+}
+
+/* Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+  font-size: calc(var(--toggle-font-size) * 0.9);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Label content */
+.label-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-spacing-1);
+}
+
+.toggle-label {
+  font-size: var(--pf-font-size-base);
+  font-weight: var(--pf-font-weight-semibold);
+  color: var(--toggle-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  margin: 0;
+}
+
+.toggle-description {
+  font-size: var(--pf-font-size-sm);
+  color: var(--pf-color-muted);
+  line-height: 1.4;
+  font-weight: var(--pf-font-weight-medium);
+}
+
+/* With labels variant */
+.toggle.with-labels .toggle-track {
+  padding: 0 0.75rem;
+}
+
+.toggle.with-labels.size-sm .toggle-track {
+  padding: 0 0.5rem;
+}
+
+.toggle.with-labels.size-lg .toggle-track {
+  padding: 0 1rem;
+}
+
+/* Focus styles */
+.toggle-input:focus-visible + .toggle-track {
+  outline: 2px solid var(--toggle-active-color);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toggle.size-lg {
+    --toggle-track-width: 4rem;
+    --toggle-track-height: 2rem;
+    --toggle-thumb-size: 1.5rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .toggle-track {
+    border-width: 4px;
+  }
+  
+  .toggle-thumb {
+    border-width: 3px;
+  }
+  
+  .toggle.checked .toggle-track {
+    background: var(--toggle-text);
+  }
+  
+  .toggle.checked .toggle-thumb {
+    background: var(--toggle-bg);
+    color: var(--toggle-text);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .toggle-track,
+  .toggle-thumb,
+  .bg-label-on,
+  .bg-label-off,
+  .label-on,
+  .label-off {
+    transition: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+}

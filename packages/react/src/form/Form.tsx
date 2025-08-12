@@ -49,6 +49,16 @@ export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
    * Custom className for the form wrapper
    */
   wrapperClassName?: string;
+
+  /**
+   * Custom separator icon for the form header
+   */
+  headerSeparatorIcon?: string;
+
+  /**
+   * Custom separator icon for the form actions
+   */
+  actionsSeparatorIcon?: string;
 }
 
 /**
@@ -67,6 +77,8 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
       error,
       success,
       wrapperClassName,
+      headerSeparatorIcon = '✂',
+      actionsSeparatorIcon = '✂',
       className,
       children,
       ...props
@@ -94,7 +106,12 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
     const formClasses = clsx(styles.form, className);
 
     return (
-      <div className={wrapperClasses}>
+      <div 
+        className={wrapperClasses}
+        style={{
+          '--form-header-separator-icon': `"${headerSeparatorIcon}"`,
+          '--form-actions-separator-icon': `"${actionsSeparatorIcon}"`
+        } as React.CSSProperties}>
         {showPatterns && (
           <div className={styles['form-patterns']}>
             <div className={styles['pattern-grid']} />
@@ -305,6 +322,11 @@ export interface FormActionsProps {
   className?: string;
 
   /**
+   * Custom separator icon for the actions
+   */
+  separatorIcon?: string;
+
+  /**
    * Form actions content
    */
   children: React.ReactNode;
@@ -317,6 +339,7 @@ export const FormActions: React.FC<FormActionsProps> = ({
   direction = 'horizontal',
   align = 'right',
   className,
+  separatorIcon = '✂',
   children,
 }) => {
   const actionsClasses = clsx(
@@ -326,5 +349,14 @@ export const FormActions: React.FC<FormActionsProps> = ({
     className
   );
 
-  return <div className={actionsClasses}>{children}</div>;
+  return (
+    <div 
+      className={actionsClasses}
+      style={{
+        '--form-actions-separator-icon': `"${separatorIcon}"`
+      } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
 };
