@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, useRef, useEffect } from 'react';
 import { clsx } from 'clsx';
-import { ChevronDown, Check, Search } from '@pixelforge-ui/icons';
+import { ChevronDown, Check } from '@pixelforge-ui/icons';
 import styles from './Select.module.css';
 import '../styles/utilities.css';
 
